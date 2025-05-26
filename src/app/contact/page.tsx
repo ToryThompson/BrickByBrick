@@ -42,7 +42,7 @@ export default function Contact() {
         setSize: '',
         message: '',
       });
-    } catch (error) {
+    } catch (err) {
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -82,7 +82,7 @@ export default function Contact() {
           <h1 className="text-4xl font-bold text-center mb-2 text-[#0055BF] font-brick bg-white/80 backdrop-blur-sm px-8 py-4 rounded-lg shadow-lg [text-shadow:_1px_1px_3px_rgba(0,0,0,0.3)]">Contact Us</h1>
           <div className="w-24 h-1 bg-[#D01012] rounded-full mb-6"></div>
           <p className="text-xl max-w-2xl mx-auto text-center text-[#1B1B1B] mb-12">
-            Ready to bring your LEGO dreams to life? Fill out the form below and we'll get back to you within 24 hours.
+            Ready to bring your LEGO dreams to life? Fill out the form below and we&apos;ll get back to you within 24 hours.
           </p>
         </div>
 

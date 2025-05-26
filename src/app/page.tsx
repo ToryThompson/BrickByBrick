@@ -34,7 +34,7 @@ const testimonials = [
   {
     name: "Emily R.",
     role: "Gift Giver",
-    text: "Perfect for busy parents! They built my son's birthday gift and it was ready to display when he opened it.",
+    text: "Perfect for busy parents! They built my son&apos;s birthday gift and it was ready to display when he opened it.",
     rating: 5
   }
 ];

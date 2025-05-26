@@ -28,92 +28,57 @@ export default function Pricing() {
         </div>
 
         {/* Pricing Cards */}
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
-          {/* Basic Build Service */}
-          <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg p-6 border-2 border-[#0055BF] hover:border-[#D01012] transition-all">
-            <h2 className="text-2xl font-bold text-[#0055BF] mb-4 font-brick [text-shadow:_1px_1px_2px_rgba(0,0,0,0.3)]">Basic Build Service</h2>
-            <div className="space-y-4">
-              <div className="p-4 bg-[#F7D117] bg-opacity-10 rounded-lg">
-                <h3 className="font-bold text-lg mb-2 text-[#1B1B1B]">Under 500 Pcs</h3>
-                <p className="text-[#D01012] font-bold text-xl">$25–$50</p>
-                <p className="text-[#1B1B1B] mt-2">Perfect for small sets and quick builds</p>
-              </div>
-              <div className="p-4 bg-[#F7D117] bg-opacity-10 rounded-lg">
-                <h3 className="font-bold text-lg mb-2 text-[#1B1B1B]">500–1999 Pcs</h3>
-                <p className="text-[#D01012] font-bold text-xl">$50–$100</p>
-                <p className="text-[#1B1B1B] mt-2">Ideal for medium-sized sets</p>
-              </div>
-              <div className="p-4 bg-[#F7D117] bg-opacity-10 rounded-lg">
-                <h3 className="font-bold text-lg mb-2 text-[#1B1B1B]">2000–3999 Pcs</h3>
-                <p className="text-[#D01012] font-bold text-xl">$100–$200</p>
-                <p className="text-[#1B1B1B] mt-2">For larger, more complex builds</p>
-              </div>
-              <div className="p-4 bg-[#F7D117] bg-opacity-10 rounded-lg">
-                <h3 className="font-bold text-lg mb-2 text-[#1B1B1B]">4000+ Pcs</h3>
-                <p className="text-[#D01012] font-bold text-xl">$200+</p>
-                <p className="text-[#1B1B1B] mt-2">Custom pricing for massive sets</p>
-              </div>
-            </div>
+        <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+          <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 text-center border-2 border-[#0055BF]">
+            <h2 className="text-2xl font-bold mb-4 text-[#0055BF]">Small Sets</h2>
+            <p className="text-[#1B1B1B] mb-6">(Under 500 pieces)</p>
+            <p className="text-4xl font-bold mb-6 text-[#1B1B1B]">Starting at $20</p>
+            <p className="text-[#1B1B1B] mb-6">Perfect for smaller models and quick builds.</p>
+            <Link href="/contact" className="lego-yellow px-6 py-2 rounded-full font-semibold">Get Quote</Link>
           </div>
 
-          {/* Additional Services */}
-          <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg p-6 border-2 border-[#0055BF] hover:border-[#D01012] transition-all">
-            <h2 className="text-2xl font-bold text-[#0055BF] mb-4 font-brick [text-shadow:_1px_1px_2px_rgba(0,0,0,0.3)]">Additional Services</h2>
-            <div className="space-y-4">
-              <div className="p-4 bg-[#F7D117] bg-opacity-10 rounded-lg">
-                <h3 className="font-bold text-lg mb-2 text-[#1B1B1B]">Gluing Service</h3>
-                <p className="text-[#D01012] font-bold text-xl">+$25</p>
-                <div className="text-[#1B1B1B] mt-2 space-y-1">
-                  <p className="font-semibold">Professional gluing ensures your set stays intact forever. We use specialized LEGO-compatible glue that:</p>
-                  <ul className="list-disc list-inside space-y-1">
-                    <li>Preserves the set's appearance</li>
-                    <li>Prevents accidental disassembly</li>
-                    <li>Makes cleaning easier</li>
-                    <li>Perfect for display pieces</li>
-                  </ul>
-                </div>
-              </div>
-              <div className="p-4 bg-[#F7D117] bg-opacity-10 rounded-lg">
-                <h3 className="font-bold text-lg mb-2 text-[#1B1B1B]">Delivery/Pickup</h3>
-                <p className="text-[#D01012] font-bold text-xl">+$15–30</p>
-                <div className="text-[#1B1B1B] mt-2 space-y-1">
-                  <p className="font-semibold">Convenient local delivery and pickup service:</p>
-                  <ul className="list-disc list-inside space-y-1">
-                    <li>Safe transportation</li>
-                    <li>Careful handling</li>
-                    <li>Flexible scheduling</li>
-                    <li>Available in Atlanta area</li>
-                  </ul>
-                </div>
-              </div>
+          <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 text-center border-2 border-[#D01012]">
+            <h2 className="text-2xl font-bold mb-4 text-[#D01012]">Medium Sets</h2>
+            <p className="text-[#1B1B1B] mb-6">(500 - 1999 pieces)</p>
+            <p className="text-4xl font-bold mb-6 text-[#1B1B1B]">Starting at $40</p>
+            <p className="text-[#1B1B1B] mb-6">Great for most standard sized sets and collections.</p>
+            <Link href="/contact" className="lego-red px-6 py-2 rounded-full font-semibold text-white">Get Quote</Link>
+          </div>
+
+          <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 text-center border-2 border-[#F7D117]">
+            <h2 className="text-2xl font-bold mb-4 text-[#F7D117]">Large Sets</h2>
+            <p className="text-[#1B1B1B] mb-6">(2000+ pieces)</p>
+            <p className="text-4xl font-bold mb-6 text-[#1B1B1B]">Starting at $80</p>
+            <p className="text-[#1B1B1B] mb-6">Ideal for complex models and enthusiast builds.</p>
+            <Link href="/contact" className="lego-yellow px-6 py-2 rounded-full font-semibold">Get Quote</Link>
+          </div>
+        </div>
+
+        {/* Additional Services */}
+        <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 mb-16 border-2 border-[#0055BF]">
+          <h2 className="text-3xl font-bold mb-6 text-center text-[#0055BF]">Additional Services</h2>
+          <div className="grid md:grid-cols-2 gap-8">
+            <div>
+              <h3 className="text-xl font-bold mb-4 text-[#1B1B1B]">Gluing Service</h3>
+              <p className="text-[#1B1B1B] mb-4">Ensure your completed set stays together permanently with our professional gluing service. Perfect for display pieces in high-traffic areas or for transport.</p>
+              <ul className="space-y-2 text-[#1B1B1B]">
+                <li>✓ Secure and discreet gluing</li>
+                <li>✓ Ideal for permanent displays</li>
+                <li>✓ Adds durability for transport</li>
+              </ul>
+            </div>
+            <div>
+              <h3 className="text-xl font-bold mb-4 text-[#1B1B1B]">Display Solutions</h3>
+              <p className="text-[#1B1B1B] mb-4">We offer a range of display solutions to showcase your built sets beautifully and keep them dust-free. From custom cases to lighting, we can help your collection shine.</p>
+              <ul className="space-y-2 text-[#1B1B1B]">
+                <li>✓ Custom display cases</li>
+                <li>✓ Integrated lighting options</li>
+                <li>✓ Dust prevention</li>
+              </ul>
             </div>
           </div>
         </div>
 
-        {/* FAQ Section */}
-        <div className="bg-white/95 backdrop-blur-sm rounded-lg shadow-lg p-6 mb-12">
-          <h2 className="text-2xl font-bold text-[#0055BF] mb-6 font-brick [text-shadow:_1px_1px_2px_rgba(0,0,0,0.3)]">Frequently Asked Questions</h2>
-          <div className="space-y-6">
-            <div>
-              <h3 className="font-bold text-lg mb-2 text-[#1B1B1B]">What's included in the basic build service?</h3>
-              <p className="text-[#1B1B1B]">Our basic build service includes professional assembly of your LEGO set, quality checking, and basic cleaning. We ensure all pieces are properly connected and the build matches the instructions exactly.</p>
-            </div>
-            <div>
-              <h3 className="font-bold text-lg mb-2 text-[#1B1B1B]">How long does a build typically take?</h3>
-              <p className="text-[#1B1B1B]">Build times vary based on set size and complexity. Small sets (under 500 pieces) typically take 1-2 days, while larger sets may take 3-5 days. Rush service is available for an additional fee.</p>
-            </div>
-            <div>
-              <h3 className="font-bold text-lg mb-2 text-[#1B1B1B]">Is gluing permanent?</h3>
-              <p className="text-[#1B1B1B]">Yes, gluing is permanent. We use specialized LEGO-compatible glue that creates a strong, lasting bond. This is ideal for display pieces but not recommended if you plan to disassemble the set later.</p>
-            </div>
-            <div>
-              <h3 className="font-bold text-lg mb-2 text-[#1B1B1B]">Do I need to provide the LEGO set?</h3>
-              <p className="text-[#1B1B1B]">Yes, you'll need to provide the LEGO set. We can help you source sets if needed, but this would be an additional cost. We recommend purchasing from official LEGO retailers to ensure authenticity.</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Call to Action */}
         <div className="text-center">
           <p className="text-lg mb-6 text-[#1B1B1B] font-semibold">Ready to get your LEGO set built? Contact us for a custom quote!</p>
           <div className="flex flex-col sm:flex-row justify-center gap-4">

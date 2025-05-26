@@ -46,7 +46,7 @@ const services = [
     short: "Convenient pickup and delivery services for your LEGO sets in Atlanta, GA.",
     long: (
       <div className="space-y-6">
-        <p className="text-[#1B1B1B]">No need to leave home! We'll pick up your LEGO set (boxed or loose) and deliver it back fully assembled. We coordinate a time that works for you and keep your set safe in transit.</p>
+        <p className="text-[#1B1B1B]">No need to leave home! We&apos;ll pick up your LEGO set (boxed or loose) and deliver it back fully assembled. We coordinate a time that works for you and keep your set safe in transit.</p>
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-[#F7D117]/10 p-4 rounded-lg">
             <h3 className="font-bold mb-2 text-[#0055BF]">Service Features:</h3>
@@ -78,7 +78,7 @@ const services = [
     short: "We can build your LEGO set at your location by request for special events or convenience.",
     long: (
       <div className="space-y-6">
-        <p className="text-[#1B1B1B]">Want to watch the magic happen? We'll come to your location and build your set on-site—great for store displays, parties, or just for fun. We bring all the tools and keep the area tidy.</p>
+        <p className="text-[#1B1B1B]">Want to watch the magic happen? We&apos;ll come to your location and build your set on-site—great for store displays, parties, or just for fun. We bring all the tools and keep the area tidy.</p>
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-[#F7D117]/10 p-4 rounded-lg">
             <h3 className="font-bold mb-2 text-[#0055BF]">Perfect For:</h3>

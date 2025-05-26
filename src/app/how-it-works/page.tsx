@@ -142,7 +142,7 @@ export default function HowItWorks() {
                 <div className="grid md:grid-cols-2 gap-8">
                   <div>
                     <p className="text-[#1B1B1B] text-lg mb-6">
-                      Your set is professionally assembled with care and attention to detail. Whether it's a small collectible 
+                      Your set is professionally assembled with care and attention to detail. Whether it&apos;s a small collectible 
                       or a massive display piece, we treat every build like a masterpiece.
                     </p>
                     <div className="space-y-4">
@@ -224,7 +224,7 @@ export default function HowItWorks() {
                 <div className="grid md:grid-cols-2 gap-8">
                   <div>
                     <p className="text-[#1B1B1B] text-lg mb-6">
-                      That's it! Your LEGO masterpiece is ready to display, gift, or enjoy. We're here for ongoing support 
+                      That&apos;s it! Your LEGO masterpiece is ready to display, gift, or enjoy. We&apos;re here for ongoing support 
                       with maintenance, repairs, or modifications.
                     </p>
                     <div className="bg-[#F7D117]/10 p-6 rounded-lg">
