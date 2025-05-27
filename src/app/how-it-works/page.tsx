@@ -15,46 +15,41 @@ interface LegoSet {
   last_modified_dt: string;
 }
 
+interface Location {
+  address: string;
+  distance: number;
+}
+
 export default function HowItWorks() {
   const [pieceCount, setPieceCount] = useState('');
+  const [requestGluing, setRequestGluing] = useState(false);
+  const [estimatedPrice, setEstimatedPrice] = useState<number | null>(null);
+  const [deliveryMethod, setDeliveryMethod] = useState('local'); // 'local' or 'shipping'
+  const [miles, setMiles] = useState('');
+  const [userAddress, setUserAddress] = useState('');
+  const [calculatedDistance, setCalculatedDistance] = useState<number | null>(null);
+  const [isCalculatingDistance, setIsCalculatingDistance] = useState(false);
+  const [distanceError, setDistanceError] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [searchResults, setSearchResults] = useState<LegoSet[]>([]);
   const [selectedSet, setSelectedSet] = useState<LegoSet | null>(null);
-  const [requestGluing, setRequestGluing] = useState(false);
-  const [estimatedPrice, setEstimatedPrice] = useState<number | null>(null);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   // Calculate price based on piece count
   const calculatePrice = (pieces: number) => {
-    if (pieces <= 200) return 20;
-    if (pieces <= 500) return 35;
-    if (pieces <= 1000) return 50;
-    if (pieces <= 2000) return 75;
-    if (pieces <= 3000) return 100;
-    if (pieces <= 4000) return 150;
-    if (pieces <= 5000) return 200;
-    if (pieces <= 6000) return 250;
-    if (pieces <= 7000) return 300;
-    if (pieces <= 8000) return 350;
-    if (pieces <= 9000) return 400;
-    return 450;
-  };
-
-  // Calculate delivery price based on piece count
-  const calculateDeliveryPrice = (pieces: number) => {
-    if (pieces <= 200) return 10;
-    if (pieces <= 500) return 15;
-    if (pieces <= 1000) return 20;
-    if (pieces <= 2000) return 25;
-    if (pieces <= 3000) return 30;
-    if (pieces <= 4000) return 35;
-    if (pieces <= 5000) return 40;
-    if (pieces <= 6000) return 45;
-    if (pieces <= 7000) return 50;
-    if (pieces <= 8000) return 55;
-    if (pieces <= 9000) return 60;
-    return 65;
+    if (pieces <= 200) return 30;
+    if (pieces <= 500) return 50;
+    if (pieces <= 1000) return 100;
+    if (pieces <= 2000) return 150;
+    if (pieces <= 3000) return 200;
+    if (pieces <= 4000) return 250;
+    if (pieces <= 5000) return 300;
+    if (pieces <= 6000) return 350;
+    if (pieces <= 7000) return 400;
+    if (pieces <= 8000) return 450;
+    if (pieces <= 9000) return 500;
+    return 550;
   };
 
   // Calculate gluing price based on piece count
@@ -71,6 +66,121 @@ export default function HowItWorks() {
     if (pieces <= 8000) return 105;
     if (pieces <= 9000) return 115;
     return 125;
+  };
+
+  // Calculate local delivery price based on piece count and miles
+  const calculateLocalDeliveryPrice = (pieces: number, distance: number) => {
+    // Base delivery price based on piece count
+    let basePrice = 0;
+    if (pieces <= 200) basePrice = 10;
+    else if (pieces <= 500) basePrice = 15;
+    else if (pieces <= 1000) basePrice = 20;
+    else if (pieces <= 2000) basePrice = 25;
+    else if (pieces <= 3000) basePrice = 30;
+    else if (pieces <= 4000) basePrice = 35;
+    else if (pieces <= 5000) basePrice = 40;
+    else if (pieces <= 6000) basePrice = 45;
+    else if (pieces <= 7000) basePrice = 50;
+    else if (pieces <= 8000) basePrice = 55;
+    else if (pieces <= 9000) basePrice = 60;
+    else basePrice = 65;
+
+    // Add $1.50 per mile after the first 5 miles
+    const milesCharge = Math.max(0, distance - 5) * 1.50;
+    
+    return basePrice + milesCharge;
+  };
+
+  // Calculate shipping price based on piece count
+  const calculateShippingPrice = (pieces: number) => {
+    if (pieces <= 200) return 25;
+    if (pieces <= 500) return 35;
+    if (pieces <= 1000) return 45;
+    if (pieces <= 2000) return 65;
+    if (pieces <= 3000) return 85;
+    if (pieces <= 4000) return 105;
+    if (pieces <= 5000) return 125;
+    if (pieces <= 6000) return 145;
+    if (pieces <= 7000) return 165;
+    if (pieces <= 8000) return 185;
+    if (pieces <= 9000) return 205;
+    return 225;
+  };
+
+  // Calculate distance using Google Maps Distance Matrix API
+  const calculateDistance = async () => {
+    if (!userAddress) {
+      setDistanceError('Please enter your address');
+      return;
+    }
+
+    setIsCalculatingDistance(true);
+    setDistanceError(null);
+
+    try {
+      const response = await fetch(`/api/calculate-distance?address=${encodeURIComponent(userAddress)}`);
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to calculate distance');
+      }
+
+      setCalculatedDistance(data.distance);
+      setMiles(data.distance.toString());
+    } catch (error) {
+      console.error('Error calculating distance:', error);
+      setDistanceError(error instanceof Error ? error.message : 'Failed to calculate distance');
+    } finally {
+      setIsCalculatingDistance(false);
+    }
+  };
+
+  const calculateEstimate = () => {
+    const count = parseInt(pieceCount);
+    if (isNaN(count) || count <= 0) {
+      setEstimatedPrice(null);
+      return;
+    }
+
+    let basePrice = 0;
+    // Define base pricing based on piece count ranges
+    if (count < 500) {
+      basePrice = 30; // Small set pricing
+    } else if (count >= 500 && count < 2000) {
+      basePrice = 50; // Medium set pricing
+    } else {
+      basePrice = 100; // Large set pricing
+    }
+
+    let gluingCost = 0;
+    if (requestGluing) {
+      // $50 per 1000 pieces, rounded up to the nearest thousand
+      gluingCost = Math.ceil(count / 1000) * 50;
+    }
+
+    setEstimatedPrice(basePrice + gluingCost);
+  };
+
+  // Calculate total price including all services
+  const calculateTotalPrice = (pieces: number) => {
+    const basePrice = calculatePrice(pieces);
+    let deliveryPrice = 0;
+    
+    if (deliveryMethod === 'shipping') {
+      deliveryPrice = calculateShippingPrice(pieces);
+    } else {
+      const distance = parseInt(miles) || 0;
+      deliveryPrice = calculateLocalDeliveryPrice(pieces, distance);
+    }
+    
+    const gluingPrice = requestGluing ? calculateGluingPrice(pieces) : 0;
+    
+    return {
+      basePrice,
+      deliveryPrice,
+      gluingPrice,
+      total: basePrice + deliveryPrice + gluingPrice
+    };
   };
 
   // Handle search with API
@@ -110,46 +220,6 @@ export default function HowItWorks() {
     setSearchQuery(set.name);
   };
 
-  const calculateEstimate = () => {
-    const count = parseInt(pieceCount);
-    if (isNaN(count) || count <= 0) {
-      setEstimatedPrice(null);
-      return;
-    }
-
-    let basePrice = 0;
-    // Define base pricing based on piece count ranges
-    if (count < 500) {
-      basePrice = 30; // Small set pricing
-    } else if (count >= 500 && count < 2000) {
-      basePrice = 50; // Medium set pricing
-    } else {
-      basePrice = 100; // Large set pricing
-    }
-
-    let gluingCost = 0;
-    if (requestGluing) {
-      // $50 per 1000 pieces, rounded up to the nearest thousand
-      gluingCost = Math.ceil(count / 1000) * 50;
-    }
-
-    setEstimatedPrice(basePrice + gluingCost);
-  };
-
-  // Calculate total price including all services
-  const calculateTotalPrice = (pieces: number) => {
-    const basePrice = calculatePrice(pieces);
-    const deliveryPrice = calculateDeliveryPrice(pieces);
-    const gluingPrice = requestGluing ? calculateGluingPrice(pieces) : 0;
-    
-    return {
-      basePrice,
-      deliveryPrice,
-      gluingPrice,
-      total: basePrice + deliveryPrice + gluingPrice
-    };
-  };
-
   return (
     <div className="min-h-screen py-16 relative">
       <div className="absolute inset-0 z-0">
@@ -179,9 +249,9 @@ export default function HowItWorks() {
           </p>
         </div>
 
-        {/* LEGO Set Search and Price Calculator */}
+        {/* Price Calculator */}
         <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 mb-16 border-2 border-[#0055BF]">
-          <h2 className="text-3xl font-bold mb-6 text-center text-[#0055BF]">Find Your LEGO Set</h2>
+          <h2 className="text-3xl font-bold mb-6 text-center text-[#0055BF]">Get a Price Estimate</h2>
           
           {/* Search Input */}
           <div className="relative mb-6">
@@ -286,37 +356,74 @@ export default function HowItWorks() {
             />
           </div>
 
-          {/* Price Estimate */}
-          {estimatedPrice !== null && (
-            <div className="text-center">
-              <h3 className="text-xl font-bold text-[#0055BF] mb-4">Price Breakdown</h3>
-              <div className="bg-gray-50 rounded-lg p-4 mb-4">
-                <div className="grid grid-cols-2 gap-4 text-left">
-                  <div>
-                    <p className="text-gray-600">Base Build Price:</p>
-                    <p className="text-gray-600">Delivery Fee:</p>
-                    {requestGluing && <p className="text-gray-600">Gluing Service:</p>}
-                    <p className="font-bold text-[#0055BF] mt-2">Total Price:</p>
+          {/* Delivery Options */}
+          <div className="mb-6">
+            <label htmlFor="deliveryMethod" className="block text-sm font-medium text-gray-700 mb-2">
+              Delivery Method
+            </label>
+            <select
+              id="deliveryMethod"
+              value={deliveryMethod}
+              onChange={(e) => setDeliveryMethod(e.target.value)}
+              className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#0055BF] focus:border-transparent mb-4"
+            >
+              <option value="local">Local Delivery</option>
+              <option value="shipping">Shipping (USPS/UPS/FedEx)</option>
+            </select>
+
+            {deliveryMethod === 'local' && (
+              <div className="mt-4">
+                <div className="mb-4">
+                  <label htmlFor="userAddress" className="block text-sm font-medium text-gray-700 mb-2">
+                    Your Address
+                  </label>
+                  <div className="flex gap-2">
+                    <input
+                      type="text"
+                      id="userAddress"
+                      value={userAddress}
+                      onChange={(e) => setUserAddress(e.target.value)}
+                      placeholder="Enter your full address"
+                      className="flex-1 px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#0055BF] focus:border-transparent"
+                    />
+                    <button
+                      onClick={calculateDistance}
+                      disabled={isCalculatingDistance}
+                      className="bg-[#0055BF] text-white px-4 py-2 rounded-lg hover:bg-[#004494] transition-colors disabled:opacity-50"
+                    >
+                      {isCalculatingDistance ? 'Calculating...' : 'Calculate Distance'}
+                    </button>
                   </div>
-                  <div className="text-right">
-                    <p className="font-semibold">${calculatePrice(parseInt(pieceCount))}</p>
-                    <p className="font-semibold">${calculateDeliveryPrice(parseInt(pieceCount))}</p>
-                    {requestGluing && <p className="font-semibold">${calculateGluingPrice(parseInt(pieceCount))}</p>}
-                    <p className="font-bold text-[#0055BF] mt-2">${calculateTotalPrice(parseInt(pieceCount)).total}</p>
-                  </div>
+                  {distanceError && (
+                    <p className="mt-2 text-sm text-red-600">{distanceError}</p>
+                  )}
+                  {calculatedDistance && (
+                    <p className="mt-2 text-sm text-gray-600">
+                      Calculated distance: {calculatedDistance} miles
+                    </p>
+                  )}
+                  <p className="mt-2 text-sm text-gray-600">
+                    *First 5 miles included in base price. Additional miles charged at $1.50 per mile.
+                  </p>
                 </div>
               </div>
-              <p className="text-sm text-gray-600">
-                *Prices may vary based on set complexity and additional services
-              </p>
-            </div>
-          )}
-        </div>
+            )}
 
-        {/* Pricing Calculator (Copied from Pricing page) */}
-        <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 mb-16 max-w-md mx-auto relative z-10">
-          <h2 className="text-2xl font-bold mb-6 text-center text-[#0055BF]">Get an Estimate</h2>
-          <div className="space-y-4">
+            {deliveryMethod === 'shipping' && (
+              <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+                <h4 className="font-semibold mb-2 text-[#0055BF]">Shipping Information</h4>
+                <ul className="space-y-2 text-gray-600">
+                  <li>• Professional packaging and handling</li>
+                  <li>• Insurance included</li>
+                  <li>• Tracking number provided</li>
+                  <li>• Estimated delivery time: 3-7 business days</li>
+                </ul>
+              </div>
+            )}
+          </div>
+
+          {/* Gluing Service Option */}
+          <div className="mb-6">
             <div className="flex items-center">
               <input
                 type="checkbox"
@@ -325,17 +432,73 @@ export default function HowItWorks() {
                 onChange={(e) => setRequestGluing(e.target.checked)}
                 className="h-4 w-4 text-[#0055BF] border-gray-300 rounded focus:ring-[#0055BF]"
               />
-              <label htmlFor="requestGluing" className="ml-2 block text-sm font-medium text-[#1B1B1B]">
-                Request Gluing (+ $50 per 1000 pieces)
+              <label htmlFor="requestGluing" className="ml-2 block text-sm font-medium text-gray-700">
+                Include Gluing Service
               </label>
             </div>
+          </div>
+
+          {/* Calculate Button */}
+          <div className="mb-6">
             <button
               onClick={calculateEstimate}
               className="w-full bg-[#0055BF] text-white px-6 py-3 rounded-lg hover:bg-[#004494] transition-colors text-lg"
             >
-              Calculate Estimate
+              Calculate Estimated Price
             </button>
           </div>
+
+          {/* Price Estimate */}
+          {estimatedPrice !== null && (
+            <div className="text-center">
+              <h3 className="text-xl font-bold text-[#0055BF] mb-4">Estimated Price Breakdown</h3>
+              <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                <div className="grid grid-cols-2 gap-4 text-left">
+                  <div>
+                    <p className="text-gray-600">Estimated Build Price:</p>
+                    <p className="text-gray-600">
+                      {deliveryMethod === 'shipping' ? 'Estimated Shipping Fee:' : 'Estimated Delivery Fee:'}
+                    </p>
+                    {requestGluing && <p className="text-gray-600">Estimated Gluing Service:</p>}
+                    <p className="font-bold text-[#0055BF] mt-2">Estimated Total Price:</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-semibold">${calculatePrice(parseInt(pieceCount))}</p>
+                    <p className="font-semibold">
+                      ${deliveryMethod === 'shipping' 
+                        ? calculateShippingPrice(parseInt(pieceCount))
+                        : calculateLocalDeliveryPrice(parseInt(pieceCount), calculatedDistance || 0)}
+                    </p>
+                    {requestGluing && <p className="font-semibold">${calculateGluingPrice(parseInt(pieceCount))}</p>}
+                    <p className="font-bold text-[#0055BF] mt-2">${calculateTotalPrice(parseInt(pieceCount)).total}</p>
+                  </div>
+                </div>
+              </div>
+              <p className="text-sm text-gray-600 mb-6">
+                *This is an estimate. Final price may vary based on set complexity and additional services. Contact us for a precise quote.
+              </p>
+
+              {/* Next Steps */}
+              <div className="bg-white rounded-lg p-6 border-2 border-[#0055BF]">
+                <h4 className="text-lg font-bold text-[#0055BF] mb-4">Next Steps</h4>
+                <div className="grid md:grid-cols-2 gap-6 mb-6">
+                  <div className="text-left">
+                    <h5 className="font-semibold mb-2">1. Contact Us</h5>
+                    <p className="text-gray-600">Send us your set details and requirements for a precise quote.</p>
+                  </div>
+                  <div className="text-left">
+                    <h5 className="font-semibold mb-2">2. Schedule Pickup/Delivery</h5>
+                    <p className="text-gray-600">Arrange a convenient time for us to collect your set or discuss shipping options.</p>
+                  </div>
+                </div>
+                <div className="flex justify-center">
+                  <Link href="/contact" className="bg-[#0055BF] text-white px-8 py-3 rounded-lg hover:bg-[#004494] transition-colors text-lg">
+                    Get a Precise Quote
+                  </Link>
+                </div>
+              </div>
+            </div>
+          )}
         </div>
 
         {/* Main content area with side image */}
@@ -570,12 +733,9 @@ export default function HowItWorks() {
             {/* Call to Action */}
             <div className="text-center mt-16">
               <h2 className="text-3xl font-bold mb-6 font-brick text-[#0055BF] [text-shadow:_1px_1px_2px_rgba(0,0,0,0.3)]">Ready to Get Started?</h2>
-              <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <div className="flex justify-center">
                 <Link href="/contact" className="bg-[#0055BF] text-white px-8 py-4 rounded-lg hover:bg-[#004494] transition-colors text-lg">
                   Start Your Build
-                </Link>
-                <Link href="/pricing" className="bg-[#F7D117] text-[#1B1B1B] px-8 py-4 rounded-lg hover:bg-[#E6C615] transition-colors text-lg">
-                  View Pricing
                 </Link>
               </div>
             </div>

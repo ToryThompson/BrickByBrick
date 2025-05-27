@@ -3,11 +3,22 @@ import React, { useState, useEffect, Suspense } from 'react';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 
+interface LegoSet {
+  set_num: string;
+  name: string;
+  year: number;
+  theme_id: number;
+  num_parts: number;
+  set_img_url: string;
+  set_url: string;
+  last_modified_dt: string;
+}
+
 const serviceOptions = [
   { value: "assembly", label: "Expert Assembly" },
-  { value: "pickup-delivery", label: "Local Pickup & Delivery" },
   { value: "on-site", label: "On-site Building" },
-  { value: "display-prep", label: "Display Solutions" },
+  { value: "display", label: "Display Solutions" },
+  { value: "complicated", label: "It's Complicated - We Need to Talk About It" },
 ];
 
 function ContactContent() {
@@ -22,7 +33,13 @@ function ContactContent() {
     setSize: '',
     message: '',
     gluing: false,
+    selectedSet: null as LegoSet | null,
   });
+
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState<LegoSet[]>([]);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   // Initialize form data with initialService from search params on mount
   useEffect(() => {
@@ -61,6 +78,7 @@ function ContactContent() {
         setSize: '',
         message: '',
         gluing: false,
+        selectedSet: null,
       });
     } catch (error) {
       console.error('Error:', error);
@@ -76,6 +94,44 @@ function ContactContent() {
       ...prev,
       [name]: value
     }));
+  };
+
+  const handleSearch = async (query: string) => {
+    setSearchQuery(query);
+    setError(null);
+    
+    if (query.length < 2) {
+      setSearchResults([]);
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const response = await fetch(`/api/lego-search?query=${encodeURIComponent(query)}`);
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to search LEGO sets');
+      }
+      
+      setSearchResults(data.results);
+    } catch (error) {
+      console.error('Error searching LEGO sets:', error);
+      setError(error instanceof Error ? error.message : 'Failed to search LEGO sets');
+      setSearchResults([]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleSetSelect = (set: LegoSet) => {
+    setFormData(prev => ({
+      ...prev,
+      selectedSet: set,
+      setSize: set.num_parts.toString()
+    }));
+    setSearchResults([]);
+    setSearchQuery(set.name);
   };
 
   return (
@@ -198,20 +254,113 @@ function ContactContent() {
 
                 <div>
                   <label htmlFor="setSize" className="block text-sm font-medium text-[#1B1B1B] mb-2">
-                    Set Size (if applicable)
+                    Find Your LEGO Set
                   </label>
-                  <select
-                    id="setSize"
-                    name="setSize"
-                    value={formData.setSize}
-                    onChange={handleChange}
-                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#0055BF] focus:border-transparent"
-                  >
-                    <option value="">Select set size</option>
-                    <option value="small">Small (Under 500 pieces)</option>
-                    <option value="medium">Medium (500-1999 pieces)</option>
-                    <option value="large">Large (2000+ pieces)</option>
-                  </select>
+                  <div className="relative mb-4">
+                    <input
+                      type="text"
+                      value={searchQuery}
+                      onChange={(e) => handleSearch(e.target.value)}
+                      placeholder="Search by set name or number (e.g., 'Star Destroyer' or '75252')"
+                      className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#0055BF] focus:border-transparent"
+                    />
+                    
+                    {/* Loading Indicator */}
+                    {isLoading && (
+                      <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                        <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-[#0055BF]"></div>
+                      </div>
+                    )}
+                    
+                    {/* Error Message */}
+                    {error && (
+                      <div className="mt-2 text-red-600 text-sm">
+                        {error}
+                      </div>
+                    )}
+                    
+                    {/* Search Results Dropdown */}
+                    {searchResults.length > 0 && (
+                      <div className="absolute z-10 w-full mt-1 bg-white rounded-lg shadow-lg border border-gray-200 max-h-96 overflow-y-auto">
+                        {searchResults.map((set) => (
+                          <button
+                            key={set.set_num}
+                            onClick={() => handleSetSelect(set)}
+                            className="w-full px-4 py-3 text-left hover:bg-gray-100 focus:bg-gray-100 focus:outline-none flex items-center gap-4"
+                          >
+                            {set.set_img_url && (
+                              <img
+                                src={set.set_img_url}
+                                alt={set.name}
+                                className="w-16 h-16 object-contain bg-gray-50 rounded"
+                              />
+                            )}
+                            <div>
+                              <div className="font-semibold">{set.name}</div>
+                              <div className="text-sm text-gray-600">
+                                Set #{set.set_num} • {set.num_parts} pieces • {set.year}
+                              </div>
+                            </div>
+                          </button>
+                        ))}
+                      </div>
+                    )}
+
+                    {/* No Results Message */}
+                    {searchQuery.length >= 2 && !isLoading && !error && searchResults.length === 0 && (
+                      <div className="mt-2 text-gray-600 text-sm">
+                        No LEGO sets found. Try a different search term.
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Selected Set Info */}
+                  {formData.selectedSet && (
+                    <div className="mb-4 p-4 bg-gray-50 rounded-lg">
+                      <div className="flex items-start gap-4">
+                        {formData.selectedSet.set_img_url && (
+                          <img
+                            src={formData.selectedSet.set_img_url}
+                            alt={formData.selectedSet.name}
+                            className="w-32 h-32 object-contain bg-white rounded-lg shadow-sm"
+                          />
+                        )}
+                        <div>
+                          <h3 className="font-bold text-lg mb-2">{formData.selectedSet.name}</h3>
+                          <p className="text-gray-600">
+                            Set #{formData.selectedSet.set_num} • {formData.selectedSet.num_parts} pieces • Released {formData.selectedSet.year}
+                          </p>
+                          <a
+                            href={formData.selectedSet.set_url}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-[#0055BF] hover:underline text-sm mt-2 inline-block"
+                          >
+                            View Set Details →
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Manual Set Size Input */}
+                  <div className="mt-4">
+                    <label htmlFor="setSize" className="block text-sm font-medium text-[#1B1B1B] mb-2">
+                      Or select set size manually:
+                    </label>
+                    <select
+                      id="setSize"
+                      name="setSize"
+                      value={formData.setSize}
+                      onChange={handleChange}
+                      className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#0055BF] focus:border-transparent"
+                    >
+                      <option value="">Select set size</option>
+                      <option value="small">Small (Under 500 pieces)</option>
+                      <option value="medium">Medium (500-1999 pieces)</option>
+                      <option value="large">Large (2000+ pieces)</option>
+                    </select>
+                  </div>
                 </div>
 
                 <div>
