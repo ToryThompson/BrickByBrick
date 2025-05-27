@@ -66,6 +66,16 @@ export default function Pricing() {
           <div className="w-24 h-1 bg-[#D01012] rounded-full mb-6"></div>
         </div>
 
+        {/* Introduction to Pricing */}
+        <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 mb-16">
+          <p className="text-lg text-[#1B1B1B] mb-4 text-center">
+            We believe in transparent pricing that reflects the care and expertise we put into every build. The calculator below provides a helpful estimate based on piece count, but the final price may vary depending on several factors.
+          </p>
+          <p className="text-lg text-[#1B1B1B] text-center">
+            Our goal is to provide exceptional value and bring your LEGO dreams to life, brick by brick.
+          </p>
+        </div>
+
         {/* Pricing Calculator */}
         <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 mb-16 max-w-md mx-auto">
           <h2 className="text-2xl font-bold mb-6 text-center text-[#0055BF]">Get an Estimate</h2>
@@ -107,6 +117,19 @@ export default function Pricing() {
               Estimated Price: ${estimatedPrice}
             </div>
           )}
+        </div>
+
+        {/* Factors Affecting Pricing */}
+        <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 mb-16 border-2 border-[#D01012]">
+          <h2 className="text-3xl font-bold mb-6 text-center text-[#D01012]">Factors Affecting Your Quote</h2>
+          <p className="text-[#1B1B1B] mb-6 text-center">While piece count is a primary factor, other elements can influence the final cost:</p>
+          <ul className="list-disc list-inside space-y-2 text-[#1B1B1B] max-w-2xl mx-auto">
+            <li>**Set Complexity:** Intricate builds with many small or unique pieces may require more time and precision.</li>
+            <li>**Set Condition:** If the set is used, disassembled incorrectly, or missing pieces, additional sorting and handling time may be needed.</li>
+            <li>**Instruction Clarity:** Poorly printed or unclear instructions can increase build time.</li>
+            <li>**Special Requests:** Customizations, modifications, or specific building techniques will be factored into the quote.</li>
+            <li>**Timeline:** Rush orders requiring a faster turnaround time may incur an additional fee.</li>
+          </ul>
         </div>
 
         {/* Original Pricing Cards (kept for reference/comparison) */}
