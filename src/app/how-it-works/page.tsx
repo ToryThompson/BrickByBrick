@@ -343,7 +343,7 @@ export default function HowItWorks() {
             )}
 
             {/* No Results Message */}
-            {searchQuery.length >= 2 && !isLoading && !error && searchResults.length === 0 && (
+            {searchQuery.length >= 2 && !isLoading && !error && searchResults.length === 0 && !selectedSet && (
               <div className="mt-2 text-gray-600 text-sm">
                 No LEGO sets found. Try a different search term.
               </div>

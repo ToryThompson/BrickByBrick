@@ -86,12 +86,46 @@ body {
 
 /* Placeholder text styling */
 ::placeholder {
-  color: #666666 !important; /* Dark grey color */
+  color: #333333 !important; /* Dark grey */
+  opacity: 1 !important;
 }
 
 /* Dark mode placeholder styling */
 @media (prefers-color-scheme: dark) {
   ::placeholder {
-    color: #999999 !important; /* Lighter grey for dark mode */
+    color: #aaaaaa !important; /* Lighter grey for dark mode */
+    opacity: 1 !important;
   }
+}
+
+/* Styling for input text */
+body input[type="text"],
+body input[type="number"],
+body textarea {
+  color: #000000 !important; /* Black color for typed text in light mode */
+}
+
+/* Dark mode styling for input text */
+@media (prefers-color-scheme: dark) {
+  body input[type="text"],
+  body input[type="number"],
+  body textarea {
+    color: #333333 !important; /* Very dark grey for typed text in dark mode */
+  }
+}
+
+/* Styling for selected set info text */
+.p-4.bg-gray-50.rounded-lg p,
+.p-4.bg-gray-50.rounded-lg h3 {
+  color: #1B1B1B !important; /* Dark color for selected set info in both modes */
+}
+
+/* Dark mode styling for selected set info text */
+@media (prefers-color-scheme: dark) {
+  /* Remove dark mode specific style as text should be dark in both modes */
+}
+
+/* Styling for search results text */
+.absolute.z-10.w-full.mt-1.bg-white.rounded-lg.shadow-lg.border.border-gray-200.max-h-96.overflow-y-auto div {
+  color: #000000 !important; /* Black color for search results text */
 }
