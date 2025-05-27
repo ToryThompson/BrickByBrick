@@ -97,7 +97,7 @@ export default function HowItWorks() {
                 <div className="grid md:grid-cols-2 gap-8">
                   <div>
                     <p className="text-[#1B1B1B] text-lg mb-6">
-                      Within 24 hours, we'll contact you to confirm your quote and timeline. We'll discuss pickup/delivery details 
+                      Within 24 hours, we&apos;ll contact you to confirm your quote and timeline. We&apos;ll discuss pickup/delivery details 
                       and answer any questions you might have. Our goal is to make sure everything is perfectly clear before we begin.
                     </p>
                     <ul className="space-y-3 text-[#1B1B1B]">

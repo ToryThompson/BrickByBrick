@@ -42,7 +42,7 @@ export default function Contact() {
         setSize: '',
         message: '',
       });
-    } catch (err) {
+    } catch {
       setSubmitStatus('error');
     } finally {
       setIsSubmitting(false);
@@ -96,7 +96,7 @@ export default function Contact() {
                   </svg>
                 </div>
                 <h2 className="text-2xl font-bold text-[#0055BF] mb-2">Thank You!</h2>
-                <p className="text-[#1B1B1B] mb-6">We've received your request and will contact you shortly.</p>
+                <p className="text-[#1B1B1B] mb-6">We&apos;ve received your request and will contact you shortly.</p>
                 <button
                   onClick={() => setSubmitStatus('idle')}
                   className="bg-[#0055BF] text-white px-6 py-3 rounded-lg hover:bg-[#004494] transition-colors"

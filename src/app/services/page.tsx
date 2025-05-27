@@ -17,7 +17,7 @@ const services = [
         <p className="text-[#1B1B1B]">We treat every LEGO set as a masterpiece! Your set will be built by a passionate LEGO expert who follows the official instructions, checks for missing pieces, and ensures a sturdy, display-ready result.</p>
         <div className="grid md:grid-cols-2 gap-6">
           <div className="bg-[#F7D117]/10 p-4 rounded-lg">
-            <h3 className="font-bold mb-2 text-[#0055BF]">What's Included:</h3>
+            <h3 className="font-bold mb-2 text-[#0055BF]">What&apos;s Included:</h3>
             <ul className="space-y-2 text-[#1B1B1B]">
               <li>✓ Careful sorting and inventory check</li>
               <li>✓ Step-by-step, instruction-accurate assembly</li>
