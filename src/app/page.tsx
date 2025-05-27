@@ -101,7 +101,7 @@ export default function Home() {
             </div>
             <div className="md:w-1/2 flex justify-center">
               <div 
-                className="relative w-full max-w-xl aspect-video"
+                className="relative w-full max-w-4xl aspect-video"
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
               >

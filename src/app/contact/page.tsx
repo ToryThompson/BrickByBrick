@@ -21,6 +21,7 @@ function ContactContent() {
     service: initialService,
     setSize: '',
     message: '',
+    gluing: false,
   });
 
   // Initialize form data with initialService from search params on mount
@@ -59,6 +60,7 @@ function ContactContent() {
         service: '',
         setSize: '',
         message: '',
+        gluing: false,
       });
     } catch (error) {
       console.error('Error:', error);
@@ -226,6 +228,21 @@ function ContactContent() {
                     className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#0055BF] focus:border-transparent"
                     placeholder="Tell us about your LEGO project..."
                   ></textarea>
+                </div>
+
+                {/* Gluing Checkbox */}
+                <div className="flex items-center">
+                  <input
+                    type="checkbox"
+                    id="gluing"
+                    name="gluing"
+                    checked={formData.gluing}
+                    onChange={(e) => setFormData(prev => ({ ...prev, gluing: e.target.checked }))}
+                    className="h-4 w-4 text-[#0055BF] border-gray-300 rounded focus:ring-[#0055BF]"
+                  />
+                  <label htmlFor="gluing" className="ml-2 block text-sm font-medium text-[#1B1B1B]">
+                    Request Gluing (+ $50 per 1000 pieces)
+                  </label>
                 </div>
 
                 {submitStatus === 'error' && (

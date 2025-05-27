@@ -3,7 +3,7 @@ import nodemailer from 'nodemailer';
 
 export async function POST(request: Request) {
   try {
-    const { name, email, phone, service, setSize, message } = await request.json();
+    const { name, email, phone, service, setSize, message, gluing } = await request.json();
 
     // Create a transporter using Gmail
     const transporter = nodemailer.createTransport({
@@ -18,7 +18,7 @@ export async function POST(request: Request) {
     const mailOptions = {
       from: process.env.EMAIL_USER,
       to: process.env.EMAIL_USER, // Send to yourself
-      subject: `New Contact Form Submission - ${service}`,
+      subject: `New Contact Form Submission - ${service}${gluing ? ' (with Gluing)' : ''}`,
       html: `
         <h2>New Contact Form Submission</h2>
         <p><strong>Name:</strong> ${name}</p>
@@ -26,6 +26,7 @@ export async function POST(request: Request) {
         <p><strong>Phone:</strong> ${phone || 'Not provided'}</p>
         <p><strong>Service:</strong> ${service}</p>
         <p><strong>Set Size:</strong> ${setSize || 'Not specified'}</p>
+        <p><strong>Gluing Requested:</strong> ${gluing ? 'Yes' : 'No'}</p>
         <p><strong>Message:</strong></p>
         <p>${message}</p>
       `,

@@ -183,21 +183,20 @@ export default function HowItWorks() {
                 <div className="grid md:grid-cols-2 gap-8">
                   <div>
                     <p className="text-[#1B1B1B] text-lg mb-6">
-                      We coordinate a smooth handoff of your completed set. Choose from pickup at our location, 
-                      local delivery, or on-site building (available by request).
+                      We coordinate a smooth handoff of your completed set. You have the flexibility to choose how your build is handled: either send your set to us for professional building and delivery, or opt for our on-site service where we come to your location! Choose from pickup at our location, local delivery, or on-site building (available by request).
                     </p>
                     <div className="grid grid-cols-3 gap-4 text-center">
                       <div className="bg-[#F7D117]/10 p-4 rounded-lg">
                         <h3 className="font-bold mb-2 text-[#0055BF]">Pickup</h3>
-                        <p className="text-[#1B1B1B]">Collect from our location</p>
+                        <p className="text-[#1B1B1B]">Drop off and collect your set from our location at your convenience.</p>
                       </div>
                       <div className="bg-[#F7D117]/10 p-4 rounded-lg">
                         <h3 className="font-bold mb-2 text-[#0055BF]">Delivery</h3>
-                        <p className="text-[#1B1B1B]">Local delivery available</p>
+                        <p className="text-[#1B1B1B]">Send your set to us (or have a new set shipped directly), we'll build it, and then deliver the completed masterpiece back to your local address.</p>
                       </div>
                       <div className="bg-[#F7D117]/10 p-4 rounded-lg">
                         <h3 className="font-bold mb-2 text-[#0055BF]">On-site</h3>
-                        <p className="text-[#1B1B1B]">Building at your location</p>
+                        <p className="text-[#1B1B1B]">We come to your location to build your set, perfect for events or convenience.</p>
                       </div>
                     </div>
                   </div>
