@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from 'react';
+import React, { useState, useEffect, Suspense } from 'react';
 import Image from 'next/image';
 import { useSearchParams } from 'next/navigation';
 
@@ -10,7 +10,7 @@ const serviceOptions = [
   { value: "display-prep", label: "Display Solutions" },
 ];
 
-export default function Contact() {
+function ContactContent() {
   const searchParams = useSearchParams();
   const initialService = searchParams.get('service') || '';
   
@@ -22,6 +22,14 @@ export default function Contact() {
     setSize: '',
     message: '',
   });
+
+  // Initialize form data with initialService from search params on mount
+  useEffect(() => {
+    setFormData(prev => ({
+      ...prev,
+      service: initialService,
+    }));
+  }, [initialService]);
 
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
@@ -58,7 +66,7 @@ export default function Contact() {
   };
 
   return (
-    <div className="min-h-screen py-16 relative">
+    <main className="min-h-screen py-16 relative">
       <div className="absolute inset-0 z-0">
         <Image
           src="/images/backgrounds/colored-toy-bricks-place-your-600nw-663866968.webp"
@@ -79,7 +87,7 @@ export default function Contact() {
             <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-6 h-2 bg-white/90 rounded-sm"></div>
             <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-6 h-2 bg-white/90 rounded-sm"></div>
           </div>
-          <h1 className="text-4xl font-bold text-center mb-2 text-[#0055BF] font-brick bg-white/80 backdrop-blur-sm px-8 py-4 rounded-lg shadow-lg [text-shadow:_1px_1px_3px_rgba(0,0,0,0.3)]">Contact Us</h1>
+          <h1 className="text-4xl font-bold text-center mb-2 text-[#0055BF] font-brick bg-white/80 backdrop-blur-sm px-8 py-4 rounded-lg shadow-lg [text-shadow:_1px_1px_3px_rgba(0,0,0,0.3)]">Get a Quote</h1>
           <div className="w-24 h-1 bg-[#D01012] rounded-full mb-6"></div>
           <p className="text-xl max-w-2xl mx-auto text-center text-[#1B1B1B] mb-12">
             Ready to bring your LEGO dreams to life? Fill out the form below and we&apos;ll get back to you within 12 hours.
@@ -106,22 +114,23 @@ export default function Contact() {
               </div>
             ) : (
               <form onSubmit={handleSubmit} className="space-y-6">
+                <div>
+                  <label htmlFor="name" className="block text-sm font-medium text-[#1B1B1B] mb-2">
+                    Full Name *
+                  </label>
+                  <input
+                    type="text"
+                    id="name"
+                    name="name"
+                    required
+                    value={formData.name}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#0055BF] focus:border-transparent"
+                    placeholder="John Doe"
+                  />
+                </div>
+
                 <div className="grid md:grid-cols-2 gap-6">
-                  <div>
-                    <label htmlFor="name" className="block text-sm font-medium text-[#1B1B1B] mb-2">
-                      Your Name *
-                    </label>
-                    <input
-                      type="text"
-                      id="name"
-                      name="name"
-                      required
-                      value={formData.name}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#0055BF] focus:border-transparent"
-                      placeholder="John Doe"
-                    />
-                  </div>
                   <div>
                     <label htmlFor="email" className="block text-sm font-medium text-[#1B1B1B] mb-2">
                       Email Address *
@@ -134,12 +143,9 @@ export default function Contact() {
                       value={formData.email}
                       onChange={handleChange}
                       className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#0055BF] focus:border-transparent"
-                      placeholder="john@example.com"
+                      placeholder="john.doe@example.com"
                     />
                   </div>
-                </div>
-
-                <div className="grid md:grid-cols-2 gap-6">
                   <div>
                     <label htmlFor="phone" className="block text-sm font-medium text-[#1B1B1B] mb-2">
                       Phone Number
@@ -154,26 +160,27 @@ export default function Contact() {
                       placeholder="(555) 123-4567"
                     />
                   </div>
-                  <div>
-                    <label htmlFor="service" className="block text-sm font-medium text-[#1B1B1B] mb-2">
-                      Service Type *
-                    </label>
-                    <select
-                      id="service"
-                      name="service"
-                      required
-                      value={formData.service}
-                      onChange={handleChange}
-                      className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#0055BF] focus:border-transparent"
-                    >
-                      <option value="">Select a service</option>
-                      {serviceOptions.map(option => (
-                        <option key={option.value} value={option.value}>
-                          {option.label}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
+                </div>
+
+                <div>
+                  <label htmlFor="service" className="block text-sm font-medium text-[#1B1B1B] mb-2">
+                    Service Type *
+                  </label>
+                  <select
+                    id="service"
+                    name="service"
+                    required
+                    value={formData.service}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#0055BF] focus:border-transparent"
+                  >
+                    <option value="">Select a service</option>
+                    {serviceOptions.map(option => (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    ))}
+                  </select>
                 </div>
 
                 <div>
@@ -276,6 +283,14 @@ export default function Contact() {
           </div>
         </div>
       </div>
-    </div>
+    </main>
+  );
+}
+
+export default function Contact() {
+  return (
+    <Suspense fallback={<div>Loading contact form...</div>}>
+      <ContactContent />
+    </Suspense>
   );
 } 
