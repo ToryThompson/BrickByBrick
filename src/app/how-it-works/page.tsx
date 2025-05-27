@@ -476,18 +476,18 @@ export default function HowItWorks() {
                   <span>Base Price:</span>
                   <span>${calculatePrice(parseInt(pieceCount))}</span>
                 </p>
-                <p className="flex justify-between">
-                  <span>Delivery:</span>
-                  <span>
-                    {deliveryMethod === 'shipping' ? (
-                      `$${calculateShippingPrice(parseInt(pieceCount))}`
-                    ) : deliveryCost !== null ? (
-                      `$${deliveryCost}`
-                    ) : (
-                      'Get estimate'
-                    )}
-                  </span>
-                </p>
+                {deliveryMethod === 'local' && (
+                  <p className="flex justify-between">
+                    <span>Delivery:</span>
+                    <span>
+                      {deliveryCost !== null ? (
+                        `$${deliveryCost}`
+                      ) : (
+                        'Get estimate'
+                      )}
+                    </span>
+                  </p>
+                )}
                 {requestGluing && (
                   <p className="flex justify-between">
                     <span>Gluing Service:</span>
@@ -498,17 +498,35 @@ export default function HowItWorks() {
                   <p className="flex justify-between font-bold">
                     <span>Total:</span>
                     <span>
-                      {deliveryMethod === 'shipping' ? (
-                        `$${calculateTotalPrice(parseInt(pieceCount)).total}`
-                      ) : deliveryCost !== null ? (
-                        `$${calculateTotalPrice(parseInt(pieceCount)).total}`
+                      {deliveryMethod === 'local' ? (
+                        deliveryCost !== null ? (
+                          `$${calculateTotalPrice(parseInt(pieceCount)).total}`
+                        ) : (
+                          'Get estimate'
+                        )
                       ) : (
-                        'Get estimate'
+                        'Contact for shipping quote'
                       )}
                     </span>
                   </p>
                 </div>
               </div>
+            </div>
+          )}
+
+          {deliveryMethod === 'shipping' && (
+            <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+              <h4 className="font-semibold mb-2 text-[#0055BF]">Shipping Information</h4>
+              <p className="text-gray-600 mb-4">
+                Shipping costs will be calculated and provided with your quote based on your location and the size of your set.
+              </p>
+              <ul className="space-y-2 text-gray-600">
+                <li>• Professional packaging and handling</li>
+                <li>• Insurance included</li>
+                <li>• Tracking number provided</li>
+                <li>• Standard delivery: 3-7 business days</li>
+                <li>• Rush delivery available (1-2 business days)</li>
+              </ul>
             </div>
           )}
         </div>

@@ -83,3 +83,15 @@ body {
   object-fit: cover;
   z-index: -1; /* Ensure it stays behind content */
 }
+
+/* Placeholder text styling */
+::placeholder {
+  color: #666666 !important; /* Dark grey color */
+}
+
+/* Dark mode placeholder styling */
+@media (prefers-color-scheme: dark) {
+  ::placeholder {
+    color: #999999 !important; /* Lighter grey for dark mode */
+  }
+}

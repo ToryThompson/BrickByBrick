@@ -432,11 +432,15 @@ export default function Pricing() {
             {deliveryMethod === 'shipping' && (
               <div className="mt-4 p-4 bg-gray-50 rounded-lg">
                 <h4 className="font-semibold mb-2 text-[#0055BF]">Shipping Information</h4>
+                <p className="text-gray-600 mb-4">
+                  Shipping costs will be calculated and provided with your quote based on your location and the size of your set.
+                </p>
                 <ul className="space-y-2 text-gray-600">
                   <li>• Professional packaging and handling</li>
                   <li>• Insurance included</li>
                   <li>• Tracking number provided</li>
-                  <li>• Estimated delivery time: 3-7 business days</li>
+                  <li>• Standard delivery: 3-7 business days</li>
+                  <li>• Rush delivery available (1-2 business days)</li>
                 </ul>
               </div>
             )}
@@ -470,12 +474,12 @@ export default function Pricing() {
           </div>
 
           {/* Price Estimate */}
-          {pieceCount && (deliveryMethod === 'shipping' || deliveryCost !== null) && (
+          {pieceCount && (deliveryMethod === 'local' || deliveryCost !== null) && (
             <div className="bg-gray-50 rounded-lg p-6">
               <h3 className="text-xl font-bold mb-4 text-[#0055BF]">Estimated Price Breakdown</h3>
               {selectedSet && (
                 <div className="mb-4">
-                   <p className="text-gray-600">
+                  <p className="text-gray-600">
                     <span className="font-semibold">Selected Set:</span> {selectedSet.name}
                   </p>
                   <p className="text-gray-600">
@@ -488,18 +492,18 @@ export default function Pricing() {
                   <span>Estimated Build Price:</span>
                   <span>${calculatePrice(parseInt(pieceCount))}</span>
                 </p>
-                <p className="flex justify-between">
-                  <span>{deliveryMethod === 'shipping' ? 'Estimated Shipping Fee:' : 'Estimated Delivery Fee:'}</span>
-                  <span>
-                    {deliveryMethod === 'shipping' ? (
-                      `$${calculateShippingPrice(parseInt(pieceCount))}`
-                    ) : deliveryCost !== null ? (
-                      `$${deliveryCost}`
-                    ) : (
-                      'Calculating...'
-                    )}
-                  </span>
-                </p>
+                {deliveryMethod === 'local' && (
+                  <p className="flex justify-between">
+                    <span>Estimated Delivery Fee:</span>
+                    <span>
+                      {deliveryCost !== null ? (
+                        `$${deliveryCost}`
+                      ) : (
+                        'Calculating...'
+                      )}
+                    </span>
+                  </p>
+                )}
                 {requestGluing && (
                   <p className="flex justify-between">
                     <span>Estimated Gluing Service:</span>
@@ -510,13 +514,15 @@ export default function Pricing() {
                   <p className="flex justify-between font-bold">
                     <span>Estimated Total Price:</span>
                     <span>
-                       {deliveryMethod === 'shipping' ? (
-                         `$${calculateTotalPrice(parseInt(pieceCount)).total}`
-                       ) : deliveryCost !== null ? (
-                         `$${calculateTotalPrice(parseInt(pieceCount)).total}`
-                       ) : (
-                         'Calculating...'
-                       )}
+                      {deliveryMethod === 'local' ? (
+                        deliveryCost !== null ? (
+                          `$${calculateTotalPrice(parseInt(pieceCount)).total}`
+                        ) : (
+                          'Calculating...'
+                        )
+                      ) : (
+                        'Contact for shipping quote'
+                      )}
                     </span>
                   </p>
                 </div>
