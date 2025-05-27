@@ -3,13 +3,43 @@
 import Link from "next/link";
 import Image from "next/image";
 import { useState } from "react";
-import PaymentForm from "@/components/PaymentForm";
+// import PaymentForm from "@/components/PaymentForm"; // We might not need this if we're just doing estimates for now
 
 export default function Pricing() {
-  const [selectedPlan, setSelectedPlan] = useState<{
-    name: string;
-    price: number;
-  } | null>(null);
+  // const [selectedPlan, setSelectedPlan] = useState<{
+  //   name: string;
+  //   price: number;
+  // } | null>(null);
+
+  const [pieceCount, setPieceCount] = useState('');
+  const [requestGluing, setRequestGluing] = useState(false);
+  const [estimatedPrice, setEstimatedPrice] = useState<number | null>(null);
+
+  const calculateEstimate = () => {
+    const count = parseInt(pieceCount);
+    if (isNaN(count) || count <= 0) {
+      setEstimatedPrice(null);
+      return;
+    }
+
+    let basePrice = 0;
+    // Define base pricing based on piece count ranges
+    if (count < 500) {
+      basePrice = 30; // Small set pricing
+    } else if (count >= 500 && count < 2000) {
+      basePrice = 50; // Medium set pricing
+    } else {
+      basePrice = 100; // Large set pricing
+    }
+
+    let gluingCost = 0;
+    if (requestGluing) {
+      // $50 per 1000 pieces, rounded up to the nearest thousand
+      gluingCost = Math.ceil(count / 1000) * 50;
+    }
+
+    setEstimatedPrice(basePrice + gluingCost);
+  };
 
   return (
     <main className="min-h-screen py-16 relative">
@@ -36,22 +66,54 @@ export default function Pricing() {
           <div className="w-24 h-1 bg-[#D01012] rounded-full mb-6"></div>
         </div>
 
-        {selectedPlan ? (
-          <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 mb-16">
-            <h2 className="text-2xl font-bold mb-6 text-center text-[#0055BF]">Complete Your Purchase</h2>
-            <p className="text-center mb-8">You selected: {selectedPlan.name} - ${selectedPlan.price}</p>
-            <PaymentForm amount={selectedPlan.price} />
+        {/* Pricing Calculator */}
+        <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 mb-16 max-w-md mx-auto">
+          <h2 className="text-2xl font-bold mb-6 text-center text-[#0055BF]">Get an Estimate</h2>
+          <div className="space-y-4">
+            <div>
+              <label htmlFor="pieceCount" className="block text-sm font-medium text-[#1B1B1B] mb-2">Number of Pieces *</label>
+              <input
+                type="number"
+                id="pieceCount"
+                value={pieceCount}
+                onChange={(e) => setPieceCount(e.target.value)}
+                className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#0055BF] focus:border-transparent"
+                placeholder="e.g. 1500"
+                min="1"
+              />
+            </div>
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="requestGluing"
+                checked={requestGluing}
+                onChange={(e) => setRequestGluing(e.target.checked)}
+                className="h-4 w-4 text-[#0055BF] border-gray-300 rounded focus:ring-[#0055BF]"
+              />
+              <label htmlFor="requestGluing" className="ml-2 block text-sm font-medium text-[#1B1B1B]">
+                Request Gluing (+ $50 per 1000 pieces)
+              </label>
+            </div>
             <button
-              onClick={() => setSelectedPlan(null)}
-              className="mt-4 text-[#0055BF] hover:text-[#004494] transition-colors"
+              onClick={calculateEstimate}
+              className="w-full bg-[#0055BF] text-white px-6 py-3 rounded-lg hover:bg-[#004494] transition-colors text-lg"
             >
-              ← Back to Plans
+              Calculate Estimate
             </button>
           </div>
-        ) : (
-          <>
+
+          {estimatedPrice !== null && (
+            <div className="mt-6 text-center text-2xl font-bold text-[#1B1B1B]">
+              Estimated Price: ${estimatedPrice}
+            </div>
+          )}
+        </div>
+
+        {/* Original Pricing Cards (kept for reference/comparison) */}
+        {/* You can choose to remove or keep these depending on your design preference */}
+        {/* <>
             {/* Pricing Cards */}
-            <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
+            {/* <div className="grid md:grid-cols-1 lg:grid-cols-3 gap-8 mb-16">
               <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 text-center border-2 border-[#0055BF]">
                 <h2 className="text-2xl font-bold mb-4 text-[#0055BF]">Small Sets</h2>
                 <p className="text-[#1B1B1B] mb-6">(Under 500 pieces)</p>
@@ -90,7 +152,7 @@ export default function Pricing() {
                   Select Plan
                 </button>
               </div>
-            </div>
+            </div> */}
 
             {/* Additional Services */}
             <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 mb-16 border-2 border-[#0055BF]">
@@ -116,8 +178,8 @@ export default function Pricing() {
                 </div>
               </div>
             </div>
-          </>
-        )}
+          {/* </>
+        )} */}
 
         <div className="text-center">
           <p className="text-lg mb-6 text-[#1B1B1B] font-semibold">Ready to get your LEGO set built? Contact us for a custom quote!</p>

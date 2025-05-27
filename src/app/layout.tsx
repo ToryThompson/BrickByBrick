@@ -24,7 +24,12 @@ export default function RootLayout({
         <nav className="bg-white shadow-md">
           <div className="container mx-auto px-4">
             <div className="flex justify-between items-center h-16">
-              <Link href="/" className="text-2xl font-bold text-blue-600 font-brick">
+              <Link href="/" className="flex items-center text-2xl font-bold text-blue-600 font-brick">
+                {/* LEGO Brick Logo */}
+                <div className="w-8 h-4 bg-[#0055BF] rounded-sm mr-2 relative">
+                  <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-white/90 rounded-sm"></div>
+                  <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-white/90 rounded-sm"></div>
+                </div>
                 Brick by Brick
               </Link>
               <div className="hidden md:flex space-x-8">

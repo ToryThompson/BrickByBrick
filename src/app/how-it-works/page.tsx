@@ -1,8 +1,40 @@
-import React from 'react';
+"use client";
+
+import React, { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
 export default function HowItWorks() {
+  const [pieceCount, setPieceCount] = useState('');
+  const [requestGluing, setRequestGluing] = useState(false);
+  const [estimatedPrice, setEstimatedPrice] = useState<number | null>(null);
+
+  const calculateEstimate = () => {
+    const count = parseInt(pieceCount);
+    if (isNaN(count) || count <= 0) {
+      setEstimatedPrice(null);
+      return;
+    }
+
+    let basePrice = 0;
+    // Define base pricing based on piece count ranges
+    if (count < 500) {
+      basePrice = 30; // Small set pricing
+    } else if (count >= 500 && count < 2000) {
+      basePrice = 50; // Medium set pricing
+    } else {
+      basePrice = 100; // Large set pricing
+    }
+
+    let gluingCost = 0;
+    if (requestGluing) {
+      // $50 per 1000 pieces, rounded up to the nearest thousand
+      gluingCost = Math.ceil(count / 1000) * 50;
+    }
+
+    setEstimatedPrice(basePrice + gluingCost);
+  };
+
   return (
     <div className="min-h-screen py-16 relative">
       <div className="absolute inset-0 z-0">
@@ -30,6 +62,49 @@ export default function HowItWorks() {
           <p className="text-xl max-w-2xl mx-auto text-center text-[#1B1B1B] mb-12">
             From request to delivery, we make building your LEGO dreams simple and enjoyable. Follow our step-by-step process below.
           </p>
+        </div>
+
+        {/* Pricing Calculator (Copied from Pricing page) */}
+        <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 mb-16 max-w-md mx-auto relative z-10">
+          <h2 className="text-2xl font-bold mb-6 text-center text-[#0055BF]">Get an Estimate</h2>
+          <div className="space-y-4">
+            <div>
+              <label htmlFor="pieceCount" className="block text-sm font-medium text-[#1B1B1B] mb-2">Number of Pieces *</label>
+              <input
+                type="number"
+                id="pieceCount"
+                value={pieceCount}
+                onChange={(e) => setPieceCount(e.target.value)}
+                className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#0055BF] focus:border-transparent"
+                placeholder="e.g. 1500"
+                min="1"
+              />
+            </div>
+            <div className="flex items-center">
+              <input
+                type="checkbox"
+                id="requestGluing"
+                checked={requestGluing}
+                onChange={(e) => setRequestGluing(e.target.checked)}
+                className="h-4 w-4 text-[#0055BF] border-gray-300 rounded focus:ring-[#0055BF]"
+              />
+              <label htmlFor="requestGluing" className="ml-2 block text-sm font-medium text-[#1B1B1B]">
+                Request Gluing (+ $50 per 1000 pieces)
+              </label>
+            </div>
+            <button
+              onClick={calculateEstimate}
+              className="w-full bg-[#0055BF] text-white px-6 py-3 rounded-lg hover:bg-[#004494] transition-colors text-lg"
+            >
+              Calculate Estimate
+            </button>
+          </div>
+
+          {estimatedPrice !== null && (
+            <div className="mt-6 text-center text-2xl font-bold text-[#1B1B1B]">
+              Estimated Price: ${estimatedPrice}
+            </div>
+          )}
         </div>
 
         {/* Main content area with side image */}
