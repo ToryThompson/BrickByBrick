@@ -32,7 +32,7 @@ export default function Pricing() {
           <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 text-center border-2 border-[#0055BF]">
             <h2 className="text-2xl font-bold mb-4 text-[#0055BF]">Small Sets</h2>
             <p className="text-[#1B1B1B] mb-6">(Under 500 pieces)</p>
-            <p className="text-4xl font-bold mb-6 text-[#1B1B1B]">Starting at $20</p>
+            <p className="text-4xl font-bold mb-6 text-[#1B1B1B]">Starting at $30</p>
             <p className="text-[#1B1B1B] mb-6">Perfect for smaller models and quick builds.</p>
             <Link href="/contact" className="lego-yellow px-6 py-2 rounded-full font-semibold">Get Quote</Link>
           </div>
@@ -40,7 +40,7 @@ export default function Pricing() {
           <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 text-center border-2 border-[#D01012]">
             <h2 className="text-2xl font-bold mb-4 text-[#D01012]">Medium Sets</h2>
             <p className="text-[#1B1B1B] mb-6">(500 - 1999 pieces)</p>
-            <p className="text-4xl font-bold mb-6 text-[#1B1B1B]">Starting at $40</p>
+            <p className="text-4xl font-bold mb-6 text-[#1B1B1B]">Starting at $50</p>
             <p className="text-[#1B1B1B] mb-6">Great for most standard sized sets and collections.</p>
             <Link href="/contact" className="lego-red px-6 py-2 rounded-full font-semibold text-white">Get Quote</Link>
           </div>
@@ -48,7 +48,7 @@ export default function Pricing() {
           <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 text-center border-2 border-[#F7D117]">
             <h2 className="text-2xl font-bold mb-4 text-[#F7D117]">Large Sets</h2>
             <p className="text-[#1B1B1B] mb-6">(2000+ pieces)</p>
-            <p className="text-4xl font-bold mb-6 text-[#1B1B1B]">Starting at $80</p>
+            <p className="text-4xl font-bold mb-6 text-[#1B1B1B]">Starting at $100</p>
             <p className="text-[#1B1B1B] mb-6">Ideal for complex models and enthusiast builds.</p>
             <Link href="/contact" className="lego-yellow px-6 py-2 rounded-full font-semibold">Get Quote</Link>
           </div>
