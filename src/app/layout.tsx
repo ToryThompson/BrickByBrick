@@ -74,8 +74,8 @@ export default function RootLayout({
               </div>
               <div>
                 <h3 className="text-xl font-bold mb-4 font-brick">Contact Us</h3>
-                <p className="text-gray-300">Email: contact@brickbybrick.com</p>
-                <p className="text-gray-300">Phone: (555) 123-4567</p>
+                <p className="text-gray-300">Email: probrickbuilds@gmail.com</p>
+                <p className="text-gray-300">Phone: (770) 383-5290</p>
               </div>
             </div>
             <div className="border-t border-gray-700 mt-8 pt-8 text-center text-gray-300">

@@ -7,13 +7,24 @@ import { useState, useEffect } from "react";
 const slides = [
   {
     image: "/images/backgrounds/ChatGPT Image May 26, 2025, 07_20_30 PM.png",
-    title: "Custom Displays",
-    description: "Beautiful display solutions for your collection"
+    title: "We build for YOU!!!",
+    description: "All of the best parts of LEGO are included in our builds!"
   },
   {
     image: "/images/backgrounds/ChatGPT Image May 26, 2025, 07_24_20 PM.png",
-    title: "Local Service",
-    description: "Convenient pickup and delivery in Atlanta"
+    title: "New or Old",
+    description: "Just purchase the set and have us do the work!!"
+  },
+  
+  {
+    image: "/images/backgrounds/May 27, 2025, 10_54_04 AM.png",
+    title: "Great for Gifts or the Holidays",
+    description: ""
+  },
+  {
+    image: "/images/backgrounds/Screenshot 2025-05-27 at 9.29.22 AM.png",
+    title: "Placeholder Title 3",
+    description: "Placeholder description 3"
   }
 ];
 
@@ -90,7 +101,7 @@ export default function Home() {
             </div>
             <div className="md:w-1/2 flex justify-center">
               <div 
-                className="relative w-full max-w-lg aspect-square"
+                className="relative w-full max-w-xl aspect-video"
                 onMouseEnter={handleMouseEnter}
                 onMouseLeave={handleMouseLeave}
               >
@@ -108,7 +119,7 @@ export default function Home() {
                       className="rounded-lg shadow-2xl bg-white/90 backdrop-blur-sm object-cover"
                       priority={index === 0}
                     />
-                    <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white p-4 rounded-b-lg">
+                    <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white p-6 rounded-b-lg">
                       <h3 className="text-xl font-bold mb-1">{slide.title}</h3>
                       <p>{slide.description}</p>
                     </div>

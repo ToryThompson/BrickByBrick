@@ -269,7 +269,7 @@ function ContactContent() {
                   </svg>
                 </div>
                 <h3 className="font-bold text-[#1B1B1B] mb-2">Phone</h3>
-                <p className="text-[#1B1B1B]">(555) 123-4567</p>
+                <p className="text-[#1B1B1B]">(770) 383-5290</p>
               </div>
               <div className="bg-white/95 backdrop-blur-sm rounded-xl p-6">
                 <div className="w-12 h-12 bg-[#0055BF] rounded-full flex items-center justify-center mx-auto mb-4">
@@ -278,7 +278,7 @@ function ContactContent() {
                   </svg>
                 </div>
                 <h3 className="font-bold text-[#1B1B1B] mb-2">Email</h3>
-                <p className="text-[#1B1B1B]">contact@legobuilders.com</p>
+                <p className="text-[#1B1B1B]">probrickbuilds@gmail.com</p>
               </div>
               <div className="bg-white/95 backdrop-blur-sm rounded-xl p-6">
                 <div className="w-12 h-12 bg-[#0055BF] rounded-full flex items-center justify-center mx-auto mb-4">
