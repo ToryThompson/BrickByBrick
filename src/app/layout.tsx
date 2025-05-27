@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import { Bricolage_Grotesque } from "next/font/google";
 import "./globals.css";
 import Link from "next/link";
+import MobileMenu from "./components/MobileMenu";
 
 const inter = Inter({ subsets: ["latin"] });
 const bricolage = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-bricolage" });
@@ -32,6 +33,8 @@ export default function RootLayout({
                 </div>
                 Brick by Brick
               </Link>
+              
+              {/* Desktop Navigation */}
               <div className="hidden md:flex space-x-8">
                 <Link href="/" className="text-gray-600 hover:text-blue-600">
                   Home
@@ -52,22 +55,27 @@ export default function RootLayout({
                   Contact
                 </Link>
               </div>
+
+              {/* Mobile Menu */}
+              <MobileMenu />
             </div>
           </div>
         </nav>
 
         {/* Main Content */}
-        {children}
+        <main className="min-h-screen">
+          {children}
+        </main>
 
         {/* Footer */}
         <footer className="bg-gray-800 text-white py-12">
           <div className="container mx-auto px-4">
-            <div className="grid md:grid-cols-3 gap-8">
-              <div>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <div className="text-center md:text-left">
                 <h3 className="text-xl font-bold mb-4 font-brick">Brick by Brick</h3>
                 <p className="text-gray-300">Professional LEGO set building services.</p>
               </div>
-              <div>
+              <div className="text-center md:text-left">
                 <h3 className="text-xl font-bold mb-4 font-brick">Quick Links</h3>
                 <ul className="space-y-2">
                   <li><Link href="/services" className="text-gray-300 hover:text-white">Services</Link></li>
@@ -77,7 +85,7 @@ export default function RootLayout({
                   <li><Link href="/contact" className="text-gray-300 hover:text-white">Contact</Link></li>
                 </ul>
               </div>
-              <div>
+              <div className="text-center md:text-left">
                 <h3 className="text-xl font-bold mb-4 font-brick">Contact Us</h3>
                 <p className="text-gray-300">Email: probrickbuilds@gmail.com</p>
                 <p className="text-gray-300">Phone: (770) 383-5290</p>

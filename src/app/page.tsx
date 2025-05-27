@@ -85,21 +85,21 @@ export default function Home() {
           <div className="absolute inset-0 bg-white/40 backdrop-blur-sm"></div>
         </div>
         <div className="container mx-auto px-4 relative z-10">
-          <div className="flex flex-col md:flex-row items-center gap-12">
-            <div className="md:w-1/2">
-              <h1 className="text-7xl font-bold mb-8 text-[#0055BF] font-brick [text-shadow:_2px_2px_4px_rgba(0,0,0,0.3)]">Brick by Brick</h1>
-              <h2 className="text-4xl font-semibold mb-8 text-[#0055BF] font-brick [text-shadow:_1px_1px_3px_rgba(0,0,0,0.3)]">Professional LEGO Set Building – Atlanta, GA</h2>
-              <p className="text-3xl font-bold mb-10 text-[#0055BF] font-brick [text-shadow:_1px_1px_3px_rgba(0,0,0,0.3)]">Too busy to build your LEGO set? <br/>Let us handle it for you!</p>
-              <div className="flex flex-col sm:flex-row gap-6 mb-8">
-                <Link href="/pricing" className="bg-yellow-400 px-10 py-5 rounded-lg font-semibold text-xl text-center hover:bg-yellow-300 transition-colors shadow-lg hover:shadow-xl">See Pricing</Link>
-                <Link href="/contact" className="bg-red-600 px-10 py-5 rounded-lg font-semibold text-xl text-center hover:bg-red-500 transition-colors shadow-lg hover:shadow-xl">Contact Us</Link>
+          <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
+            <div className="md:w-1/2 text-center md:text-left">
+              <h1 className="text-5xl md:text-7xl font-bold mb-4 md:mb-8 text-[#0055BF] font-brick [text-shadow:_2px_2px_4px_rgba(0,0,0,0.3)]">Brick by Brick</h1>
+              <h2 className="text-2xl md:text-4xl font-semibold mb-4 md:mb-8 text-[#0055BF] font-brick [text-shadow:_1px_1px_3px_rgba(0,0,0,0.3)]">Professional LEGO Set Building – Atlanta, GA</h2>
+              <p className="text-xl md:text-3xl font-bold mb-6 md:mb-10 text-[#0055BF] font-brick [text-shadow:_1px_1px_3px_rgba(0,0,0,0.3)]">Too busy to build your LEGO set? <br/>Let us handle it for you!</p>
+              <div className="flex flex-col sm:flex-row gap-4 md:gap-6 mb-6 md:mb-8">
+                <Link href="/pricing" className="bg-yellow-400 px-6 md:px-10 py-4 md:py-5 rounded-lg font-semibold text-lg md:text-xl text-center hover:bg-yellow-300 transition-colors shadow-lg hover:shadow-xl">See Pricing</Link>
+                <Link href="/contact" className="bg-red-600 px-6 md:px-10 py-4 md:py-5 rounded-lg font-semibold text-lg md:text-xl text-center hover:bg-red-500 transition-colors shadow-lg hover:shadow-xl">Contact Us</Link>
               </div>
-              <div className="mt-8 text-[#0055BF] text-2xl font-semibold [text-shadow:_1px_1px_2px_rgba(0,0,0,0.3)]">
+              <div className="mt-6 md:mt-8 text-[#0055BF] text-xl md:text-2xl font-semibold [text-shadow:_1px_1px_2px_rgba(0,0,0,0.3)]">
                 <span>Call or Text: </span>
                 <a href="tel:7703835290" className="underline text-[#0055BF] hover:text-[#004494] transition-colors">770-383-5290</a>
               </div>
             </div>
-            <div className="md:w-1/2 flex justify-center">
+            <div className="md:w-1/2 flex justify-center w-full">
               <div 
                 className="relative w-full max-w-4xl aspect-video"
                 onMouseEnter={handleMouseEnter}
@@ -143,50 +143,50 @@ export default function Home() {
       </section>
 
       {/* Perfect For Section */}
-      <section className="relative py-20 bg-gray-50">
+      <section className="relative py-12 md:py-20 bg-gray-50">
         <div className="container mx-auto px-4 relative z-10">
-          <h2 className="text-4xl font-bold mb-12 text-red-600 font-brick text-center">Perfect for:</h2>
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8 max-w-6xl mx-auto">
-            <div className="bg-white rounded-lg p-8 shadow-lg hover:scale-105 transition-transform border-2 border-blue-200">
-              <div className="text-4xl text-blue-500 mb-4 text-center">👨‍💼</div>
-              <h3 className="text-xl font-bold text-center mb-2 text-blue-600">Adult Collectors</h3>
-              <p className="text-gray-600 text-center">Perfect for collectors who want their sets professionally assembled and displayed.</p>
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-red-600 font-brick text-center">Perfect for:</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-6xl mx-auto">
+            <div className="bg-white rounded-lg p-6 md:p-8 shadow-lg hover:scale-105 transition-transform border-2 border-blue-200">
+              <div className="text-3xl md:text-4xl text-blue-500 mb-3 md:mb-4 text-center">👨‍💼</div>
+              <h3 className="text-lg md:text-xl font-bold text-center mb-2 text-blue-600">Adult Collectors</h3>
+              <p className="text-sm md:text-base text-gray-600 text-center">Perfect for collectors who want their sets professionally assembled and displayed.</p>
             </div>
-            <div className="bg-white rounded-lg p-8 shadow-lg hover:scale-105 transition-transform border-2 border-red-200">
-              <div className="text-4xl text-red-500 mb-4 text-center">🏪</div>
-              <h3 className="text-xl font-bold text-center mb-2 text-red-600">Store Displays</h3>
-              <p className="text-gray-600 text-center">Eye-catching displays for retail stores and businesses.</p>
+            <div className="bg-white rounded-lg p-6 md:p-8 shadow-lg hover:scale-105 transition-transform border-2 border-red-200">
+              <div className="text-3xl md:text-4xl text-red-500 mb-3 md:mb-4 text-center">🏪</div>
+              <h3 className="text-lg md:text-xl font-bold text-center mb-2 text-red-600">Store Displays</h3>
+              <p className="text-sm md:text-base text-gray-600 text-center">Eye-catching displays for retail stores and businesses.</p>
             </div>
-            <div className="bg-white rounded-lg p-8 shadow-lg hover:scale-105 transition-transform border-2 border-yellow-200">
-              <div className="text-4xl text-yellow-500 mb-4 text-center">🎁</div>
-              <h3 className="text-xl font-bold text-center mb-2 text-yellow-600">Gifts & Birthdays</h3>
-              <p className="text-gray-600 text-center">Surprise your loved ones with professionally built LEGO sets.</p>
+            <div className="bg-white rounded-lg p-6 md:p-8 shadow-lg hover:scale-105 transition-transform border-2 border-yellow-200">
+              <div className="text-3xl md:text-4xl text-yellow-500 mb-3 md:mb-4 text-center">🎁</div>
+              <h3 className="text-lg md:text-xl font-bold text-center mb-2 text-yellow-600">Gifts & Birthdays</h3>
+              <p className="text-sm md:text-base text-gray-600 text-center">Surprise your loved ones with professionally built LEGO sets.</p>
             </div>
-            <div className="bg-white rounded-lg p-8 shadow-lg hover:scale-105 transition-transform border-2 border-green-200">
-              <div className="text-4xl text-green-500 mb-4 text-center">⏰</div>
-              <h3 className="text-xl font-bold text-center mb-2 text-green-600">Busy LEGO Lovers</h3>
-              <p className="text-gray-600 text-center">For those who love LEGO but don't have time to build.</p>
+            <div className="bg-white rounded-lg p-6 md:p-8 shadow-lg hover:scale-105 transition-transform border-2 border-green-200">
+              <div className="text-3xl md:text-4xl text-green-500 mb-3 md:mb-4 text-center">⏰</div>
+              <h3 className="text-lg md:text-xl font-bold text-center mb-2 text-green-600">Busy LEGO Lovers</h3>
+              <p className="text-sm md:text-base text-gray-600 text-center">For those who love LEGO but don't have time to build.</p>
             </div>
           </div>
         </div>
       </section>
 
       {/* Testimonials Section */}
-      <section className="py-20 bg-white">
+      <section className="py-12 md:py-20 bg-white">
         <div className="container mx-auto px-4">
-          <h2 className="text-4xl font-bold mb-12 text-[#0055BF] font-brick text-center">What Our Clients Say</h2>
-          <div className="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-[#0055BF] font-brick text-center">What Our Clients Say</h2>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
             {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-gray-50 rounded-xl p-8 shadow-lg hover:shadow-xl transition-shadow">
+              <div key={index} className="bg-gray-50 rounded-xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow">
                 <div className="flex items-center mb-4">
                   {[...Array(testimonial.rating)].map((_, i) => (
-                    <span key={i} className="text-yellow-400 text-xl">★</span>
+                    <span key={i} className="text-yellow-400 text-lg md:text-xl">★</span>
                   ))}
                 </div>
-                <p className="text-gray-600 mb-6 italic">"{testimonial.text}"</p>
+                <p className="text-sm md:text-base text-gray-600 mb-4 md:mb-6 italic">"{testimonial.text}"</p>
                 <div>
                   <p className="font-bold text-[#0055BF]">{testimonial.name}</p>
-                  <p className="text-gray-500 text-sm">{testimonial.role}</p>
+                  <p className="text-gray-500 text-xs md:text-sm">{testimonial.role}</p>
                 </div>
               </div>
             ))}
@@ -195,9 +195,9 @@ export default function Home() {
       </section>
 
       {/* Call to Action Section */}
-      <section className="bg-red-600 py-16">
+      <section className="bg-red-600 py-12 md:py-16">
         <div className="container mx-auto px-4 text-center">
-          <h2 className="text-4xl font-bold mb-6 text-white font-brick">Ready to get started?</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6 text-white font-brick">Ready to get started?</h2>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link href="/contact" className="bg-yellow-400 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-yellow-300 transition-colors shadow-lg hover:shadow-xl">Order Now</Link>
             <Link href="/how-it-works" className="bg-white px-8 py-4 rounded-lg font-semibold text-lg text-red-600 hover:bg-gray-100 transition-colors shadow-lg hover:shadow-xl">Learn More</Link>
