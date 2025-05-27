@@ -1,13 +1,114 @@
 "use client";
 
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 
+interface LegoSet {
+  set_num: string;
+  name: string;
+  year: number;
+  theme_id: number;
+  num_parts: number;
+  set_img_url: string;
+  set_url: string;
+  last_modified_dt: string;
+}
+
 export default function HowItWorks() {
   const [pieceCount, setPieceCount] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [searchResults, setSearchResults] = useState<LegoSet[]>([]);
+  const [selectedSet, setSelectedSet] = useState<LegoSet | null>(null);
   const [requestGluing, setRequestGluing] = useState(false);
   const [estimatedPrice, setEstimatedPrice] = useState<number | null>(null);
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+
+  // Calculate price based on piece count
+  const calculatePrice = (pieces: number) => {
+    if (pieces <= 200) return 20;
+    if (pieces <= 500) return 35;
+    if (pieces <= 1000) return 50;
+    if (pieces <= 2000) return 75;
+    if (pieces <= 3000) return 100;
+    if (pieces <= 4000) return 150;
+    if (pieces <= 5000) return 200;
+    if (pieces <= 6000) return 250;
+    if (pieces <= 7000) return 300;
+    if (pieces <= 8000) return 350;
+    if (pieces <= 9000) return 400;
+    return 450;
+  };
+
+  // Calculate delivery price based on piece count
+  const calculateDeliveryPrice = (pieces: number) => {
+    if (pieces <= 200) return 10;
+    if (pieces <= 500) return 15;
+    if (pieces <= 1000) return 20;
+    if (pieces <= 2000) return 25;
+    if (pieces <= 3000) return 30;
+    if (pieces <= 4000) return 35;
+    if (pieces <= 5000) return 40;
+    if (pieces <= 6000) return 45;
+    if (pieces <= 7000) return 50;
+    if (pieces <= 8000) return 55;
+    if (pieces <= 9000) return 60;
+    return 65;
+  };
+
+  // Calculate gluing price based on piece count
+  const calculateGluingPrice = (pieces: number) => {
+    if (pieces <= 200) return 15;
+    if (pieces <= 500) return 25;
+    if (pieces <= 1000) return 35;
+    if (pieces <= 2000) return 45;
+    if (pieces <= 3000) return 55;
+    if (pieces <= 4000) return 65;
+    if (pieces <= 5000) return 75;
+    if (pieces <= 6000) return 85;
+    if (pieces <= 7000) return 95;
+    if (pieces <= 8000) return 105;
+    if (pieces <= 9000) return 115;
+    return 125;
+  };
+
+  // Handle search with API
+  const handleSearch = async (query: string) => {
+    setSearchQuery(query);
+    setError(null);
+    
+    if (query.length < 2) {
+      setSearchResults([]);
+      return;
+    }
+
+    setIsLoading(true);
+    try {
+      const response = await fetch(`/api/lego-search?query=${encodeURIComponent(query)}`);
+      const data = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(data.error || 'Failed to search LEGO sets');
+      }
+      
+      setSearchResults(data.results);
+    } catch (error) {
+      console.error('Error searching LEGO sets:', error);
+      setError(error instanceof Error ? error.message : 'Failed to search LEGO sets');
+      setSearchResults([]);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  // Handle set selection
+  const handleSetSelect = (set: LegoSet) => {
+    setSelectedSet(set);
+    setPieceCount(set.num_parts.toString());
+    setSearchResults([]);
+    setSearchQuery(set.name);
+  };
 
   const calculateEstimate = () => {
     const count = parseInt(pieceCount);
@@ -33,6 +134,20 @@ export default function HowItWorks() {
     }
 
     setEstimatedPrice(basePrice + gluingCost);
+  };
+
+  // Calculate total price including all services
+  const calculateTotalPrice = (pieces: number) => {
+    const basePrice = calculatePrice(pieces);
+    const deliveryPrice = calculateDeliveryPrice(pieces);
+    const gluingPrice = requestGluing ? calculateGluingPrice(pieces) : 0;
+    
+    return {
+      basePrice,
+      deliveryPrice,
+      gluingPrice,
+      total: basePrice + deliveryPrice + gluingPrice
+    };
   };
 
   return (
@@ -64,22 +179,144 @@ export default function HowItWorks() {
           </p>
         </div>
 
+        {/* LEGO Set Search and Price Calculator */}
+        <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 mb-16 border-2 border-[#0055BF]">
+          <h2 className="text-3xl font-bold mb-6 text-center text-[#0055BF]">Find Your LEGO Set</h2>
+          
+          {/* Search Input */}
+          <div className="relative mb-6">
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => handleSearch(e.target.value)}
+              placeholder="Search by set name or number (e.g., 'Star Destroyer' or '75252')"
+              className="w-full px-4 py-3 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#0055BF] focus:border-transparent"
+            />
+            
+            {/* Loading Indicator */}
+            {isLoading && (
+              <div className="absolute right-3 top-1/2 transform -translate-y-1/2">
+                <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-[#0055BF]"></div>
+              </div>
+            )}
+            
+            {/* Error Message */}
+            {error && (
+              <div className="mt-2 text-red-600 text-sm">
+                {error}
+              </div>
+            )}
+            
+            {/* Search Results Dropdown */}
+            {searchResults.length > 0 && (
+              <div className="absolute z-10 w-full mt-1 bg-white rounded-lg shadow-lg border border-gray-200 max-h-96 overflow-y-auto">
+                {searchResults.map((set) => (
+                  <button
+                    key={set.set_num}
+                    onClick={() => handleSetSelect(set)}
+                    className="w-full px-4 py-3 text-left hover:bg-gray-100 focus:bg-gray-100 focus:outline-none flex items-center gap-4"
+                  >
+                    {set.set_img_url && (
+                      <img
+                        src={set.set_img_url}
+                        alt={set.name}
+                        className="w-16 h-16 object-contain bg-gray-50 rounded"
+                      />
+                    )}
+                    <div>
+                      <div className="font-semibold">{set.name}</div>
+                      <div className="text-sm text-gray-600">
+                        Set #{set.set_num} • {set.num_parts} pieces • {set.year}
+                      </div>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            )}
+
+            {/* No Results Message */}
+            {searchQuery.length >= 2 && !isLoading && !error && searchResults.length === 0 && (
+              <div className="mt-2 text-gray-600 text-sm">
+                No LEGO sets found. Try a different search term.
+              </div>
+            )}
+          </div>
+
+          {/* Selected Set Info */}
+          {selectedSet && (
+            <div className="mb-6 p-4 bg-gray-50 rounded-lg">
+              <div className="flex items-start gap-4">
+                {selectedSet.set_img_url && (
+                  <img
+                    src={selectedSet.set_img_url}
+                    alt={selectedSet.name}
+                    className="w-32 h-32 object-contain bg-white rounded-lg shadow-sm"
+                  />
+                )}
+                <div>
+                  <h3 className="font-bold text-lg mb-2">{selectedSet.name}</h3>
+                  <p className="text-gray-600">
+                    Set #{selectedSet.set_num} • {selectedSet.num_parts} pieces • Released {selectedSet.year}
+                  </p>
+                  <a
+                    href={selectedSet.set_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="text-[#0055BF] hover:underline text-sm mt-2 inline-block"
+                  >
+                    View Set Details →
+                  </a>
+                </div>
+              </div>
+            </div>
+          )}
+
+          {/* Manual Piece Count Input */}
+          <div className="mb-6">
+            <label htmlFor="pieceCount" className="block text-sm font-medium text-gray-700 mb-2">
+              Or enter piece count manually:
+            </label>
+            <input
+              type="number"
+              id="pieceCount"
+              value={pieceCount}
+              onChange={(e) => setPieceCount(e.target.value)}
+              placeholder="Enter number of pieces"
+              className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#0055BF] focus:border-transparent"
+            />
+          </div>
+
+          {/* Price Estimate */}
+          {estimatedPrice !== null && (
+            <div className="text-center">
+              <h3 className="text-xl font-bold text-[#0055BF] mb-4">Price Breakdown</h3>
+              <div className="bg-gray-50 rounded-lg p-4 mb-4">
+                <div className="grid grid-cols-2 gap-4 text-left">
+                  <div>
+                    <p className="text-gray-600">Base Build Price:</p>
+                    <p className="text-gray-600">Delivery Fee:</p>
+                    {requestGluing && <p className="text-gray-600">Gluing Service:</p>}
+                    <p className="font-bold text-[#0055BF] mt-2">Total Price:</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="font-semibold">${calculatePrice(parseInt(pieceCount))}</p>
+                    <p className="font-semibold">${calculateDeliveryPrice(parseInt(pieceCount))}</p>
+                    {requestGluing && <p className="font-semibold">${calculateGluingPrice(parseInt(pieceCount))}</p>}
+                    <p className="font-bold text-[#0055BF] mt-2">${calculateTotalPrice(parseInt(pieceCount)).total}</p>
+                  </div>
+                </div>
+              </div>
+              <p className="text-sm text-gray-600">
+                *Prices may vary based on set complexity and additional services
+              </p>
+            </div>
+          )}
+        </div>
+
         {/* Pricing Calculator (Copied from Pricing page) */}
         <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 mb-16 max-w-md mx-auto relative z-10">
           <h2 className="text-2xl font-bold mb-6 text-center text-[#0055BF]">Get an Estimate</h2>
           <div className="space-y-4">
-            <div>
-              <label htmlFor="pieceCount" className="block text-sm font-medium text-[#1B1B1B] mb-2">Number of Pieces *</label>
-              <input
-                type="number"
-                id="pieceCount"
-                value={pieceCount}
-                onChange={(e) => setPieceCount(e.target.value)}
-                className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#0055BF] focus:border-transparent"
-                placeholder="e.g. 1500"
-                min="1"
-              />
-            </div>
             <div className="flex items-center">
               <input
                 type="checkbox"
@@ -99,12 +336,6 @@ export default function HowItWorks() {
               Calculate Estimate
             </button>
           </div>
-
-          {estimatedPrice !== null && (
-            <div className="mt-6 text-center text-2xl font-bold text-[#1B1B1B]">
-              Estimated Price: ${estimatedPrice}
-            </div>
-          )}
         </div>
 
         {/* Main content area with side image */}
