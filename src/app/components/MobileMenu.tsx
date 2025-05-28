@@ -10,22 +10,24 @@ export default function MobileMenu() {
     <div className="relative">
       {/* Mobile Menu Button */}
       <button 
-        className="md:hidden p-2"
+        className="md:hidden p-2 hover:bg-gray-100 rounded-lg transition-all duration-300 active:scale-95"
         onClick={() => setIsOpen(!isOpen)}
         aria-label="Toggle mobile menu"
       >
-        <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-        </svg>
+        <div className="w-6 h-6 flex flex-col justify-center items-center gap-1.5">
+          <span className={`block w-6 h-0.5 bg-[#0055BF] transition-all duration-300 ${isOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+          <span className={`block w-6 h-0.5 bg-[#0055BF] transition-all duration-300 ${isOpen ? 'opacity-0' : ''}`}></span>
+          <span className={`block w-6 h-0.5 bg-[#0055BF] transition-all duration-300 ${isOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+        </div>
       </button>
 
       {/* Mobile Navigation Menu */}
       <div 
-        className={`md:hidden fixed top-16 left-0 right-0 bg-white shadow-lg z-50 transition-all duration-300 ease-in-out ${
+        className={`md:hidden fixed top-20 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-lg z-50 transition-all duration-300 ease-in-out ${
           isOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
         }`}
       >
-        <div className="px-2 pt-2 pb-3 space-y-1 border-t border-gray-100">
+        <div className="px-4 py-6 space-y-4 border-t border-gray-100">
           <Link 
             href="/" 
             className="group relative flex items-center justify-center px-6 py-3 text-white font-semibold rounded-lg bg-[#0055BF] hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
@@ -92,7 +94,7 @@ export default function MobileMenu() {
       {/* Overlay when menu is open */}
       {isOpen && (
         <div 
-          className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden"
+          className="fixed inset-0 bg-black/20 backdrop-blur-sm z-40 md:hidden transition-opacity duration-300"
           onClick={() => setIsOpen(false)}
         />
       )}

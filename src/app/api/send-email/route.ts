@@ -46,6 +46,8 @@ export async function POST(request: Request) {
         
         <p><strong>Delivery Method:</strong> ${deliveryMethod || 'Not specified'}</p>
         <p><strong>Gluing Requested:</strong> ${gluing ? 'Yes' : 'No'}</p>
+        <p><strong>Gluing Request:</strong> ${gluing === 'permanent' ? 'Permanent Gluing' : gluing === 'dissolvable' ? 'Dissolvable Gluing' : 'No Gluing'}</p>
+        ${gluing !== false ? `<p><strong>Gluing Details:</strong> ${gluing === 'permanent' ? 'Permanent glue for display pieces that won\'t be disassembled' : 'Dissolvable glue that can be removed with warm water if you want to rebuild later'}</p>` : ''}
         <p><strong>Message:</strong></p>
         <p>${message}</p>
       `,
