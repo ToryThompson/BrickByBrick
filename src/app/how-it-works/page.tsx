@@ -272,7 +272,6 @@ export default function HowItWorks() {
         <div className="hidden md:flex justify-center items-center mb-8">
           <div className="bg-white/95 backdrop-blur-sm rounded-xl p-8 shadow-lg border-2 border-[#0055BF] max-w-2xl">
             <div className="flex flex-col items-center gap-8">
-              
               <div className="text-center">
                 <h3 className="text-2xl font-bold mb-4 text-[#0055BF]">Ready to Get Started?</h3>
                 <p className="text-gray-600 mb-6">Let us bring your LEGO dreams to life. Contact us today!</p>
@@ -287,8 +286,68 @@ export default function HowItWorks() {
           </div>
         </div>
 
+        {/* FAQ Section */}
+        <div className="mt-16 bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 border-2 border-[#0055BF]">
+          <h2 className="text-3xl font-bold mb-8 text-center text-[#0055BF]">Frequently Asked Questions</h2>
+          
+          <div className="space-y-6">
+            <div className="bg-gray-50 rounded-lg p-6">
+              <h3 className="text-xl font-bold mb-3 text-[#0055BF]">How long does it take to build a set?</h3>
+              <p className="text-gray-600">Build times vary based on the size and complexity of the set. Small sets (under 500 pieces) typically take 1-2 days, medium sets (500-2000 pieces) take 2-4 days, and large sets (2000+ pieces) can take 4-7 days. We'll provide a specific timeline when you request a quote.</p>
+            </div>
+
+            <div className="bg-gray-50 rounded-lg p-6">
+              <h3 className="text-xl font-bold mb-3 text-[#0055BF]">Do you provide the LEGO sets?</h3>
+              <p className="text-gray-600">No, we don't provide the LEGO sets. You'll need to purchase the set you want built. We can help you find the set you're looking for and provide guidance on where to purchase it.</p>
+            </div>
+
+            <div className="bg-gray-50 rounded-lg p-6">
+              <h3 className="text-xl font-bold mb-3 text-[#0055BF]">What happens if pieces are missing?</h3>
+              <p className="text-gray-600">We carefully inventory all pieces before starting the build. If any pieces are missing, we'll notify you immediately and can order replacement parts for you. The cost of replacement parts will be added to your final bill.</p>
+            </div>
+
+            <div className="bg-gray-50 rounded-lg p-6">
+              <h3 className="text-xl font-bold mb-3 text-[#0055BF]">What gluing options do you offer?</h3>
+              <p className="text-gray-600">We offer two gluing options: permanent glue for display pieces that won't be disassembled, and dissolvable glue that can be removed with warm water if you want to rebuild the set later. Both options use professional-grade glue that's safe for LEGO pieces.</p>
+            </div>
+
+            <div className="bg-gray-50 rounded-lg p-6">
+              <h3 className="text-xl font-bold mb-3 text-[#0055BF]">How do you ensure quality?</h3>
+              <p className="text-gray-600">We follow a strict quality control process: careful sorting, step-by-step building following official instructions, thorough inspection for missing pieces, and final quality check. We also take photos during the build process so you can see the progress.</p>
+            </div>
+
+            <div className="bg-gray-50 rounded-lg p-6">
+              <h3 className="text-xl font-bold mb-3 text-[#0055BF]">What's included in the price?</h3>
+              <p className="text-gray-600">The price includes professional assembly, quality control, and secure packaging. Additional services like gluing, custom display solutions, and delivery/shipping are priced separately. We'll provide a detailed quote that breaks down all costs.</p>
+            </div>
+
+            <div className="bg-gray-50 rounded-lg p-6">
+              <h3 className="text-xl font-bold mb-3 text-[#0055BF]">How do you handle shipping?</h3>
+              <p className="text-gray-600">We use professional packaging materials and techniques to ensure your built set arrives safely. Sets are carefully wrapped and secured in custom boxes. We provide tracking information and can arrange for special handling if needed.</p>
+            </div>
+
+            <div className="bg-gray-50 rounded-lg p-6">
+              <h3 className="text-xl font-bold mb-3 text-[#0055BF]">What comes in my package?</h3>
+              <p className="text-gray-600">Your package includes:</p>
+              <ul className="list-disc list-inside text-gray-600 mt-2 space-y-1">
+                <li>Your fully assembled LEGO set</li>
+                <li>Original instruction manual</li>
+                <li>Any extra pieces that came with the set</li>
+                <li>Care instructions for your built set</li>
+                <li>Tracking information for your shipment</li>
+              </ul>
+              <p className="text-gray-600 mt-2">Note: The original box will only be included if specifically requested during your order.</p>
+            </div>
+
+            <div className="bg-gray-50 rounded-lg p-6">
+              <h3 className="text-xl font-bold mb-3 text-[#0055BF]">Can you build custom LEGO creations?</h3>
+              <p className="text-gray-600">Yes! We can help bring your custom LEGO ideas to life. This includes modifications to existing sets or completely original designs. Custom builds require additional planning and may have different pricing. Contact us to discuss your ideas.</p>
+            </div>
+          </div>
+        </div>
+
         {/* Price Calculator - Moved to bottom */}
-        <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 border-2 border-[#0055BF]">
+        <div className="mt-16 bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 border-2 border-[#0055BF]">
           <h2 className="text-3xl font-bold mb-6 text-center text-[#0055BF]">Get a Price Estimate</h2>
           
           {/* Search Input */}

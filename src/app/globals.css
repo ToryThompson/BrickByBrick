@@ -100,17 +100,21 @@ body {
 
 /* Styling for input text */
 body input[type="text"],
+body input[type="email"],
+body input[type="tel"],
 body input[type="number"],
 body textarea {
-  color: #000000 !important; /* Black color for typed text in light mode */
+  color: #1B1B1B !important; /* Dark color for typed text in light mode */
 }
 
 /* Dark mode styling for input text */
 @media (prefers-color-scheme: dark) {
   body input[type="text"],
+  body input[type="email"],
+  body input[type="tel"],
   body input[type="number"],
   body textarea {
-    color: #333333 !important; /* Very dark grey for typed text in dark mode */
+    color: #1B1B1B !important; /* Dark color for typed text in dark mode */
   }
 }
 

@@ -34,6 +34,8 @@ function ContactContent() {
     message: '',
     gluing: false,
     selectedSet: null as LegoSet | null,
+    deliveryMethod: '',
+    address: '',
   });
 
   const [searchQuery, setSearchQuery] = useState('');
@@ -79,6 +81,8 @@ function ContactContent() {
         message: '',
         gluing: false,
         selectedSet: null,
+        deliveryMethod: '',
+        address: '',
       });
     } catch (error) {
       console.error('Error:', error);
@@ -307,7 +311,7 @@ function ContactContent() {
                     )}
 
                     {/* No Results Message */}
-                    {searchQuery.length >= 2 && !isLoading && !error && searchResults.length === 0 && (
+                    {searchQuery.length >= 2 && !isLoading && !error && searchResults.length === 0 && !formData.selectedSet && (
                       <div className="mt-2 text-gray-600 text-sm">
                         No LEGO sets found. Try a different search term.
                       </div>
@@ -362,6 +366,48 @@ function ContactContent() {
                     </select>
                   </div>
                 </div>
+
+                <div>
+                  <label htmlFor="deliveryMethod" className="block text-sm font-medium text-[#1B1B1B] mb-2">
+                    Delivery Method *
+                  </label>
+                  <select
+                    id="deliveryMethod"
+                    name="deliveryMethod"
+                    required
+                    value={formData.deliveryMethod}
+                    onChange={handleChange}
+                    className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#0055BF] focus:border-transparent"
+                  >
+                    <option value="">Select delivery method</option>
+                    <option value="local">Local Delivery</option>
+                    <option value="shipping">Shipping</option>
+                    <option value="pickup">Pickup</option>
+                  </select>
+                </div>
+
+                {(formData.deliveryMethod === 'local' || formData.deliveryMethod === 'shipping') && (
+                  <div>
+                    <label htmlFor="address" className="block text-sm font-medium text-[#1B1B1B] mb-2">
+                      Delivery Address *
+                    </label>
+                    <textarea
+                      id="address"
+                      name="address"
+                      required
+                      value={formData.address}
+                      onChange={handleChange}
+                      rows={3}
+                      className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#0055BF] focus:border-transparent"
+                      placeholder="Enter your complete delivery address"
+                    ></textarea>
+                    <p className="mt-1 text-sm text-gray-500">
+                      {formData.deliveryMethod === 'local' 
+                        ? 'We\'ll calculate delivery costs based on your location.'
+                        : 'We\'ll provide shipping costs in your quote.'}
+                    </p>
+                  </div>
+                )}
 
                 <div>
                   <label htmlFor="message" className="block text-sm font-medium text-[#1B1B1B] mb-2">
