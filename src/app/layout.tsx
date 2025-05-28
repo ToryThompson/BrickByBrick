@@ -8,7 +8,11 @@ import MobileMenu from "./components/MobileMenu";
 import { useState } from "react";
 
 const inter = Inter({ subsets: ["latin"] });
-const bricolage = Bricolage_Grotesque({ subsets: ["latin"], variable: "--font-bricolage" });
+const bricolage = Bricolage_Grotesque({ 
+  subsets: ["latin"],
+  display: 'swap',
+  variable: '--font-bricolage'
+});
 
 export default function RootLayout({
   children,
