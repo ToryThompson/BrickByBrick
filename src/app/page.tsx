@@ -49,6 +49,49 @@ const testimonials = [
   }
 ];
 
+// Update the animation style
+const style = `
+@keyframes float {
+  0% {
+    transform: translateY(0);
+  }
+  100% {
+    transform: translateY(-100vh);
+  }
+}
+
+@keyframes float-forever {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(-120vh); }
+}
+
+@keyframes float-forever-fade {
+  0% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+    animation-timing-function: ease-in;
+  }
+  90% {
+    opacity: 1;
+    animation-timing-function: ease-out;
+  }
+  100% {
+    transform: translateY(-120vh);
+    opacity: 0;
+  }
+}
+`;
+
+// Add this right after the imports
+if (typeof window !== 'undefined') {
+  const styleSheet = document.createElement('style');
+  styleSheet.textContent = style;
+  document.head.appendChild(styleSheet);
+}
+
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
@@ -86,9 +129,9 @@ export default function Home() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
             <div className="md:w-1/2 text-center md:text-left">
-              <h1 className="text-5xl md:text-7xl font-bold mb-4 md:mb-8 text-[#0055BF] font-brick [text-shadow:_2px_2px_4px_rgba(0,0,0,0.3)]">Brick by Brick</h1>
-              <h2 className="text-2xl md:text-4xl font-semibold mb-4 md:mb-8 text-[#0055BF] font-brick [text-shadow:_1px_1px_3px_rgba(0,0,0,0.3)]">Professional LEGO Set Building – Atlanta, GA</h2>
-              <p className="text-xl md:text-3xl font-bold mb-6 md:mb-10 text-[#0055BF] font-brick [text-shadow:_1px_1px_3px_rgba(0,0,0,0.3)]">Too busy to build your LEGO set? <br/>Let us handle it for you!</p>
+              <h1 className="text-5xl md:text-7xl font-bold mb-4 md:mb-8 text-[#0055BF] font-brick [text-shadow:_4px_4px_8px_rgba(0,0,0,0.5)]">Brick by Brick</h1>
+              <h2 className="text-2xl md:text-4xl font-semibold mb-4 md:mb-8 text-[#0055BF] font-brick [text-shadow:_3px_3px_6px_rgba(0,0,0,0.4)]">Professional LEGO Set Building – Atlanta, GA</h2>
+              <p className="text-xl md:text-3xl font-bold mb-6 md:mb-10 text-[#0055BF] hover:text-[#0066E5] transition-colors duration-300 font-brick [text-shadow:_2px_2px_4px_rgba(0,0,0,0.3)]">Too busy to build your LEGO set? <br/>Let us handle it for you!</p>
               <div className="flex flex-col sm:flex-row gap-4 md:gap-6 mb-6 md:mb-8">
                 <Link 
                   href="/how-it-works" 
@@ -100,27 +143,14 @@ export default function Home() {
                   <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#C00000] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </Link>
                 <Link 
-                  href="/pricing" 
-                  className="group relative flex items-center justify-center px-6 py-3 rounded-lg bg-[#F7D117] text-[#1B1B1B] font-semibold text-lg md:text-xl text-center hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
+                  href="/get-a-quote" 
+                  className="group relative flex items-center justify-center px-6 py-3 rounded-lg bg-[#237841] text-white font-semibold text-lg md:text-xl text-center hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
                 >
-                  {isAutoPlaying ? "See Pricing" : "See Pricing"}
+                  Get a Quote
                   {/* Studs - relative to the button */}
-                  <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#E0B500] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#E0B500] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#1a5a30] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#1a5a30] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </Link>
-                <Link 
-                  href="/contact" 
-                  className="group relative flex items-center justify-center px-6 py-3 rounded-lg bg-[#0055BF] text-white font-semibold text-lg md:text-xl text-center hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
-                >
-                  {isAutoPlaying ? "Contact Us" : "Contact Us"}
-                  {/* Studs - relative to the button */}
-                  <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#004494] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#004494] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                </Link>
-              </div>
-              <div className="mt-6 md:mt-8 text-[#0055BF] text-xl md:text-2xl font-semibold [text-shadow:_1px_1px_2px_rgba(0,0,0,0.3)]">
-                <span>Call or Text: </span>
-                <a href="tel:7703835290" className="underline text-[#0055BF] hover:text-[#004494] transition-colors">770-383-5290</a>
               </div>
             </div>
             <div className="md:w-1/2 flex justify-center w-full">
@@ -230,29 +260,65 @@ export default function Home() {
       </section>
 
       {/* Perfect For Section */}
-      <section className="relative py-12 md:py-20 bg-gray-50">
+      <section className="relative py-12 md:py-20 bg-gray-50 overflow-hidden">
+        {/* Pastel Floating LEGO Blocks Background */}
+        <div className="absolute inset-0 pointer-events-none z-0">
+          {Array.from({ length: 32 }).map((_, i) => {
+            const colors = [
+              'bg-[#D01012]/20',
+              'bg-[#F7D117]/20',
+              'bg-[#0055BF]/20',
+              'bg-[#237841]/20'
+            ];
+            const size = Math.random() > 0.5 ? 'w-6 h-3' : 'w-4 h-2';
+            const left = Math.random() * 100;
+            const top = Math.random() * 100;
+            const duration = 120 + Math.random() * 120; // 2-4 minutes
+            const delay = Math.random() * 60;
+            return (
+              <div
+                key={i}
+                className={`absolute rounded-md ${colors[i % 4]} ${size}`}
+                style={{
+                  left: `${left}%`,
+                  top: `${top}%`,
+                  animation: `float-forever-fade ${duration}s linear infinite`,
+                  animationDelay: `${delay}s`,
+                }}
+              />
+            );
+          })}
+        </div>
         <div className="container mx-auto px-4 relative z-10">
-          <h2 className="text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-red-600 font-brick text-center">Perfect for:</h2>
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-[#0055BF] font-brick [text-shadow:_4px_4px_8px_rgba(0,0,0,0.5)] text-center">Perfect for:</h2>
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 md:gap-8 max-w-6xl mx-auto">
-            <div className="bg-white rounded-lg p-6 md:p-8 shadow-lg hover:scale-105 transition-transform border-2 border-blue-200">
-              <div className="text-3xl md:text-4xl text-blue-500 mb-3 md:mb-4 text-center">👨‍💼</div>
-              <h3 className="text-lg md:text-xl font-bold text-center mb-2 text-blue-600">Adult Collectors</h3>
-              <p className="text-sm md:text-base text-gray-600 text-center">Perfect for collectors who want their sets professionally assembled and displayed.</p>
+            <div className="group relative bg-white rounded-lg p-6 md:p-8 shadow-lg hover:scale-105 transition-all duration-300 border-2 border-blue-200 hover:border-blue-400">
+              <div className="absolute -top-2 left-1/4 -translate-x-1/2 w-4 h-2 bg-blue-400 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute -top-2 left-3/4 -translate-x-1/2 w-4 h-2 bg-blue-400 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="text-3xl md:text-4xl text-blue-500 mb-3 md:mb-4 text-center transform group-hover:scale-110 transition-transform duration-300">👨‍💼</div>
+              <h3 className="text-lg md:text-xl font-bold text-center mb-2 text-blue-600 group-hover:text-blue-700 transition-colors">Adult Collectors</h3>
+              <p className="text-sm md:text-base text-gray-600 text-center group-hover:text-gray-800 transition-colors">Perfect for collectors who want their sets professionally assembled and displayed.</p>
             </div>
-            <div className="bg-white rounded-lg p-6 md:p-8 shadow-lg hover:scale-105 transition-transform border-2 border-red-200">
-              <div className="text-3xl md:text-4xl text-red-500 mb-3 md:mb-4 text-center">🏪</div>
-              <h3 className="text-lg md:text-xl font-bold text-center mb-2 text-red-600">Store Displays</h3>
-              <p className="text-sm md:text-base text-gray-600 text-center">Eye-catching displays for retail stores and businesses.</p>
+            <div className="group relative bg-white rounded-lg p-6 md:p-8 shadow-lg hover:scale-105 transition-all duration-300 border-2 border-red-200 hover:border-red-400">
+              <div className="absolute -top-2 left-1/4 -translate-x-1/2 w-4 h-2 bg-red-400 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute -top-2 left-3/4 -translate-x-1/2 w-4 h-2 bg-red-400 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="text-3xl md:text-4xl text-red-500 mb-3 md:mb-4 text-center transform group-hover:scale-110 transition-transform duration-300">🏪</div>
+              <h3 className="text-lg md:text-xl font-bold text-center mb-2 text-red-600 group-hover:text-red-700 transition-colors">Store Displays</h3>
+              <p className="text-sm md:text-base text-gray-600 text-center group-hover:text-gray-800 transition-colors">Eye-catching displays for retail stores and businesses.</p>
             </div>
-            <div className="bg-white rounded-lg p-6 md:p-8 shadow-lg hover:scale-105 transition-transform border-2 border-yellow-200">
-              <div className="text-3xl md:text-4xl text-yellow-500 mb-3 md:mb-4 text-center">🎁</div>
-              <h3 className="text-lg md:text-xl font-bold text-center mb-2 text-yellow-600">Gifts & Birthdays</h3>
-              <p className="text-sm md:text-base text-gray-600 text-center">Surprise your loved ones with professionally built LEGO sets.</p>
+            <div className="group relative bg-white rounded-lg p-6 md:p-8 shadow-lg hover:scale-105 transition-all duration-300 border-2 border-yellow-200 hover:border-yellow-400">
+              <div className="absolute -top-2 left-1/4 -translate-x-1/2 w-4 h-2 bg-yellow-400 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute -top-2 left-3/4 -translate-x-1/2 w-4 h-2 bg-yellow-400 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="text-3xl md:text-4xl text-yellow-500 mb-3 md:mb-4 text-center transform group-hover:scale-110 transition-transform duration-300">🎁</div>
+              <h3 className="text-lg md:text-xl font-bold text-center mb-2 text-yellow-600 group-hover:text-yellow-700 transition-colors">Gifts & Birthdays</h3>
+              <p className="text-sm md:text-base text-gray-600 text-center group-hover:text-gray-800 transition-colors">Surprise your loved ones with professionally built LEGO sets.</p>
             </div>
-            <div className="bg-white rounded-lg p-6 md:p-8 shadow-lg hover:scale-105 transition-transform border-2 border-green-200">
-              <div className="text-3xl md:text-4xl text-green-500 mb-3 md:mb-4 text-center">⏰</div>
-              <h3 className="text-lg md:text-xl font-bold text-center mb-2 text-green-600">Busy LEGO Lovers</h3>
-              <p className="text-sm md:text-base text-gray-600 text-center">For those who love LEGO but don't have time to build.</p>
+            <div className="group relative bg-white rounded-lg p-6 md:p-8 shadow-lg hover:scale-105 transition-all duration-300 border-2 border-green-200 hover:border-green-400">
+              <div className="absolute -top-2 left-1/4 -translate-x-1/2 w-4 h-2 bg-green-400 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute -top-2 left-3/4 -translate-x-1/2 w-4 h-2 bg-green-400 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="text-3xl md:text-4xl text-green-500 mb-3 md:mb-4 text-center transform group-hover:scale-110 transition-transform duration-300">⏰</div>
+              <h3 className="text-lg md:text-xl font-bold text-center mb-2 text-green-600 group-hover:text-green-700 transition-colors">Busy LEGO Lovers</h3>
+              <p className="text-sm md:text-base text-gray-600 text-center group-hover:text-gray-800 transition-colors">For those who love LEGO but don't have time to build.</p>
             </div>
           </div>
         </div>
@@ -287,10 +353,10 @@ export default function Home() {
           <h2 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6 text-white font-brick">Ready to get started?</h2>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link 
-              href="/contact" 
+              href="/get-a-quote" 
               className="group relative flex items-center justify-center px-6 py-3 rounded-lg bg-[#F7D117] text-[#1B1B1B] font-semibold text-lg text-center hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
             >
-              Order Now
+              Get a Quote
               {/* Studs - relative to the button */}
               <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#E0B500] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#E0B500] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
