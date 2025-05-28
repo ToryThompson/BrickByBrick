@@ -28,45 +28,63 @@ export default function MobileMenu() {
         <div className="px-2 pt-2 pb-3 space-y-1 border-t border-gray-100">
           <Link 
             href="/" 
-            className="block px-3 py-2 text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+            className="group relative flex items-center justify-center px-6 py-3 text-white font-semibold rounded-lg bg-[#0055BF] hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
             onClick={() => setIsOpen(false)}
           >
             Home
+            {/* Studs - relative to the button */}
+            <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#004494] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#004494] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </Link>
           <Link 
             href="/services" 
-            className="block px-3 py-2 text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+            className="group relative flex items-center justify-center px-6 py-3 text-[#1B1B1B] font-semibold rounded-lg bg-[#F7D117] hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
             onClick={() => setIsOpen(false)}
           >
             Services
+            {/* Studs - relative to the button */}
+            <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#E0B500] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#E0B500] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </Link>
           <Link 
             href="/how-it-works" 
-            className="block px-3 py-2 text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+            className="group relative flex items-center justify-center px-6 py-3 text-white font-semibold rounded-lg bg-[#D01012] hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
             onClick={() => setIsOpen(false)}
           >
             How It Works
+            {/* Studs - relative to the button */}
+            <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#C00000] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#C00000] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </Link>
           <Link 
             href="/portfolio" 
-            className="block px-3 py-2 text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+            className="group relative flex items-center justify-center px-6 py-3 text-white font-semibold rounded-lg bg-[#237841] hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
             onClick={() => setIsOpen(false)}
           >
             Portfolio
+            {/* Studs - relative to the button */}
+            <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#1a5a30] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#1a5a30] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </Link>
           <Link 
             href="/pricing" 
-            className="block px-3 py-2 text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+            className="group relative flex items-center justify-center px-6 py-3 text-white font-semibold rounded-lg bg-[#0055BF] hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
             onClick={() => setIsOpen(false)}
           >
             Pricing
+            {/* Studs - relative to the button */}
+            <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#004494] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#004494] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </Link>
           <Link 
             href="/contact" 
-            className="block px-3 py-2 text-gray-600 hover:text-blue-600 hover:bg-gray-50 rounded-md"
+            className="group relative flex items-center justify-center px-6 py-3 text-white font-semibold rounded-lg bg-[#D01012] hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
             onClick={() => setIsOpen(false)}
           >
-            Contact
+            Contact Us
+            {/* Studs - relative to the button */}
+            <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#C00000] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#C00000] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </Link>
         </div>
       </div>
