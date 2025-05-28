@@ -44,7 +44,7 @@ body {
 
 @layer base {
   body {
-    @apply bg-gray-50;
+    @apply bg-gray-50 text-lego-black;
   }
   :root {
     --font-bricolage: 'Bricolage Grotesque', sans-serif;
@@ -53,19 +53,19 @@ body {
 
 @layer components {
   .lego-red {
-    @apply bg-[#D01012] text-white;
+    @apply bg-lego-red text-white;
   }
   .lego-yellow {
-    @apply bg-[#F7D117] text-black;
+    @apply bg-lego-yellow text-black;
   }
   .lego-blue {
-    @apply bg-[#0055BF] text-white;
+    @apply bg-lego-blue text-white;
   }
   .lego-green {
-    @apply bg-[#237841] text-white;
+    @apply bg-lego-green text-white;
   }
   .lego-black {
-    @apply bg-[#1B1B1B] text-white;
+    @apply bg-lego-black text-white;
   }
 }
 
@@ -80,26 +80,18 @@ body {
 
 /* Parallax effect for background images */
 .parallax-bg > img {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  z-index: -1; /* Ensure it stays behind content */
+  @apply fixed top-0 left-0 w-full h-full object-cover -z-10;
 }
 
 /* Placeholder text styling */
 ::placeholder {
-  color: #333333 !important; /* Dark grey */
-  opacity: 1 !important;
+  @apply text-gray-700 opacity-100;
 }
 
 /* Dark mode placeholder styling */
 @media (prefers-color-scheme: dark) {
   ::placeholder {
-    color: #aaaaaa !important; /* Lighter grey for dark mode */
-    opacity: 1 !important;
+    @apply text-gray-400;
   }
 }
 
@@ -109,34 +101,18 @@ body input[type="email"],
 body input[type="tel"],
 body input[type="number"],
 body textarea {
-  color: #1B1B1B !important; /* Dark color for typed text in light mode */
-}
-
-/* Dark mode styling for input text */
-@media (prefers-color-scheme: dark) {
-  body input[type="text"],
-  body input[type="email"],
-  body input[type="tel"],
-  body input[type="number"],
-  body textarea {
-    color: #1B1B1B !important; /* Dark color for typed text in dark mode */
-  }
+  @apply text-lego-black;
 }
 
 /* Styling for selected set info text */
 .p-4.bg-gray-50.rounded-lg p,
 .p-4.bg-gray-50.rounded-lg h3 {
-  color: #1B1B1B !important; /* Dark color for selected set info in both modes */
-}
-
-/* Dark mode styling for selected set info text */
-@media (prefers-color-scheme: dark) {
-  /* Remove dark mode specific style as text should be dark in both modes */
+  @apply text-lego-black;
 }
 
 /* Styling for search results text */
 .absolute.z-10.w-full.mt-1.bg-white.rounded-lg.shadow-lg.border.border-gray-200.max-h-96.overflow-y-auto div {
-  color: #000000 !important; /* Black color for search results text */
+  @apply text-black;
 }
 
 /* Navigation Animations */
