@@ -2,7 +2,6 @@
 
 import { Inter } from "next/font/google";
 import { Bricolage_Grotesque } from "next/font/google";
-import "./globals.css";
 import Link from "next/link";
 import MobileMenu from "./components/MobileMenu";
 import { useState } from "react";
