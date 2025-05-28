@@ -53,20 +53,21 @@ export default function HowItWorks() {
     return 550;
   };
 
-  // Calculate gluing price based on piece count
-  const calculateGluingPrice = (pieces: number) => {
-    if (pieces <= 200) return 15;
-    if (pieces <= 500) return 25;
-    if (pieces <= 1000) return 35;
-    if (pieces <= 2000) return 45;
-    if (pieces <= 3000) return 55;
-    if (pieces <= 4000) return 65;
-    if (pieces <= 5000) return 75;
-    if (pieces <= 6000) return 85;
-    if (pieces <= 7000) return 95;
-    if (pieces <= 8000) return 105;
-    if (pieces <= 9000) return 115;
-    return 125;
+  // Calculate gluing price based on piece count and type
+  const calculateGluingPrice = (pieces: number, gluingType: 'permanent' | 'dissolvable') => {
+    const basePrice = gluingType === 'permanent' ? 1.5 : 1; // 50% more for permanent gluing
+    if (pieces <= 200) return Math.round(15 * basePrice);
+    if (pieces <= 500) return Math.round(25 * basePrice);
+    if (pieces <= 1000) return Math.round(35 * basePrice);
+    if (pieces <= 2000) return Math.round(45 * basePrice);
+    if (pieces <= 3000) return Math.round(55 * basePrice);
+    if (pieces <= 4000) return Math.round(65 * basePrice);
+    if (pieces <= 5000) return Math.round(75 * basePrice);
+    if (pieces <= 6000) return Math.round(85 * basePrice);
+    if (pieces <= 7000) return Math.round(95 * basePrice);
+    if (pieces <= 8000) return Math.round(105 * basePrice);
+    if (pieces <= 9000) return Math.round(115 * basePrice);
+    return Math.round(125 * basePrice);
   };
 
   // Calculate local delivery price based on piece count and miles
@@ -173,7 +174,7 @@ export default function HowItWorks() {
       deliveryPrice = deliveryCost;
     }
     
-    const gluingPrice = requestGluing ? calculateGluingPrice(pieces) : 0;
+    const gluingPrice = requestGluing ? calculateGluingPrice(pieces, requestGluing === 'permanent' ? 'permanent' : 'dissolvable') : 0;
     
     return {
       basePrice,
@@ -508,17 +509,50 @@ export default function HowItWorks() {
 
           {/* Gluing Option */}
           <div className="mb-6">
-            <label className="flex items-center gap-2">
-              <input
-                type="checkbox"
-                checked={requestGluing}
-                onChange={(e) => setRequestGluing(e.target.checked)}
-                className="rounded border-gray-300 text-[#0055BF] focus:ring-[#0055BF]"
-              />
-              <span className="text-sm font-medium text-gray-700">
-                Request gluing service (additional cost)
-              </span>
-            </label>
+            <label className="block text-sm font-medium text-gray-700 mb-2">Gluing Options</label>
+            <div className="space-y-4">
+              <div className="flex items-start">
+                <input
+                  type="radio"
+                  id="noGluing"
+                  checked={!requestGluing}
+                  onChange={() => setRequestGluing(false)}
+                  className="h-4 w-4 mt-1 text-[#0055BF] border-gray-300 focus:ring-[#0055BF]"
+                />
+                <label htmlFor="noGluing" className="ml-2 block">
+                  <span className="text-sm font-medium text-gray-700">No Gluing</span>
+                  <p className="text-sm text-gray-600">Keep your set unglued for future rebuilding or modifications.</p>
+                </label>
+              </div>
+
+              <div className="flex items-start">
+                <input
+                  type="radio"
+                  id="permanentGluing"
+                  checked={requestGluing === 'permanent'}
+                  onChange={() => setRequestGluing('permanent')}
+                  className="h-4 w-4 mt-1 text-[#0055BF] border-gray-300 focus:ring-[#0055BF]"
+                />
+                <label htmlFor="permanentGluing" className="ml-2 block">
+                  <span className="text-sm font-medium text-gray-700">Permanent Gluing (+ $75 per 1000 pieces)</span>
+                  <p className="text-sm text-gray-600">Perfect for display pieces that won't be disassembled. Uses professional-grade glue that's safe for LEGO pieces.</p>
+                </label>
+              </div>
+
+              <div className="flex items-start">
+                <input
+                  type="radio"
+                  id="dissolvableGluing"
+                  checked={requestGluing === 'dissolvable'}
+                  onChange={() => setRequestGluing('dissolvable')}
+                  className="h-4 w-4 mt-1 text-[#0055BF] border-gray-300 focus:ring-[#0055BF]"
+                />
+                <label htmlFor="dissolvableGluing" className="ml-2 block">
+                  <span className="text-sm font-medium text-gray-700">Dissolvable Gluing (+ $50 per 1000 pieces)</span>
+                  <p className="text-sm text-gray-600">Can be removed with warm water if you want to rebuild the set later. Great for temporary displays or sets you might want to modify.</p>
+                </label>
+              </div>
+            </div>
           </div>
 
           {/* Calculate Price Button */}
@@ -572,7 +606,7 @@ export default function HowItWorks() {
                 {requestGluing && (
                   <p className="flex justify-between">
                     <span>Gluing Service:</span>
-                    <span>${calculateGluingPrice(parseInt(pieceCount))}</span>
+                    <span>${calculateGluingPrice(parseInt(pieceCount), requestGluing === 'permanent' ? 'permanent' : 'dissolvable')}</span>
                   </p>
                 )}
                 <div className="border-t border-gray-300 pt-2 mt-2">
@@ -586,7 +620,7 @@ export default function HowItWorks() {
                           'Get estimate'
                         )
                       ) : deliveryMethod === 'pickup' ? (
-                        `$${calculatePrice(parseInt(pieceCount)) + (requestGluing ? calculateGluingPrice(parseInt(pieceCount)) : 0)}`
+                        `$${calculatePrice(parseInt(pieceCount)) + (requestGluing ? calculateGluingPrice(parseInt(pieceCount), requestGluing === 'permanent' ? 'permanent' : 'dissolvable') : 0)}`
                       ) : (
                         'Contact for shipping quote'
                       )}

@@ -32,7 +32,7 @@ function ContactContent() {
     service: initialService,
     setSize: '',
     message: '',
-    gluing: false,
+    gluing: false as boolean | 'permanent' | 'dissolvable',
     selectedSet: null as LegoSet | null,
     deliveryMethod: '',
     address: '',
@@ -432,19 +432,55 @@ function ContactContent() {
                   ></textarea>
                 </div>
 
-                {/* Gluing Checkbox */}
-                <div className="flex items-center">
-                  <input
-                    type="checkbox"
-                    id="gluing"
-                    name="gluing"
-                    checked={formData.gluing}
-                    onChange={(e) => setFormData(prev => ({ ...prev, gluing: e.target.checked }))}
-                    className="h-4 w-4 text-[#0055BF] border-gray-300 rounded focus:ring-[#0055BF]"
-                  />
-                  <label htmlFor="gluing" className="ml-2 block text-sm font-medium text-[#1B1B1B]">
-                    Request Gluing (+ $50 per 1000 pieces)
-                  </label>
+                {/* Gluing Options */}
+                <div className="space-y-4">
+                  <h3 className="text-lg font-medium text-[#1B1B1B]">Gluing Options</h3>
+                  <div className="space-y-4">
+                    <div className="flex items-start">
+                      <input
+                        type="radio"
+                        id="noGluing"
+                        name="gluing"
+                        checked={!formData.gluing}
+                        onChange={(e) => setFormData(prev => ({ ...prev, gluing: false }))}
+                        className="h-4 w-4 mt-1 text-[#0055BF] border-gray-300 focus:ring-[#0055BF]"
+                      />
+                      <label htmlFor="noGluing" className="ml-2 block">
+                        <span className="text-sm font-medium text-[#1B1B1B]">No Gluing</span>
+                        <p className="text-sm text-gray-600">Keep your set unglued for future rebuilding or modifications.</p>
+                      </label>
+                    </div>
+
+                    <div className="flex items-start">
+                      <input
+                        type="radio"
+                        id="permanentGluing"
+                        name="gluing"
+                        checked={formData.gluing === 'permanent'}
+                        onChange={(e) => setFormData(prev => ({ ...prev, gluing: 'permanent' }))}
+                        className="h-4 w-4 mt-1 text-[#0055BF] border-gray-300 focus:ring-[#0055BF]"
+                      />
+                      <label htmlFor="permanentGluing" className="ml-2 block">
+                        <span className="text-sm font-medium text-[#1B1B1B]">Permanent Gluing (+ $75 per 1000 pieces)</span>
+                        <p className="text-sm text-gray-600">Perfect for display pieces that won't be disassembled. Uses professional-grade glue that's safe for LEGO pieces.</p>
+                      </label>
+                    </div>
+
+                    <div className="flex items-start">
+                      <input
+                        type="radio"
+                        id="dissolvableGluing"
+                        name="gluing"
+                        checked={formData.gluing === 'dissolvable'}
+                        onChange={(e) => setFormData(prev => ({ ...prev, gluing: 'dissolvable' }))}
+                        className="h-4 w-4 mt-1 text-[#0055BF] border-gray-300 focus:ring-[#0055BF]"
+                      />
+                      <label htmlFor="dissolvableGluing" className="ml-2 block">
+                        <span className="text-sm font-medium text-[#1B1B1B]">Dissolvable Gluing (+ $50 per 1000 pieces)</span>
+                        <p className="text-sm text-gray-600">Can be removed with warm water if you want to rebuild the set later. Great for temporary displays or sets you might want to modify.</p>
+                      </label>
+                    </div>
+                  </div>
                 </div>
 
                 {submitStatus === 'error' && (
