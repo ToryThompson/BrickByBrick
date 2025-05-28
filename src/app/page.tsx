@@ -44,7 +44,49 @@ const testimonials = [
   {
     name: "Emily R.",
     role: "Gift Giver",
-    text: "Perfect for busy parents! They built my son&apos;s birthday gift and it was ready to display when he opened it.",
+    text: "Perfect for busy parents! They built my son's birthday gift and it was ready to display when he opened it.",
+    rating: 5
+  },
+  {
+    name: "Carlos T.",
+    role: "Grandparent",
+    text: "My grandkids loved their LEGO sets, and I loved not having to build them myself! Fast and friendly service.",
+    rating: 5
+  },
+  {
+    name: "Priya S.",
+    role: "Busy Professional",
+    text: "I never have time to build, but now my office has a beautiful LEGO display. Will use again!",
+    rating: 5
+  },
+  {
+    name: "Mike L.",
+    role: "LEGO Enthusiast",
+    text: "Attention to detail was incredible. They even sorted the extra pieces for me!",
+    rating: 5
+  },
+  {
+    name: "Ava K.",
+    role: "Parent",
+    text: "The team was so patient and communicative. My daughter was thrilled with her finished set.",
+    rating: 5
+  },
+  {
+    name: "Derek W.",
+    role: "Corporate Client",
+    text: "We ordered several sets for a company event. Everything was built perfectly and delivered on time.",
+    rating: 5
+  },
+  {
+    name: "Lily P.",
+    role: "Birthday Planner",
+    text: "The custom LEGO build was the highlight of our party. Thank you for making it so special!",
+    rating: 5
+  },
+  {
+    name: "Sam G.",
+    role: "Repeat Customer",
+    text: "I've used Brick by Brick three times now. Consistently excellent work and great communication.",
     rating: 5
   }
 ];
@@ -95,6 +137,8 @@ if (typeof window !== 'undefined') {
 export default function Home() {
   const [currentSlide, setCurrentSlide] = useState(0);
   const [isAutoPlaying, setIsAutoPlaying] = useState(true);
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
+  const [currentTestimonialPage, setCurrentTestimonialPage] = useState(0);
 
   // Auto-advance slideshow
   useEffect(() => {
@@ -110,6 +154,15 @@ export default function Home() {
   // Pause auto-play on hover
   const handleMouseEnter = () => setIsAutoPlaying(false);
   const handleMouseLeave = () => setIsAutoPlaying(true);
+
+  // Testimonial slideshow
+  useEffect(() => {
+    const pageCount = Math.ceil(testimonials.length / 3);
+    const timer = setInterval(() => {
+      setCurrentTestimonialPage((prev) => (prev + 1) % pageCount);
+    }, 6000);
+    return () => clearInterval(timer);
+  }, [testimonials.length]);
 
   return (
     <main className="min-h-screen bg-white">
@@ -328,21 +381,43 @@ export default function Home() {
       <section className="py-12 md:py-20 bg-white">
         <div className="container mx-auto px-4">
           <h2 className="text-3xl md:text-4xl font-bold mb-8 md:mb-12 text-[#0055BF] font-brick text-center">What Our Clients Say</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8 max-w-6xl mx-auto">
-            {testimonials.map((testimonial, index) => (
-              <div key={index} className="bg-gray-50 rounded-xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow">
-                <div className="flex items-center mb-4">
-                  {[...Array(testimonial.rating)].map((_, i) => (
-                    <span key={i} className="text-yellow-400 text-lg md:text-xl">★</span>
-                  ))}
-                </div>
-                <p className="text-sm md:text-base text-gray-600 mb-4 md:mb-6 italic">"{testimonial.text}"</p>
-                <div>
-                  <p className="font-bold text-[#0055BF]">{testimonial.name}</p>
-                  <p className="text-gray-500 text-xs md:text-sm">{testimonial.role}</p>
-                </div>
+          <div className="relative max-w-6xl mx-auto">
+            <div className="overflow-hidden rounded-xl shadow-lg bg-gray-50">
+              <div
+                className="transition-transform duration-700 flex"
+                style={{ transform: `translateX(-${currentTestimonialPage * 100}%)` }}
+              >
+                {Array.from({ length: Math.ceil(testimonials.length / 3) }).map((_, pageIdx) => (
+                  <div key={pageIdx} className="min-w-full flex flex-col md:flex-row gap-6 md:gap-8 justify-center items-stretch">
+                    {testimonials.slice(pageIdx * 3, pageIdx * 3 + 3).map((testimonial, idx) => (
+                      <div key={idx} className="flex-1 bg-gray-50 rounded-xl p-6 md:p-8 shadow-lg hover:shadow-xl transition-shadow flex flex-col items-center">
+                        <div className="flex items-center mb-4">
+                          {[...Array(testimonial.rating)].map((_, i) => (
+                            <span key={i} className="text-yellow-400 text-lg md:text-xl">★</span>
+                          ))}
+                        </div>
+                        <p className="text-sm md:text-base text-gray-600 mb-4 md:mb-6 italic text-center">"{testimonial.text}"</p>
+                        <div>
+                          <p className="font-bold text-[#0055BF] text-center">{testimonial.name}</p>
+                          <p className="text-gray-500 text-xs md:text-sm text-center">{testimonial.role}</p>
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+            {/* Navigation dots */}
+            <div className="flex justify-center mt-4 gap-2">
+              {Array.from({ length: Math.ceil(testimonials.length / 3) }).map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setCurrentTestimonialPage(idx)}
+                  className={`w-3 h-3 rounded-full transition-colors ${idx === currentTestimonialPage ? 'bg-[#0055BF]' : 'bg-gray-300'}`}
+                  aria-label={`Go to testimonial page ${idx + 1}`}
+                />
+              ))}
+            </div>
           </div>
         </div>
       </section>
