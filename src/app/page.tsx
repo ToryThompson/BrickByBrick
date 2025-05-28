@@ -6,6 +6,11 @@ import { useState, useEffect } from "react";
 // Slideshow images
 const slides = [
   {
+    image: "/images/backgrounds/ChatGPT Image May 26, 2025, 06_17_43 PM.png",
+    title: "Professional Assembly",
+    description: "Expert builders ensure perfect assembly every time"
+  },
+  {
     image: "/images/backgrounds/ChatGPT Image May 26, 2025, 07_20_30 PM.png",
     title: "We build for YOU!!!",
     description: "All of the best parts of LEGO are included in our builds!"
@@ -15,16 +20,10 @@ const slides = [
     title: "New or Old",
     description: "Just purchase the set and have us do the work!!"
   },
-  
   {
     image: "/images/backgrounds/May 27, 2025, 10_54_04 AM.png",
     title: "Great for Gifts or the Holidays",
     description: ""
-  },
-  {
-    image: "/images/backgrounds/Screenshot 2025-05-27 at 9.29.22 AM.png",
-    title: "Placeholder Title 3",
-    description: "Placeholder description 3"
   }
 ];
 
