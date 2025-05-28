@@ -30,51 +30,63 @@ export default function MobileMenu() {
         <div className="px-4 py-6 space-y-4 border-t border-gray-100">
           <Link 
             href="/" 
-            className="block px-4 py-3 text-gray-600 hover:text-[#0055BF] hover:bg-gray-50 rounded-lg font-medium transition-all duration-300 active:scale-95 relative group"
+            className="group relative flex items-center justify-center px-6 py-3 text-white font-semibold rounded-lg bg-[#0055BF] hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
             onClick={() => setIsOpen(false)}
           >
-            <span className="relative z-10">Home</span>
-            <span className="absolute inset-0 bg-gray-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></span>
+            Home
+            {/* Studs - relative to the button */}
+            <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#004494] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#004494] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </Link>
           <Link 
             href="/services" 
-            className="block px-4 py-3 text-gray-600 hover:text-[#0055BF] hover:bg-gray-50 rounded-lg font-medium transition-all duration-300 active:scale-95 relative group"
+            className="group relative flex items-center justify-center px-6 py-3 text-[#1B1B1B] font-semibold rounded-lg bg-[#F7D117] hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
             onClick={() => setIsOpen(false)}
           >
-            <span className="relative z-10">Services</span>
-            <span className="absolute inset-0 bg-gray-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></span>
+            Services
+            {/* Studs - relative to the button */}
+            <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#E0B500] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#E0B500] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </Link>
           <Link 
             href="/how-it-works" 
-            className="block px-4 py-3 text-gray-600 hover:text-[#0055BF] hover:bg-gray-50 rounded-lg font-medium transition-all duration-300 active:scale-95 relative group"
+            className="group relative flex items-center justify-center px-6 py-3 text-white font-semibold rounded-lg bg-[#D01012] hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
             onClick={() => setIsOpen(false)}
           >
-            <span className="relative z-10">How It Works</span>
-            <span className="absolute inset-0 bg-gray-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></span>
+            How It Works
+            {/* Studs - relative to the button */}
+            <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#C00000] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#C00000] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </Link>
           <Link 
             href="/portfolio" 
-            className="block px-4 py-3 text-gray-600 hover:text-[#0055BF] hover:bg-gray-50 rounded-lg font-medium transition-all duration-300 active:scale-95 relative group"
+            className="group relative flex items-center justify-center px-6 py-3 text-white font-semibold rounded-lg bg-[#237841] hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
             onClick={() => setIsOpen(false)}
           >
-            <span className="relative z-10">Portfolio</span>
-            <span className="absolute inset-0 bg-gray-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></span>
+            Portfolio
+            {/* Studs - relative to the button */}
+            <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#1a5a30] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#1a5a30] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </Link>
           <Link 
             href="/pricing" 
-            className="block px-4 py-3 text-gray-600 hover:text-[#0055BF] hover:bg-gray-50 rounded-lg font-medium transition-all duration-300 active:scale-95 relative group"
+            className="group relative flex items-center justify-center px-6 py-3 text-white font-semibold rounded-lg bg-[#0055BF] hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
             onClick={() => setIsOpen(false)}
           >
-            <span className="relative z-10">Pricing</span>
-            <span className="absolute inset-0 bg-gray-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></span>
+            Pricing
+            {/* Studs - relative to the button */}
+            <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#004494] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#004494] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </Link>
           <Link 
             href="/contact" 
-            className="block px-4 py-3 bg-[#0055BF] text-white rounded-lg font-medium hover:bg-[#004494] transition-all duration-300 text-center shadow-md hover:shadow-lg active:scale-95 relative group overflow-hidden"
+            className="group relative flex items-center justify-center px-6 py-3 text-white font-semibold rounded-lg bg-[#D01012] hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
             onClick={() => setIsOpen(false)}
           >
-            <span className="relative z-10">Contact Us</span>
-            <span className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
+            Contact Us
+            {/* Studs - relative to the button */}
+            <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#C00000] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#C00000] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </Link>
         </div>
       </div>
