@@ -22,7 +22,7 @@ interface Location {
 
 export default function HowItWorks() {
   const [pieceCount, setPieceCount] = useState('');
-  const [requestGluing, setRequestGluing] = useState<string>('none');
+  const [requestGluing, setRequestGluing] = useState<'none' | 'permanent' | 'dissolvable'>('none');
   const [estimatedPrice, setEstimatedPrice] = useState<number | null>(null);
   const [deliveryMethod, setDeliveryMethod] = useState('local'); // 'local' or 'shipping' or 'pickup'
   const [miles, setMiles] = useState('');
@@ -174,7 +174,7 @@ export default function HowItWorks() {
       deliveryPrice = deliveryCost;
     }
     
-    const gluingPrice = requestGluing !== 'none' ? calculateGluingPrice(pieces, requestGluing as 'permanent' | 'dissolvable') : 0;
+    const gluingPrice = requestGluing !== 'none' ? calculateGluingPrice(pieces, requestGluing) : 0;
     
     return {
       basePrice,
