@@ -373,39 +373,46 @@ function ContactContent() {
                   </label>
                   <select
                     id="deliveryMethod"
-                    name="deliveryMethod"
-                    required
                     value={formData.deliveryMethod}
-                    onChange={handleChange}
+                    onChange={(e) => setFormData({ ...formData, deliveryMethod: e.target.value })}
                     className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#0055BF] focus:border-transparent"
+                    required
                   >
                     <option value="">Select delivery method</option>
-                    <option value="local">Local Delivery</option>
-                    <option value="shipping">Shipping</option>
                     <option value="pickup">Pickup</option>
+                    <option value="local">Local Delivery</option>
+                    <option value="shipping">Shipping (USPS/UPS/FedEx)</option>
                   </select>
                 </div>
 
                 {(formData.deliveryMethod === 'local' || formData.deliveryMethod === 'shipping') && (
-                  <div>
-                    <label htmlFor="address" className="block text-sm font-medium text-[#1B1B1B] mb-2">
-                      Delivery Address *
+                  <div className="mt-4">
+                    <label htmlFor="address" className="block text-sm font-medium text-gray-700 mb-2">
+                      Delivery Address
                     </label>
                     <textarea
                       id="address"
-                      name="address"
-                      required
                       value={formData.address}
-                      onChange={handleChange}
-                      rows={3}
+                      onChange={(e) => setFormData({ ...formData, address: e.target.value })}
+                      placeholder="Enter your full delivery address"
                       className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#0055BF] focus:border-transparent"
-                      placeholder="Enter your complete delivery address"
-                    ></textarea>
-                    <p className="mt-1 text-sm text-gray-500">
-                      {formData.deliveryMethod === 'local' 
-                        ? 'We\'ll calculate delivery costs based on your location.'
-                        : 'We\'ll provide shipping costs in your quote.'}
+                      required={formData.deliveryMethod === 'local' || formData.deliveryMethod === 'shipping'}
+                    />
+                  </div>
+                )}
+
+                {formData.deliveryMethod === 'pickup' && (
+                  <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+                    <h4 className="font-semibold mb-2 text-[#0055BF]">Pickup Information</h4>
+                    <p className="text-gray-600 mb-4">
+                      You can pick up your completed LEGO set from our location in McDonough, GA. We'll contact you when your set is ready for pickup.
                     </p>
+                    <ul className="space-y-2 text-gray-600">
+                      <li>• No additional delivery charges</li>
+                      <li>• Flexible pickup times</li>
+                      <li>• Safe and secure pickup location</li>
+                      <li>• Quality check before pickup</li>
+                    </ul>
                   </div>
                 )}
 

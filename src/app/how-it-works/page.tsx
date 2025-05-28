@@ -24,7 +24,7 @@ export default function HowItWorks() {
   const [pieceCount, setPieceCount] = useState('');
   const [requestGluing, setRequestGluing] = useState(false);
   const [estimatedPrice, setEstimatedPrice] = useState<number | null>(null);
-  const [deliveryMethod, setDeliveryMethod] = useState('local'); // 'local' or 'shipping'
+  const [deliveryMethod, setDeliveryMethod] = useState('local'); // 'local' or 'shipping' or 'pickup'
   const [miles, setMiles] = useState('');
   const [userAddress, setUserAddress] = useState('');
   const [calculatedDistance, setCalculatedDistance] = useState<number | null>(null);
@@ -464,6 +464,7 @@ export default function HowItWorks() {
               onChange={(e) => setDeliveryMethod(e.target.value)}
               className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#0055BF] focus:border-transparent mb-4"
             >
+              <option value="pickup">Pickup</option>
               <option value="local">Local Delivery</option>
               <option value="shipping">Shipping (USPS/UPS/FedEx)</option>
             </select>
@@ -486,6 +487,21 @@ export default function HowItWorks() {
                     <p className="mt-2 text-sm text-red-600">{distanceError}</p>
                   )}
                 </div>
+              </div>
+            )}
+
+            {deliveryMethod === 'pickup' && (
+              <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+                <h4 className="font-semibold mb-2 text-[#0055BF]">Pickup Information</h4>
+                <p className="text-gray-600 mb-4">
+                  You can pick up your completed LEGO set from our location in McDonough, GA. We'll contact you when your set is ready for pickup.
+                </p>
+                <ul className="space-y-2 text-gray-600">
+                  <li>• No additional delivery charges</li>
+                  <li>• Flexible pickup times</li>
+                  <li>• Safe and secure pickup location</li>
+                  <li>• Quality check before pickup</li>
+                </ul>
               </div>
             )}
           </div>
@@ -547,6 +563,12 @@ export default function HowItWorks() {
                     </span>
                   </p>
                 )}
+                {deliveryMethod === 'shipping' && (
+                  <p className="flex justify-between">
+                    <span>Shipping:</span>
+                    <span>Contact for quote</span>
+                  </p>
+                )}
                 {requestGluing && (
                   <p className="flex justify-between">
                     <span>Gluing Service:</span>
@@ -563,6 +585,8 @@ export default function HowItWorks() {
                         ) : (
                           'Get estimate'
                         )
+                      ) : deliveryMethod === 'pickup' ? (
+                        `$${calculatePrice(parseInt(pieceCount)) + (requestGluing ? calculateGluingPrice(parseInt(pieceCount)) : 0)}`
                       ) : (
                         'Contact for shipping quote'
                       )}
