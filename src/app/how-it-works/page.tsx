@@ -22,7 +22,7 @@ interface Location {
 
 export default function HowItWorks() {
   const [pieceCount, setPieceCount] = useState('');
-  const [requestGluing, setRequestGluing] = useState(false);
+  const [requestGluing, setRequestGluing] = useState<'none' | 'permanent' | 'dissolvable'>('none');
   const [estimatedPrice, setEstimatedPrice] = useState<number | null>(null);
   const [deliveryMethod, setDeliveryMethod] = useState('local'); // 'local' or 'shipping' or 'pickup'
   const [miles, setMiles] = useState('');
@@ -155,7 +155,7 @@ export default function HowItWorks() {
     }
 
     let gluingCost = 0;
-    if (requestGluing) {
+    if (requestGluing !== 'none') {
       // $50 per 1000 pieces, rounded up to the nearest thousand
       gluingCost = Math.ceil(count / 1000) * 50;
     }
@@ -174,7 +174,7 @@ export default function HowItWorks() {
       deliveryPrice = deliveryCost;
     }
     
-    const gluingPrice = requestGluing ? calculateGluingPrice(pieces, 'permanent') : 0;
+    const gluingPrice = requestGluing !== 'none' ? calculateGluingPrice(pieces, requestGluing) : 0;
     
     return {
       basePrice,
@@ -515,8 +515,8 @@ export default function HowItWorks() {
                 <input
                   type="radio"
                   id="noGluing"
-                  checked={!requestGluing}
-                  onChange={() => setRequestGluing(false)}
+                  checked={requestGluing === 'none'}
+                  onChange={() => setRequestGluing('none')}
                   className="h-4 w-4 mt-1 text-[#0055BF] border-gray-300 focus:ring-[#0055BF]"
                 />
                 <label htmlFor="noGluing" className="ml-2 block">
@@ -603,10 +603,10 @@ export default function HowItWorks() {
                     <span>Contact for quote</span>
                   </p>
                 )}
-                {requestGluing && (
+                {requestGluing !== 'none' && (
                   <p className="flex justify-between">
                     <span>Gluing Service:</span>
-                    <span>${calculateGluingPrice(parseInt(pieceCount), 'permanent')}</span>
+                    <span>${calculateGluingPrice(parseInt(pieceCount), requestGluing as 'permanent' | 'dissolvable')}</span>
                   </p>
                 )}
                 <div className="border-t border-gray-300 pt-2 mt-2">
@@ -620,7 +620,7 @@ export default function HowItWorks() {
                           'Get estimate'
                         )
                       ) : deliveryMethod === 'pickup' ? (
-                        `$${calculatePrice(parseInt(pieceCount)) + (requestGluing ? calculateGluingPrice(parseInt(pieceCount), 'permanent') : 0)}`
+                        `$${calculatePrice(parseInt(pieceCount)) + (requestGluing !== 'none' ? calculateGluingPrice(parseInt(pieceCount), requestGluing as 'permanent' | 'dissolvable') : 0)}`
                       ) : (
                         'Contact for shipping quote'
                       )}
