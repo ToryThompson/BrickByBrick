@@ -174,7 +174,7 @@ export default function HowItWorks() {
       deliveryPrice = deliveryCost;
     }
     
-    const gluingPrice = requestGluing ? calculateGluingPrice(pieces, requestGluing === 'permanent' ? 'permanent' : 'dissolvable') : 0;
+    const gluingPrice = requestGluing ? calculateGluingPrice(pieces, 'permanent') : 0;
     
     return {
       basePrice,
@@ -606,7 +606,7 @@ export default function HowItWorks() {
                 {requestGluing && (
                   <p className="flex justify-between">
                     <span>Gluing Service:</span>
-                    <span>${calculateGluingPrice(parseInt(pieceCount), requestGluing === 'permanent' ? 'permanent' : 'dissolvable')}</span>
+                    <span>${calculateGluingPrice(parseInt(pieceCount), 'permanent')}</span>
                   </p>
                 )}
                 <div className="border-t border-gray-300 pt-2 mt-2">
@@ -620,7 +620,7 @@ export default function HowItWorks() {
                           'Get estimate'
                         )
                       ) : deliveryMethod === 'pickup' ? (
-                        `$${calculatePrice(parseInt(pieceCount)) + (requestGluing ? calculateGluingPrice(parseInt(pieceCount), requestGluing === 'permanent' ? 'permanent' : 'dissolvable') : 0)}`
+                        `$${calculatePrice(parseInt(pieceCount)) + (requestGluing ? calculateGluingPrice(parseInt(pieceCount), 'permanent') : 0)}`
                       ) : (
                         'Contact for shipping quote'
                       )}
