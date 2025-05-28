@@ -91,28 +91,31 @@ export default function Home() {
               <p className="text-xl md:text-3xl font-bold mb-6 md:mb-10 text-[#0055BF] font-brick [text-shadow:_1px_1px_3px_rgba(0,0,0,0.3)]">Too busy to build your LEGO set? <br/>Let us handle it for you!</p>
               <div className="flex flex-col sm:flex-row gap-4 md:gap-6 mb-6 md:mb-8">
                 <Link 
-                  href="/pricing" 
-                  className="group relative flex items-center justify-center px-4 md:px-6 py-2 md:py-3 rounded-lg hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
+                  href="/how-it-works" 
+                  className="group relative flex items-center justify-center px-6 py-3 rounded-lg bg-[#D01012] text-white font-semibold text-lg md:text-xl text-center hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
                 >
-                  {/* This div is the 'brick' on hover */}
-                  <div className="relative z-10 px-4 md:px-6 py-2 md:py-2 rounded group-hover:bg-yellow-400 transition-colors duration-300">
-                    <span className="relative z-10 font-semibold text-lg md:text-xl text-center text-black">See Pricing</span>
-                    {/* Studs - relative to the inner div */}
-                    <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-yellow-500 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-yellow-500 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  </div>
+                  How It Works
+                  {/* Studs - relative to the button */}
+                  <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#C00000] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#C00000] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </Link>
+                <Link 
+                  href="/pricing" 
+                  className="group relative flex items-center justify-center px-6 py-3 rounded-lg bg-[#F7D117] text-[#1B1B1B] font-semibold text-lg md:text-xl text-center hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
+                >
+                  {isAutoPlaying ? "See Pricing" : "See Pricing"}
+                  {/* Studs - relative to the button */}
+                  <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#E0B500] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#E0B500] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </Link>
                 <Link 
                   href="/contact" 
-                  className="group relative flex items-center justify-center px-4 md:px-6 py-2 md:py-3 rounded-lg hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
+                  className="group relative flex items-center justify-center px-6 py-3 rounded-lg bg-[#0055BF] text-white font-semibold text-lg md:text-xl text-center hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
                 >
-                  {/* This div is the 'brick' on hover */}
-                  <div className="relative z-10 px-4 md:px-6 py-2 md:py-2 rounded group-hover:bg-red-600 transition-colors duration-300">
-                    <span className="relative z-10 font-semibold text-lg md:text-xl text-center text-white">Contact Us</span>
-                    {/* Studs - relative to the inner div */}
-                    <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-red-700 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                    <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-red-700 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  </div>
+                  {isAutoPlaying ? "Contact Us" : "Contact Us"}
+                  {/* Studs - relative to the button */}
+                  <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#004494] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#004494] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </Link>
               </div>
               <div className="mt-6 md:mt-8 text-[#0055BF] text-xl md:text-2xl font-semibold [text-shadow:_1px_1px_2px_rgba(0,0,0,0.3)]">
@@ -285,27 +288,21 @@ export default function Home() {
           <div className="flex flex-col sm:flex-row justify-center gap-4">
             <Link 
               href="/contact" 
-              className="group relative flex items-center justify-center px-4 py-2 rounded-lg hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
+              className="group relative flex items-center justify-center px-6 py-3 rounded-lg bg-[#F7D117] text-[#1B1B1B] font-semibold text-lg text-center hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
             >
-              {/* This div is the 'brick' on hover */}
-              <div className="relative z-10 px-4 py-2 rounded group-hover:bg-yellow-400 transition-colors duration-300">
-                <span className="relative z-10 font-semibold text-lg text-black">Order Now</span>
-                {/* Studs - relative to the inner div */}
-                <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-yellow-500 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-yellow-500 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </div>
+              Order Now
+              {/* Studs - relative to the button */}
+              <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#E0B500] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#E0B500] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </Link>
             <Link 
               href="/how-it-works" 
-              className="group relative flex items-center justify-center px-4 py-2 rounded-lg hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
+              className="group relative flex items-center justify-center px-6 py-3 rounded-lg bg-white text-[#D01012] font-semibold text-lg text-center hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
             >
-              {/* This div is the 'brick' on hover */}
-              <div className="relative z-10 px-4 py-2 rounded group-hover:bg-white transition-colors duration-300">
-                <span className="relative z-10 font-semibold text-lg text-red-600">Learn More</span>
-                {/* Studs - relative to the inner div */}
-                <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-gray-200 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-gray-200 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </div>
+              Learn More
+              {/* Studs - relative to the button */}
+              <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#C00000] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#C00000] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </Link>
           </div>
         </div>
