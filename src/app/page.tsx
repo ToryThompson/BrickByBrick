@@ -90,8 +90,30 @@ export default function Home() {
               <h2 className="text-2xl md:text-4xl font-semibold mb-4 md:mb-8 text-[#0055BF] font-brick [text-shadow:_1px_1px_3px_rgba(0,0,0,0.3)]">Professional LEGO Set Building – Atlanta, GA</h2>
               <p className="text-xl md:text-3xl font-bold mb-6 md:mb-10 text-[#0055BF] font-brick [text-shadow:_1px_1px_3px_rgba(0,0,0,0.3)]">Too busy to build your LEGO set? <br/>Let us handle it for you!</p>
               <div className="flex flex-col sm:flex-row gap-4 md:gap-6 mb-6 md:mb-8">
-                <Link href="/pricing" className="bg-yellow-400 px-6 md:px-10 py-4 md:py-5 rounded-lg font-semibold text-lg md:text-xl text-center hover:bg-yellow-300 transition-colors shadow-lg hover:shadow-xl">See Pricing</Link>
-                <Link href="/contact" className="bg-red-600 px-6 md:px-10 py-4 md:py-5 rounded-lg font-semibold text-lg md:text-xl text-center hover:bg-red-500 transition-colors shadow-lg hover:shadow-xl">Contact Us</Link>
+                <Link 
+                  href="/pricing" 
+                  className="group relative flex items-center justify-center px-4 md:px-6 py-2 md:py-3 rounded-lg hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
+                >
+                  {/* This div is the 'brick' on hover */}
+                  <div className="relative z-10 px-4 md:px-6 py-2 md:py-2 rounded group-hover:bg-yellow-400 transition-colors duration-300">
+                    <span className="relative z-10 font-semibold text-lg md:text-xl text-center text-black">See Pricing</span>
+                    {/* Studs - relative to the inner div */}
+                    <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-yellow-500 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-yellow-500 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                </Link>
+                <Link 
+                  href="/contact" 
+                  className="group relative flex items-center justify-center px-4 md:px-6 py-2 md:py-3 rounded-lg hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
+                >
+                  {/* This div is the 'brick' on hover */}
+                  <div className="relative z-10 px-4 md:px-6 py-2 md:py-2 rounded group-hover:bg-red-600 transition-colors duration-300">
+                    <span className="relative z-10 font-semibold text-lg md:text-xl text-center text-white">Contact Us</span>
+                    {/* Studs - relative to the inner div */}
+                    <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-red-700 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-red-700 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                </Link>
               </div>
               <div className="mt-6 md:mt-8 text-[#0055BF] text-xl md:text-2xl font-semibold [text-shadow:_1px_1px_2px_rgba(0,0,0,0.3)]">
                 <span>Call or Text: </span>
@@ -99,42 +121,105 @@ export default function Home() {
               </div>
             </div>
             <div className="md:w-1/2 flex justify-center w-full">
-              <div 
-                className="relative w-full max-w-4xl aspect-video"
-                onMouseEnter={handleMouseEnter}
-                onMouseLeave={handleMouseLeave}
-              >
-                {slides.map((slide, index) => (
-                  <div
-                    key={index}
-                    className={`absolute inset-0 transition-opacity duration-1000 ${
-                      index === currentSlide ? 'opacity-100' : 'opacity-0'
-                    }`}
-                  >
-                    <Image
-                      src={slide.image}
-                      alt={slide.title}
-                      fill
-                      className="rounded-lg shadow-2xl bg-white/90 backdrop-blur-sm object-cover"
-                      priority={index === 0}
-                    />
-                    <div className="absolute bottom-0 left-0 right-0 bg-black/50 text-white p-6 rounded-b-lg">
-                      <h3 className="text-xl font-bold mb-1">{slide.title}</h3>
-                      <p>{slide.description}</p>
-                    </div>
-                  </div>
-                ))}
-                <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2">
-                  {slides.map((_, index) => (
-                    <button
+              <div className="relative w-[130%] max-w-[130%] aspect-[16/10]">
+                {/* Slides are rendered below the SVG frame */}
+                <div className="absolute inset-0 w-full h-full z-10" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
+                  {slides.map((slide, index) => (
+                    <div
                       key={index}
-                      onClick={() => setCurrentSlide(index)}
-                      className={`w-3 h-3 rounded-full transition-colors ${
-                        index === currentSlide ? 'bg-white' : 'bg-white/50'
+                      className={`absolute inset-0 transition-opacity duration-1000 ${
+                        index === currentSlide ? 'opacity-100' : 'opacity-0'
                       }`}
+                    >
+                      <Image
+                        src={slide.image}
+                        alt={slide.title}
+                        fill
+                        className="rounded-lg shadow-2xl bg-white/90 backdrop-blur-sm object-cover"
+                        priority={index === 0}
+                      />
+                      <div className="absolute bottom-16 left-0 right-0 bg-black/50 text-white p-6 rounded-lg flex flex-col items-center text-center">
+                        <h3 className="text-2xl font-bold mb-2">{slide.title}</h3>
+                        <p className="text-lg">{slide.description}</p>
+                      </div>
+                    </div>
+                  ))}
+                  <div className="absolute bottom-16 left-1/2 -translate-x-1/2 flex gap-2">
+                    {slides.map((_, index) => (
+                      <button
+                        key={index}
+                        onClick={() => setCurrentSlide(index)}
+                        className={`w-3 h-3 rounded-full transition-colors ${
+                          index === currentSlide ? 'bg-white' : 'bg-white/50'
+                        }`}
+                      />
+                    ))}
+                  </div>
+                </div>
+                {/* LEGO Brick SVG Frame - overlays the slideshow */}
+                <svg
+                  className="absolute inset-0 w-full h-full pointer-events-none z-30"
+                  viewBox="0 0 1000 562"
+                  preserveAspectRatio="none"
+                  aria-hidden="true"
+                >
+                  {/* Top row bricks */}
+                  {Array.from({ length: 10 }).map((_, i) => (
+                    <rect
+                      key={`top-${i}`}
+                      x={i * 100 + 10}
+                      y={0}
+                      width={80}
+                      height={40}
+                      rx={8}
+                      fill={["#D01012", "#F7D117", "#0055BF", "#237841"][i % 4]}
+                      stroke="#222"
+                      strokeWidth={3}
                     />
                   ))}
-                </div>
+                  {/* Bottom row bricks */}
+                  {Array.from({ length: 10 }).map((_, i) => (
+                    <rect
+                      key={`bottom-${i}`}
+                      x={i * 100 + 10}
+                      y={522}
+                      width={80}
+                      height={40}
+                      rx={8}
+                      fill={["#237841", "#0055BF", "#F7D117", "#D01012"][i % 4]}
+                      stroke="#222"
+                      strokeWidth={3}
+                    />
+                  ))}
+                  {/* Left column bricks */}
+                  {Array.from({ length: 4 }).map((_, i) => (
+                    <rect
+                      key={`left-${i}`}
+                      x={0}
+                      y={i * 140 + 50}
+                      width={40}
+                      height={80}
+                      rx={8}
+                      fill={["#0055BF", "#D01012", "#237841", "#F7D117"][i % 4]}
+                      stroke="#222"
+                      strokeWidth={3}
+                    />
+                  ))}
+                  {/* Right column bricks */}
+                  {Array.from({ length: 4 }).map((_, i) => (
+                    <rect
+                      key={`right-${i}`}
+                      x={960}
+                      y={i * 140 + 50}
+                      width={40}
+                      height={80}
+                      rx={8}
+                      fill={["#F7D117", "#237841", "#D01012", "#0055BF"][i % 4]}
+                      stroke="#222"
+                      strokeWidth={3}
+                    />
+                  ))}
+                </svg>
               </div>
             </div>
           </div>
@@ -198,8 +283,30 @@ export default function Home() {
         <div className="container mx-auto px-4 text-center">
           <h2 className="text-3xl md:text-4xl font-bold mb-4 md:mb-6 text-white font-brick">Ready to get started?</h2>
           <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link href="/contact" className="bg-yellow-400 px-8 py-4 rounded-lg font-semibold text-lg hover:bg-yellow-300 transition-colors shadow-lg hover:shadow-xl">Order Now</Link>
-            <Link href="/how-it-works" className="bg-white px-8 py-4 rounded-lg font-semibold text-lg text-red-600 hover:bg-gray-100 transition-colors shadow-lg hover:shadow-xl">Learn More</Link>
+            <Link 
+              href="/contact" 
+              className="group relative flex items-center justify-center px-4 py-2 rounded-lg hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
+            >
+              {/* This div is the 'brick' on hover */}
+              <div className="relative z-10 px-4 py-2 rounded group-hover:bg-yellow-400 transition-colors duration-300">
+                <span className="relative z-10 font-semibold text-lg text-black">Order Now</span>
+                {/* Studs - relative to the inner div */}
+                <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-yellow-500 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-yellow-500 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
+            </Link>
+            <Link 
+              href="/how-it-works" 
+              className="group relative flex items-center justify-center px-4 py-2 rounded-lg hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
+            >
+              {/* This div is the 'brick' on hover */}
+              <div className="relative z-10 px-4 py-2 rounded group-hover:bg-white transition-colors duration-300">
+                <span className="relative z-10 font-semibold text-lg text-red-600">Learn More</span>
+                {/* Studs - relative to the inner div */}
+                <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-gray-200 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-gray-200 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
+            </Link>
           </div>
         </div>
       </section>

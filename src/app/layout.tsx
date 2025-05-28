@@ -158,40 +158,80 @@ export default function RootLayout({
               </Link>
               
               {/* Desktop Navigation */}
-              <div className="hidden md:flex items-center space-x-8">
-                <Link href="/" className="text-gray-600 hover:text-[#0055BF] font-medium transition-all duration-300 relative group">
-                  <span className="relative z-10">Home</span>
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#0055BF] group-hover:w-full transition-all duration-300"></span>
-                  <span className="absolute inset-0 bg-gray-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></span>
+              <nav className="hidden md:flex items-center gap-4">
+                <Link 
+                  href="/" 
+                  className="group relative flex items-center justify-center px-2 py-1 rounded-lg hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
+                >
+                  {/* This div is the 'brick' on hover */}
+                  <div className="relative z-10 px-3 py-2 rounded group-hover:bg-yellow-400 transition-colors duration-300">
+                    <span className="text-[#0055BF] font-semibold group-hover:text-black transition-colors duration-300">Home</span>
+                    {/* Studs - relative to the inner div */}
+                    <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-yellow-500 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-yellow-500 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
                 </Link>
-                <Link href="/services" className="text-gray-600 hover:text-[#0055BF] font-medium transition-all duration-300 relative group">
-                  <span className="relative z-10">Services</span>
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#0055BF] group-hover:w-full transition-all duration-300"></span>
-                  <span className="absolute inset-0 bg-gray-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></span>
+                <Link 
+                  href="/services" 
+                  className="group relative flex items-center justify-center px-2 py-1 rounded-lg hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
+                >
+                  {/* This div is the 'brick' on hover */}
+                  <div className="relative z-10 px-3 py-2 rounded group-hover:bg-red-500 transition-colors duration-300">
+                    <span className="text-[#0055BF] font-semibold group-hover:text-white transition-colors duration-300">Services</span>
+                    {/* Studs - relative to the inner div */}
+                    <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-red-600 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-red-600 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
                 </Link>
-                <Link href="/how-it-works" className="text-gray-600 hover:text-[#0055BF] font-medium transition-all duration-300 relative group">
-                  <span className="relative z-10">How It Works</span>
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#0055BF] group-hover:w-full transition-all duration-300"></span>
-                  <span className="absolute inset-0 bg-gray-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></span>
+                <Link 
+                  href="/how-it-works" 
+                  className="group relative flex items-center justify-center px-2 py-1 rounded-lg hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
+                >
+                  {/* This div is the 'brick' on hover */}
+                  <div className="relative z-10 px-3 py-2 rounded group-hover:bg-green-500 transition-colors duration-300">
+                    <span className="text-[#0055BF] font-semibold group-hover:text-white transition-colors duration-300">How It Works</span>
+                    {/* Studs - relative to the inner div */}
+                    <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-green-600 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-green-600 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
                 </Link>
-                <Link href="/portfolio" className="text-gray-600 hover:text-[#0055BF] font-medium transition-all duration-300 relative group">
-                  <span className="relative z-10">Portfolio</span>
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#0055BF] group-hover:w-full transition-all duration-300"></span>
-                  <span className="absolute inset-0 bg-gray-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></span>
+                <Link 
+                  href="/portfolio" 
+                  className="group relative flex items-center justify-center px-2 py-1 rounded-lg hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
+                >
+                  {/* This div is the 'brick' on hover */}
+                  <div className="relative z-10 px-3 py-2 rounded group-hover:bg-blue-500 transition-colors duration-300">
+                    <span className="text-[#0055BF] font-semibold group-hover:text-white transition-colors duration-300">Portfolio</span>
+                    {/* Studs - relative to the inner div */}
+                    <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-blue-600 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-blue-600 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
                 </Link>
-                <Link href="/pricing" className="text-gray-600 hover:text-[#0055BF] font-medium transition-all duration-300 relative group">
-                  <span className="relative z-10">Pricing</span>
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-[#0055BF] group-hover:w-full transition-all duration-300"></span>
-                  <span className="absolute inset-0 bg-gray-50 rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300 -z-10"></span>
+                <Link 
+                  href="/pricing" 
+                  className="group relative flex items-center justify-center px-2 py-1 rounded-lg hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
+                >
+                  {/* This div is the 'brick' on hover */}
+                  <div className="relative z-10 px-3 py-2 rounded group-hover:bg-yellow-400 transition-colors duration-300">
+                    <span className="text-[#0055BF] font-semibold group-hover:text-black transition-colors duration-300">Pricing</span>
+                    {/* Studs - relative to the inner div */}
+                    <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-yellow-500 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-yellow-500 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
                 </Link>
                 <Link 
                   href="/contact" 
-                  className="bg-[#0055BF] text-white px-6 py-2 rounded-lg hover:bg-[#004494] transition-all duration-300 font-medium shadow-md hover:shadow-lg hover:scale-105 relative group overflow-hidden"
+                  className="group relative flex items-center justify-center px-2 py-1 rounded-lg hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
                 >
-                  <span className="relative z-10">Contact Us</span>
-                  <span className="absolute inset-0 bg-white/10 translate-y-full group-hover:translate-y-0 transition-transform duration-300"></span>
+                  {/* This div is the 'brick' on hover */}
+                  <div className="relative z-10 px-3 py-2 rounded group-hover:bg-red-500 transition-colors duration-300">
+                    <span className="text-[#0055BF] font-semibold group-hover:text-white transition-colors duration-300">Contact</span>
+                    {/* Studs - relative to the inner div */}
+                    <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-red-600 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-red-600 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
                 </Link>
-              </div>
+              </nav>
 
               {/* Mobile Menu */}
               <MobileMenu />

@@ -179,11 +179,17 @@ export default function Services() {
               <h2 className={`text-2xl font-bold mb-2 text-center [text-shadow:_1px_1px_2px_rgba(0,0,0,0.3)]`} style={{ color: service.border }}>{service.title}</h2>
               <p className="text-[#1B1B1B] text-center mb-2">{service.short}</p>
               <button
-                className="lego-yellow px-4 py-2 rounded-full font-semibold w-fit mx-auto mb-2 hover:bg-yellow-300 transition-colors"
+                className="group relative flex items-center justify-center px-4 py-2 rounded-lg hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
                 onClick={() => setOpen(open === service.slug ? null : service.slug)}
                 aria-expanded={open === service.slug}
               >
-                {open === service.slug ? "Hide Details" : "Learn More"}
+                 {/* This div is the 'brick' on hover */}
+                 <div className="relative z-10 px-3 py-1 rounded bg-[#F7D117] group-hover:bg-yellow-400 transition-colors duration-300">
+                   <span className="font-semibold w-fit mx-auto text-[#1B1B1B]">{open === service.slug ? "Hide Details" : "Learn More"}</span>
+                   {/* Studs - relative to the inner div */}
+                   <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-yellow-500 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                   <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-yellow-500 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                 </div>
               </button>
               {open === service.slug && (
                 <div className="bg-[#F7D117]/20 p-4 rounded-lg text-[#1B1B1B] animate-fade-in mb-2">
@@ -192,23 +198,49 @@ export default function Services() {
               )}
               <Link
                 href={{ pathname: "/contact", query: { service: service.slug } }}
-                className="lego-blue px-4 py-2 rounded-full font-semibold w-fit mx-auto text-white hover:bg-blue-700 transition-colors"
+                className="group relative flex items-center justify-center px-4 py-2 rounded-lg hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
               >
-                Request This Service
+                {/* This div is the 'brick' on hover */}
+                <div className="relative z-10 px-3 py-1 rounded bg-[#0055BF] group-hover:bg-blue-500 transition-colors duration-300">
+                  <span className="font-semibold w-fit mx-auto text-white">Request This Service</span>
+                  {/* Studs - relative to the inner div */}
+                  <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-blue-600 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-blue-600 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
               </Link>
             </div>
           ))}
         </div>
 
         <div className="text-center mt-12">
-          <h2 className="text-3xl font-bold mb-6 font-brick text-[#0055BF] [text-shadow:_1px_1px_2px_rgba(0,0,0,0.3)]">Ready to Get Started?</h2>
-          <div className="flex flex-col sm:flex-row justify-center gap-4">
-            <Link href="/contact" className="bg-[#0055BF] text-white px-8 py-4 rounded-lg hover:bg-[#004494] transition-colors text-lg">
-              Request a Quote
-            </Link>
-            <Link href="/pricing" className="bg-[#F7D117] text-[#1B1B1B] px-8 py-4 rounded-lg hover:bg-[#E6C615] transition-colors text-lg">
-              View Pricing
-            </Link>
+          <div className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 border-2 border-[#0055BF]">
+            <h2 className="text-3xl font-bold mb-6 font-brick text-[#0055BF] [text-shadow:_1px_1px_2px_rgba(0,0,0,0.3)]">Ready to Get Started?</h2>
+            <div className="flex flex-col sm:flex-row justify-center gap-4">
+              <Link 
+                href="/contact" 
+                className="group relative flex items-center justify-center px-4 py-2 rounded-lg hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
+              >
+                {/* This div is the 'brick' on hover */}
+                <div className="relative z-10 px-4 py-2 rounded bg-[#0055BF] group-hover:bg-blue-500 transition-colors duration-300">
+                  <span className="font-semibold text-lg text-white">Request a Quote</span>
+                  {/* Studs - relative to the inner div */}
+                  <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-blue-600 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-blue-600 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+              </Link>
+              <Link 
+                href="/pricing" 
+                className="group relative flex items-center justify-center px-4 py-2 rounded-lg hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
+              >
+                {/* This div is the 'brick' on hover */}
+                <div className="relative z-10 px-4 py-2 rounded bg-[#F7D117] group-hover:bg-yellow-400 transition-colors duration-300">
+                  <span className="font-semibold text-lg text-[#1B1B1B]">View Pricing</span>
+                  {/* Studs - relative to the inner div */}
+                  <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-yellow-500 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-yellow-500 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </div>
+              </Link>
+            </div>
           </div>
         </div>
       </div>

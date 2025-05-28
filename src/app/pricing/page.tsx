@@ -402,9 +402,25 @@ export default function Pricing() {
               onChange={(e) => setDeliveryMethod(e.target.value)}
               className="w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-[#0055BF] focus:border-transparent mb-4"
             >
+              <option value="pickup">Local Pickup</option>
               <option value="local">Local Delivery</option>
               <option value="shipping">Shipping (USPS/UPS/FedEx)</option>
             </select>
+
+            {deliveryMethod === 'pickup' && (
+              <div className="mt-4 p-4 bg-gray-50 rounded-lg">
+                <h4 className="font-semibold mb-2 text-[#0055BF]">Pickup Information</h4>
+                <p className="text-gray-600 mb-4">
+                  Pick up your completed set from our location in Atlanta, GA. We'll notify you when your set is ready for pickup.
+                </p>
+                <ul className="space-y-2 text-gray-600">
+                  <li>• No delivery fee</li>
+                  <li>• Flexible pickup hours</li>
+                  <li>• Safe and secure storage</li>
+                  <li>• Professional packaging included</li>
+                </ul>
+              </div>
+            )}
 
             {deliveryMethod === 'local' && (
               <div className="mt-4">
@@ -467,15 +483,18 @@ export default function Pricing() {
             <button
               onClick={calculateDistance}
               disabled={isCalculatingDistance || (deliveryMethod === 'local' && !userAddress) || !pieceCount}
-              className="w-full bg-[#0055BF] text-white px-6 py-3 rounded-lg hover:bg-[#004494] transition-colors text-lg disabled:opacity-50"
+              className="group relative flex items-center justify-center px-6 py-3 rounded-lg bg-[#0055BF] text-white font-semibold text-lg hover:-translate-y-1 active:translate-y-0 transition-transform duration-300 w-full disabled:opacity-50 disabled:cursor-not-allowed opacity-100"
             >
               {isCalculatingDistance ? 'Estimating...' : 'Estimate Total Price'}
+              {/* Studs - relative to the button */}
+              <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#0055BF] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#0055BF] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </button>
           </div>
 
           {/* Price Estimate */}
-          {pieceCount && (deliveryMethod === 'local' || deliveryCost !== null) && (
-            <div className="bg-gray-50 rounded-lg p-6">
+          {pieceCount && (deliveryMethod === 'pickup' || deliveryMethod === 'local' || deliveryCost !== null) && (
+            <div className="bg-white rounded-lg p-6 shadow-md">
               <h3 className="text-xl font-bold mb-4 text-[#0055BF]">Estimated Price Breakdown</h3>
               {selectedSet && (
                 <div className="mb-4">
@@ -504,6 +523,12 @@ export default function Pricing() {
                     </span>
                   </p>
                 )}
+                {deliveryMethod === 'pickup' && (
+                  <p className="flex justify-between">
+                    <span>Delivery Fee:</span>
+                    <span className="text-green-600">$0 (Local Pickup)</span>
+                  </p>
+                )}
                 {requestGluing && (
                   <p className="flex justify-between">
                     <span>Estimated Gluing Service:</span>
@@ -511,10 +536,12 @@ export default function Pricing() {
                   </p>
                 )}
                 <div className="border-t border-gray-300 pt-2 mt-2">
-                  <p className="flex justify-between font-bold">
+                  <p className="flex justify-between font-bold text-[#1B1B1B]">
                     <span>Estimated Total Price:</span>
                     <span>
-                      {deliveryMethod === 'local' ? (
+                      {deliveryMethod === 'pickup' ? (
+                        `$${calculateTotalPrice(parseInt(pieceCount)).basePrice + (requestGluing ? calculateGluingPrice(parseInt(pieceCount)) : 0)}`
+                      ) : deliveryMethod === 'local' ? (
                         deliveryCost !== null ? (
                           `$${calculateTotalPrice(parseInt(pieceCount)).total}`
                         ) : (
@@ -619,7 +646,18 @@ export default function Pricing() {
         <div className="text-center">
           <p className="text-lg mb-6 text-[#1B1B1B] font-semibold">Ready to get your LEGO set built? Contact us for a custom quote!</p>
           <div className="flex justify-center">
-            <Link href="/contact" className="lego-yellow px-8 py-3 rounded-full font-semibold text-lg">Request a Quote</Link>
+            <Link 
+              href="/contact" 
+              className="group relative flex items-center justify-center px-4 py-2 rounded-lg hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
+            >
+              {/* This div is the 'brick' on hover */}
+              <div className="relative z-10 px-4 py-2 rounded bg-[#0055BF] group-hover:bg-blue-500 transition-colors duration-300">
+                <span className="font-semibold text-lg text-white">Request a Quote</span>
+                {/* Studs - relative to the inner div */}
+                <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-blue-600 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-blue-600 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              </div>
+            </Link>
           </div>
         </div>
       </div>
