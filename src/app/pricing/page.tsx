@@ -554,6 +554,22 @@ export default function Pricing() {
                   </p>
                 </div>
               </div>
+
+              {/* Get Actual Quote Button */}
+              <div className="mt-6">
+                <Link 
+                  href={`/contact?set=${selectedSet?.set_num || ''}&pieces=${pieceCount}&delivery=${deliveryMethod}&gluing=${requestGluing ? 'yes' : 'no'}`}
+                  className="group relative flex items-center justify-center px-6 py-3 rounded-lg bg-[#D01012] text-white font-semibold text-lg hover:-translate-y-1 active:translate-y-0 transition-transform duration-300 w-full"
+                >
+                  Get Actual Quote
+                  {/* Studs - relative to the button */}
+                  <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#D01012] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#D01012] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                </Link>
+                <p className="text-sm text-gray-600 mt-2 text-center">
+                  Get a detailed quote and start your LEGO building journey today!
+                </p>
+              </div>
             </div>
           )}
         </div>

@@ -141,7 +141,7 @@ export default function Services() {
 
   return (
     <div className="min-h-screen py-16 relative">
-      <div className="absolute inset-0 z-0">
+      <div className="fixed inset-0 z-0">
         <Image
           src="/images/backgrounds/colored-toy-bricks-place-your-600nw-663866968.webp"
           alt="LEGO Bricks Background"
@@ -172,12 +172,13 @@ export default function Services() {
           {services.map((service) => (
             <div
               key={service.title}
-              className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 flex flex-col gap-4 hover:scale-[1.025] transition-transform border-2"
+              className="bg-white/95 backdrop-blur-sm rounded-xl shadow-lg p-8 flex flex-col gap-4 hover:scale-[1.025] transition-transform border-2 min-h-[400px]"
               style={{ borderColor: service.border }}
             >
               <div className={`${service.color} p-4 rounded-full text-3xl w-fit mx-auto mb-2`}>{service.icon}</div>
               <h2 className={`text-2xl font-bold mb-2 text-center [text-shadow:_1px_1px_2px_rgba(0,0,0,0.3)]`} style={{ color: service.border }}>{service.title}</h2>
               <p className="text-[#1B1B1B] text-center mb-2">{service.short}</p>
+              <div className="flex-grow"></div>
               <button
                 className="group relative flex items-center justify-center px-4 py-2 rounded-lg hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
                 onClick={() => setOpen(open === service.slug ? null : service.slug)}
@@ -191,13 +192,13 @@ export default function Services() {
                    <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-yellow-500 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                  </div>
               </button>
-              {open === service.slug && (
-                <div className="bg-[#F7D117]/20 p-4 rounded-lg text-[#1B1B1B] animate-fade-in mb-2">
+              <div className={`overflow-hidden transition-all duration-300 ease-in-out ${open === service.slug ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}>
+                <div className="bg-[#F7D117]/20 p-4 rounded-lg text-[#1B1B1B]">
                   {service.long}
                 </div>
-              )}
+              </div>
               <Link
-                href={{ pathname: "/contact", query: { service: service.slug } }}
+                href={{ pathname: "/get-a-quote", query: { service: service.slug } }}
                 className="group relative flex items-center justify-center px-4 py-2 rounded-lg hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
               >
                 {/* This div is the 'brick' on hover */}
@@ -217,7 +218,7 @@ export default function Services() {
             <h2 className="text-3xl font-bold mb-6 font-brick text-[#0055BF] [text-shadow:_1px_1px_2px_rgba(0,0,0,0.3)]">Ready to Get Started?</h2>
             <div className="flex flex-col sm:flex-row justify-center gap-4">
               <Link 
-                href="/contact" 
+                href="/get-a-quote" 
                 className="group relative flex items-center justify-center px-4 py-2 rounded-lg hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
               >
                 {/* This div is the 'brick' on hover */}

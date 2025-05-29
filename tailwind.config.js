@@ -15,8 +15,8 @@ module.exports = {
         'lego-black': '#1B1B1B',
       },
       fontFamily: {
-        'bricolage': ['var(--font-bricolage)'],
-        'brick': ['var(--font-bricolage)'],
+        'bricolage': ['Bricolage Grotesque', 'system-ui', '-apple-system', 'sans-serif'],
+        'brick': ['Bricolage Grotesque', 'system-ui', '-apple-system', 'sans-serif'],
       },
       animation: {
         'gradient-x': 'gradient-x 12s ease-in-out infinite',

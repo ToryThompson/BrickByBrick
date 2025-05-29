@@ -79,11 +79,21 @@ export default function MobileMenu() {
             <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#004494] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
           </Link>
           <Link 
+            href="/get-a-quote" 
+            className="group relative flex items-center justify-center px-6 py-3 text-white font-semibold rounded-lg bg-[#D01012] hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
+            onClick={() => setIsOpen(false)}
+          >
+            Get a Quote
+            {/* Studs - relative to the button */}
+            <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#C00000] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+            <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#C00000] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+          </Link>
+          <Link 
             href="/contact" 
             className="group relative flex items-center justify-center px-6 py-3 text-white font-semibold rounded-lg bg-[#D01012] hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
             onClick={() => setIsOpen(false)}
           >
-            Contact Us
+            Contact
             {/* Studs - relative to the button */}
             <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#C00000] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#C00000] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

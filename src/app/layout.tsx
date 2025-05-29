@@ -1,23 +1,15 @@
 "use client";
 
-import { Inter } from "next/font/google";
-import { Bricolage_Grotesque } from "next/font/google";
 import Link from "next/link";
 import MobileMenu from "./components/MobileMenu";
-import { useState } from "react";
-
-const inter = Inter({ subsets: ["latin"] });
-const bricolage = Bricolage_Grotesque({ 
-  subsets: ["latin"],
-  display: 'swap',
-  variable: '--font-bricolage'
-});
+import { useState, useEffect } from "react";
 
 export default function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const [mounted, setMounted] = useState(false);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [blocks, setBlocks] = useState([
     // First row
@@ -90,7 +82,13 @@ export default function RootLayout({
     { id: 57, x: 90, y: 90, color: "#0055BF", size: 4 },
   ]);
 
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   const handleMouseMove = (e: React.MouseEvent) => {
+    if (!mounted) return;
+    
     const nav = e.currentTarget;
     const rect = nav.getBoundingClientRect();
     const x = ((e.clientX - rect.left) / rect.width) * 100;
@@ -102,15 +100,14 @@ export default function RootLayout({
       const dx = block.x - x;
       const dy = block.y - y;
       const distance = Math.sqrt(dx * dx + dy * dy);
-      const maxDistance = 20; // Reduced distance for more precise movement
+      const maxDistance = 20;
       
       if (distance < maxDistance) {
         const angle = Math.atan2(dy, dx);
         const force = (maxDistance - distance) / maxDistance;
-        const newX = block.x + Math.cos(angle) * force * 6; // Reduced movement for more controlled effect
+        const newX = block.x + Math.cos(angle) * force * 6;
         const newY = block.y + Math.sin(angle) * force * 6;
         
-        // Keep blocks within bounds with more precise boundaries
         return {
           ...block,
           x: Math.max(2, Math.min(98, newX)),
@@ -123,7 +120,7 @@ export default function RootLayout({
 
   return (
     <html lang="en">
-      <body className={`${inter.className} ${bricolage.variable}`}>
+      <body className="antialiased">
         {/* Navigation */}
         <nav 
           className="relative bg-white shadow-lg sticky top-0 z-50 overflow-hidden"
@@ -131,7 +128,7 @@ export default function RootLayout({
         >
           <div className="absolute inset-0">
             <div className="absolute top-0 left-0 w-full h-full">
-              {blocks.map(block => (
+              {mounted && blocks.map(block => (
                 <div
                   key={block.id}
                   className="absolute rounded-sm shadow-sm transition-all duration-300 ease-out"
@@ -151,9 +148,17 @@ export default function RootLayout({
             <div className="flex justify-between items-center h-20">
               <Link href="/" className="flex items-center group">
                 {/* LEGO Brick Logo */}
-                <div className="w-10 h-6 bg-[#0055BF] rounded-sm mr-3 relative group-hover:scale-110 transition-transform duration-300">
-                  <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-5 h-2 bg-white/90 rounded-sm"></div>
-                  <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-5 h-2 bg-white/90 rounded-sm"></div>
+                <div className="relative w-12 h-6 bg-[#0055BF] rounded-sm mr-3 transform transition-all duration-300 group-hover:scale-110">
+                  {/* 3D effect - top face */}
+                  <div className="absolute inset-0 bg-gradient-to-b from-[#0066E5] to-[#0055BF] rounded-sm"></div>
+                  
+                  {/* 3D effect - side faces */}
+                  <div className="absolute inset-y-0 -left-0.5 w-0.5 bg-[#004CAA] rounded-l-sm"></div>
+                  <div className="absolute inset-y-0 -right-0.5 w-0.5 bg-[#004CAA] rounded-r-sm"></div>
+                  
+                  {/* Studs */}
+                  <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#0066E5] rounded-sm shadow-inner"></div>
+                  <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#0066E5] rounded-sm shadow-inner"></div>
                 </div>
                 <span className="text-2xl font-bold text-[#0055BF] font-brick group-hover:text-[#004494] transition-colors">
                   Brick by Brick
@@ -223,6 +228,18 @@ export default function RootLayout({
                   </div>
                 </Link>
                 <Link 
+                  href="/get-a-quote" 
+                  className="group relative flex items-center justify-center px-2 py-1 rounded-lg hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
+                >
+                  {/* This div is the 'brick' on hover */}
+                  <div className="relative z-10 px-3 py-2 rounded group-hover:bg-red-500 transition-colors duration-300">
+                    <span className="text-[#0055BF] font-semibold group-hover:text-white transition-colors duration-300">Get a Quote</span>
+                    {/* Studs - relative to the inner div */}
+                    <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-red-600 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                    <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-red-600 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  </div>
+                </Link>
+                <Link 
                   href="/contact" 
                   className="group relative flex items-center justify-center px-2 py-1 rounded-lg hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
                 >
@@ -262,6 +279,7 @@ export default function RootLayout({
                   <li><Link href="/how-it-works" className="text-gray-300 hover:text-white">How It Works</Link></li>
                   <li><Link href="/portfolio" className="text-gray-300 hover:text-white">Portfolio</Link></li>
                   <li><Link href="/pricing" className="text-gray-300 hover:text-white">Pricing</Link></li>
+                  <li><Link href="/get-a-quote" className="text-gray-300 hover:text-white">Get a Quote</Link></li>
                   <li><Link href="/contact" className="text-gray-300 hover:text-white">Contact</Link></li>
                 </ul>
               </div>

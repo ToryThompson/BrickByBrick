@@ -167,66 +167,70 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section with Slideshow */}
-      <section className="relative h-[80vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0 z-0 parallax-bg">
+      <section className="relative h-[80vh] flex items-center overflow-hidden group">
+        <div className="absolute inset-0 z-0 parallax-bg transition-transform duration-700 group-hover:scale-105">
           <Image
             src="/images/backgrounds/colored-toy-bricks-place-your-600nw-663866968.webp"
             alt="LEGO Bricks Background"
             fill
-            className="object-cover"
+            className="object-cover transition-all duration-700 group-hover:brightness-110"
             quality={100}
             priority
           />
-          <div className="absolute inset-0 bg-white/40 backdrop-blur-sm"></div>
+          <div className="absolute inset-0 bg-white/40 backdrop-blur-sm transition-all duration-700 group-hover:bg-white/30"></div>
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-            <div className="md:w-1/2 text-center md:text-left">
-              <h1 className="text-5xl md:text-7xl font-bold mb-4 md:mb-8 text-[#0055BF] font-brick [text-shadow:_4px_4px_8px_rgba(0,0,0,0.5)]">Brick by Brick</h1>
-              <h2 className="text-2xl md:text-4xl font-semibold mb-4 md:mb-8 text-[#0055BF] font-brick [text-shadow:_3px_3px_6px_rgba(0,0,0,0.4)]">Professional LEGO Set Building – Atlanta, GA</h2>
-              <p className="text-xl md:text-3xl font-bold mb-6 md:mb-10 text-[#0055BF] hover:text-[#0066E5] transition-colors duration-300 font-brick [text-shadow:_2px_2px_4px_rgba(0,0,0,0.3)]">Too busy to build your LEGO set? <br/>Let us handle it for you!</p>
+            <div className="md:w-1/2 text-center md:text-left transform transition-all duration-500 hover:scale-[1.02]">
+              <h1 className="text-5xl md:text-7xl font-bold mb-4 md:mb-8 text-[#0055BF] font-brick [text-shadow:_4px_4px_8px_rgba(0,0,0,0.5)] transition-all duration-300 hover:text-[#0066E5] hover:[text-shadow:_6px_6px_12px_rgba(0,0,0,0.6)]">Brick by Brick</h1>
+              <h2 className="text-2xl md:text-4xl font-semibold mb-4 md:mb-8 text-[#0055BF] font-brick [text-shadow:_3px_3px_6px_rgba(0,0,0,0.4)] transition-all duration-300 hover:text-[#0066E5] hover:[text-shadow:_4px_4px_8px_rgba(0,0,0,0.5)]">Professional LEGO Set Building – Atlanta, GA</h2>
+              <p className="text-xl md:text-3xl font-bold mb-6 md:mb-10 text-[#0055BF] hover:text-[#0066E5] transition-all duration-300 font-brick [text-shadow:_2px_2px_4px_rgba(0,0,0,0.3)] hover:[text-shadow:_3px_3px_6px_rgba(0,0,0,0.4)]">Too busy to build your LEGO set? <br/>Let us handle it for you!</p>
               <div className="flex flex-col sm:flex-row gap-4 md:gap-6 mb-6 md:mb-8">
                 <Link 
                   href="/how-it-works" 
-                  className="group relative flex items-center justify-center px-6 py-3 rounded-lg bg-[#D01012] text-white font-semibold text-lg md:text-xl text-center hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
+                  className="group relative flex items-center justify-center px-6 py-3 rounded-lg bg-[#D01012] text-white font-semibold text-lg md:text-xl text-center hover:-translate-y-1 active:translate-y-0 transition-all duration-300 hover:shadow-lg hover:shadow-red-500/30"
                 >
-                  How It Works
+                  <span className="relative z-10 transition-transform duration-300 group-hover:scale-105">How It Works</span>
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-[#D01012] to-[#E52528] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   {/* Studs - relative to the button */}
-                  <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#C00000] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#C00000] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#C00000] rounded-sm opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-translate-y-1"></div>
+                  <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#C00000] rounded-sm opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-translate-y-1"></div>
                 </Link>
                 <Link 
                   href="/get-a-quote" 
-                  className="group relative flex items-center justify-center px-6 py-3 rounded-lg bg-[#237841] text-white font-semibold text-lg md:text-xl text-center hover:-translate-y-1 active:translate-y-0 transition-transform duration-300"
+                  className="group relative flex items-center justify-center px-6 py-3 rounded-lg bg-[#237841] text-white font-semibold text-lg md:text-xl text-center hover:-translate-y-1 active:translate-y-0 transition-all duration-300 hover:shadow-lg hover:shadow-green-500/30"
                 >
-                  Get a Quote
+                  <span className="relative z-10 transition-transform duration-300 group-hover:scale-105">Get a Quote</span>
+                  <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-[#237841] to-[#2A8F4E] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                   {/* Studs - relative to the button */}
-                  <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#1a5a30] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                  <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#1a5a30] rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                  <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#1a5a30] rounded-sm opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-translate-y-1"></div>
+                  <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#1a5a30] rounded-sm opacity-0 group-hover:opacity-100 transition-all duration-300 group-hover:-translate-y-1"></div>
                 </Link>
               </div>
             </div>
             <div className="md:w-1/2 flex justify-center w-full">
-              <div className="relative w-[130%] max-w-[130%] aspect-[16/10]">
-                {/* Slides are rendered below the SVG frame */}
+              <div className="relative w-[130%] max-w-[130%] aspect-[16/10] transform transition-all duration-500 hover:scale-[1.02]">
+                {/* Slides Container */}
                 <div className="absolute inset-0 w-full h-full z-10" onMouseEnter={handleMouseEnter} onMouseLeave={handleMouseLeave}>
                   {slides.map((slide, index) => (
                     <div
                       key={index}
-                      className={`absolute inset-0 transition-opacity duration-1000 ${
-                        index === currentSlide ? 'opacity-100' : 'opacity-0'
+                      className={`absolute inset-0 transition-all duration-700 ${
+                        index === currentSlide 
+                          ? 'opacity-100 scale-100 translate-x-0' 
+                          : 'opacity-0 scale-95 translate-x-4'
                       }`}
                     >
                       <Image
                         src={slide.image}
                         alt={slide.title}
                         fill
-                        className="rounded-lg shadow-2xl bg-white/90 backdrop-blur-sm object-cover"
+                        className="rounded-lg shadow-2xl bg-white/90 backdrop-blur-sm object-cover transition-all duration-500 hover:brightness-110"
                         priority={index === 0}
                       />
-                      <div className="absolute bottom-16 left-0 right-0 bg-black/50 text-white p-6 rounded-lg flex flex-col items-center text-center">
-                        <h3 className="text-2xl font-bold mb-2">{slide.title}</h3>
-                        <p className="text-lg">{slide.description}</p>
+                      <div className="absolute bottom-16 left-0 right-0 bg-black/50 text-white p-6 rounded-lg flex flex-col items-center text-center transform transition-all duration-500 hover:bg-black/60 hover:scale-[1.02]">
+                        <h3 className="text-2xl font-bold mb-2 transition-all duration-300 hover:text-[#F7D117]">{slide.title}</h3>
+                        <p className="text-lg transition-all duration-300 hover:text-white/90">{slide.description}</p>
                       </div>
                     </div>
                   ))}
@@ -235,77 +239,15 @@ export default function Home() {
                       <button
                         key={index}
                         onClick={() => setCurrentSlide(index)}
-                        className={`w-3 h-3 rounded-full transition-colors ${
-                          index === currentSlide ? 'bg-white' : 'bg-white/50'
+                        className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                          index === currentSlide 
+                            ? 'bg-white scale-125 shadow-lg shadow-white/50' 
+                            : 'bg-white/50 hover:bg-white/75 hover:scale-110'
                         }`}
                       />
                     ))}
                   </div>
                 </div>
-                {/* LEGO Brick SVG Frame - overlays the slideshow */}
-                <svg
-                  className="absolute inset-0 w-full h-full pointer-events-none z-30"
-                  viewBox="0 0 1000 562"
-                  preserveAspectRatio="none"
-                  aria-hidden="true"
-                >
-                  {/* Top row bricks */}
-                  {Array.from({ length: 10 }).map((_, i) => (
-                    <rect
-                      key={`top-${i}`}
-                      x={i * 100 + 10}
-                      y={0}
-                      width={80}
-                      height={40}
-                      rx={8}
-                      fill={["#D01012", "#F7D117", "#0055BF", "#237841"][i % 4]}
-                      stroke="#222"
-                      strokeWidth={3}
-                    />
-                  ))}
-                  {/* Bottom row bricks */}
-                  {Array.from({ length: 10 }).map((_, i) => (
-                    <rect
-                      key={`bottom-${i}`}
-                      x={i * 100 + 10}
-                      y={522}
-                      width={80}
-                      height={40}
-                      rx={8}
-                      fill={["#237841", "#0055BF", "#F7D117", "#D01012"][i % 4]}
-                      stroke="#222"
-                      strokeWidth={3}
-                    />
-                  ))}
-                  {/* Left column bricks */}
-                  {Array.from({ length: 4 }).map((_, i) => (
-                    <rect
-                      key={`left-${i}`}
-                      x={0}
-                      y={i * 140 + 50}
-                      width={40}
-                      height={80}
-                      rx={8}
-                      fill={["#0055BF", "#D01012", "#237841", "#F7D117"][i % 4]}
-                      stroke="#222"
-                      strokeWidth={3}
-                    />
-                  ))}
-                  {/* Right column bricks */}
-                  {Array.from({ length: 4 }).map((_, i) => (
-                    <rect
-                      key={`right-${i}`}
-                      x={960}
-                      y={i * 140 + 50}
-                      width={40}
-                      height={80}
-                      rx={8}
-                      fill={["#F7D117", "#237841", "#D01012", "#0055BF"][i % 4]}
-                      stroke="#222"
-                      strokeWidth={3}
-                    />
-                  ))}
-                </svg>
               </div>
             </div>
           </div>
@@ -348,28 +290,60 @@ export default function Home() {
             <div className="group relative bg-white rounded-lg p-6 md:p-8 shadow-lg hover:scale-105 transition-all duration-300 border-2 border-blue-200 hover:border-blue-400">
               <div className="absolute -top-2 left-1/4 -translate-x-1/2 w-4 h-2 bg-blue-400 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="absolute -top-2 left-3/4 -translate-x-1/2 w-4 h-2 bg-blue-400 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="text-3xl md:text-4xl text-blue-500 mb-3 md:mb-4 text-center transform group-hover:scale-110 transition-transform duration-300">👨‍💼</div>
+              <div className="flex justify-center mb-3 md:mb-4">
+                <div className="relative w-12 h-6 bg-[#0055BF] rounded-sm mr-3 transform transition-all duration-300">
+                  <div className="absolute inset-0 bg-gradient-to-b from-[#0066E5] to-[#0055BF] rounded-sm"></div>
+                  <div className="absolute inset-y-0 -left-0.5 w-0.5 bg-[#004CAA] rounded-l-sm"></div>
+                  <div className="absolute inset-y-0 -right-0.5 w-0.5 bg-[#004CAA] rounded-r-sm"></div>
+                  <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#0066E5] rounded-sm shadow-inner"></div>
+                  <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#0066E5] rounded-sm shadow-inner"></div>
+                </div>
+              </div>
               <h3 className="text-lg md:text-xl font-bold text-center mb-2 text-blue-600 group-hover:text-blue-700 transition-colors">Adult Collectors</h3>
               <p className="text-sm md:text-base text-gray-600 text-center group-hover:text-gray-800 transition-colors">Perfect for collectors who want their sets professionally assembled and displayed.</p>
             </div>
             <div className="group relative bg-white rounded-lg p-6 md:p-8 shadow-lg hover:scale-105 transition-all duration-300 border-2 border-red-200 hover:border-red-400">
               <div className="absolute -top-2 left-1/4 -translate-x-1/2 w-4 h-2 bg-red-400 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="absolute -top-2 left-3/4 -translate-x-1/2 w-4 h-2 bg-red-400 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="text-3xl md:text-4xl text-red-500 mb-3 md:mb-4 text-center transform group-hover:scale-110 transition-transform duration-300">🏪</div>
+              <div className="flex justify-center mb-3 md:mb-4">
+                <div className="relative w-12 h-6 bg-[#D01012] rounded-sm mr-3 transform transition-all duration-300">
+                  <div className="absolute inset-0 bg-gradient-to-b from-[#E52528] to-[#D01012] rounded-sm"></div>
+                  <div className="absolute inset-y-0 -left-0.5 w-0.5 bg-[#A00A0A] rounded-l-sm"></div>
+                  <div className="absolute inset-y-0 -right-0.5 w-0.5 bg-[#A00A0A] rounded-r-sm"></div>
+                  <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#E52528] rounded-sm shadow-inner"></div>
+                  <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#E52528] rounded-sm shadow-inner"></div>
+                </div>
+              </div>
               <h3 className="text-lg md:text-xl font-bold text-center mb-2 text-red-600 group-hover:text-red-700 transition-colors">Store Displays</h3>
               <p className="text-sm md:text-base text-gray-600 text-center group-hover:text-gray-800 transition-colors">Eye-catching displays for retail stores and businesses.</p>
             </div>
             <div className="group relative bg-white rounded-lg p-6 md:p-8 shadow-lg hover:scale-105 transition-all duration-300 border-2 border-yellow-200 hover:border-yellow-400">
               <div className="absolute -top-2 left-1/4 -translate-x-1/2 w-4 h-2 bg-yellow-400 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="absolute -top-2 left-3/4 -translate-x-1/2 w-4 h-2 bg-yellow-400 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="text-3xl md:text-4xl text-yellow-500 mb-3 md:mb-4 text-center transform group-hover:scale-110 transition-transform duration-300">🎁</div>
+              <div className="flex justify-center mb-3 md:mb-4">
+                <div className="relative w-12 h-6 bg-[#F7D117] rounded-sm mr-3 transform transition-all duration-300">
+                  <div className="absolute inset-0 bg-gradient-to-b from-[#FFE066] to-[#F7D117] rounded-sm"></div>
+                  <div className="absolute inset-y-0 -left-0.5 w-0.5 bg-[#C9A100] rounded-l-sm"></div>
+                  <div className="absolute inset-y-0 -right-0.5 w-0.5 bg-[#C9A100] rounded-r-sm"></div>
+                  <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#FFE066] rounded-sm shadow-inner"></div>
+                  <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#FFE066] rounded-sm shadow-inner"></div>
+                </div>
+              </div>
               <h3 className="text-lg md:text-xl font-bold text-center mb-2 text-yellow-600 group-hover:text-yellow-700 transition-colors">Gifts & Birthdays</h3>
               <p className="text-sm md:text-base text-gray-600 text-center group-hover:text-gray-800 transition-colors">Surprise your loved ones with professionally built LEGO sets.</p>
             </div>
             <div className="group relative bg-white rounded-lg p-6 md:p-8 shadow-lg hover:scale-105 transition-all duration-300 border-2 border-green-200 hover:border-green-400">
               <div className="absolute -top-2 left-1/4 -translate-x-1/2 w-4 h-2 bg-green-400 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               <div className="absolute -top-2 left-3/4 -translate-x-1/2 w-4 h-2 bg-green-400 rounded-sm opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              <div className="text-3xl md:text-4xl text-green-500 mb-3 md:mb-4 text-center transform group-hover:scale-110 transition-transform duration-300">⏰</div>
+              <div className="flex justify-center mb-3 md:mb-4">
+                <div className="relative w-12 h-6 bg-[#237841] rounded-sm mr-3 transform transition-all duration-300">
+                  <div className="absolute inset-0 bg-gradient-to-b from-[#2A8F4E] to-[#237841] rounded-sm"></div>
+                  <div className="absolute inset-y-0 -left-0.5 w-0.5 bg-[#145C2A] rounded-l-sm"></div>
+                  <div className="absolute inset-y-0 -right-0.5 w-0.5 bg-[#145C2A] rounded-r-sm"></div>
+                  <div className="absolute -top-1 left-1/4 -translate-x-1/2 w-4 h-2 bg-[#2A8F4E] rounded-sm shadow-inner"></div>
+                  <div className="absolute -top-1 left-3/4 -translate-x-1/2 w-4 h-2 bg-[#2A8F4E] rounded-sm shadow-inner"></div>
+                </div>
+              </div>
               <h3 className="text-lg md:text-xl font-bold text-center mb-2 text-green-600 group-hover:text-green-700 transition-colors">Busy LEGO Lovers</h3>
               <p className="text-sm md:text-base text-gray-600 text-center group-hover:text-gray-800 transition-colors">For those who love LEGO but don't have time to build.</p>
             </div>
@@ -448,6 +422,29 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Add these keyframes to your existing style block */}
+      <style jsx>{`
+        @keyframes fade-in {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        .animate-fade-in {
+          animation: fade-in 0.8s ease-out forwards;
+        }
+        .animate-fade-in-delay-1 {
+          animation: fade-in 0.8s ease-out 0.2s forwards;
+          opacity: 0;
+        }
+        .animate-fade-in-delay-2 {
+          animation: fade-in 0.8s ease-out 0.4s forwards;
+          opacity: 0;
+        }
+        .animate-fade-in-delay-3 {
+          animation: fade-in 0.8s ease-out 0.6s forwards;
+          opacity: 0;
+        }
+      `}</style>
     </main>
   );
 }
