@@ -24,7 +24,6 @@ const nextConfig = {
   
   // Ensure proper handling of client-side navigation
   experimental: {
-    optimizeCss: true,
     scrollRestoration: true,
   },
 };
