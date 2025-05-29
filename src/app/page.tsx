@@ -167,7 +167,7 @@ export default function Home() {
   return (
     <main className="min-h-screen bg-white">
       {/* Hero Section with Slideshow */}
-      <section className="relative h-[80vh] flex items-center overflow-hidden group">
+      <section className="relative h-[80vh] flex items-center overflow-hidden group pt-16 md:pt-0">
         <div className="absolute inset-0 z-0 parallax-bg transition-transform duration-700 group-hover:scale-105">
           <Image
             src="/images/backgrounds/colored-toy-bricks-place-your-600nw-663866968.webp"
@@ -182,9 +182,9 @@ export default function Home() {
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
             <div className="md:w-1/2 text-center md:text-left transform transition-all duration-500 hover:scale-[1.02]">
-              <h1 className="text-5xl md:text-7xl font-bold mb-4 md:mb-8 text-[#0055BF] font-brick [text-shadow:_4px_4px_8px_rgba(0,0,0,0.5)] transition-all duration-300 hover:text-[#0066E5] hover:[text-shadow:_6px_6px_12px_rgba(0,0,0,0.6)]">Brick by Brick</h1>
-              <h2 className="text-2xl md:text-4xl font-semibold mb-4 md:mb-8 text-[#0055BF] font-brick [text-shadow:_3px_3px_6px_rgba(0,0,0,0.4)] transition-all duration-300 hover:text-[#0066E5] hover:[text-shadow:_4px_4px_8px_rgba(0,0,0,0.5)]">Professional LEGO Set Building – Atlanta, GA</h2>
-              <p className="text-xl md:text-3xl font-bold mb-6 md:mb-10 text-[#0055BF] hover:text-[#0066E5] transition-all duration-300 font-brick [text-shadow:_2px_2px_4px_rgba(0,0,0,0.3)] hover:[text-shadow:_3px_3px_6px_rgba(0,0,0,0.4)]">Too busy to build your LEGO set? <br/>Let us handle it for you!</p>
+              <h1 className="text-4xl md:text-7xl font-bold mb-4 md:mb-8 text-[#0055BF] font-brick [text-shadow:_4px_4px_8px_rgba(0,0,0,0.5)] transition-all duration-300 hover:text-[#0066E5] hover:[text-shadow:_6px_6px_12px_rgba(0,0,0,0.6)]">Brick by Brick</h1>
+              <h2 className="text-xl md:text-4xl font-semibold mb-4 md:mb-8 text-[#0055BF] font-brick [text-shadow:_3px_3px_6px_rgba(0,0,0,0.4)] transition-all duration-300 hover:text-[#0066E5] hover:[text-shadow:_4px_4px_8px_rgba(0,0,0,0.5)]">Professional LEGO Set Building – Atlanta, GA</h2>
+              <p className="text-lg md:text-3xl font-bold mb-6 md:mb-10 text-[#0055BF] hover:text-[#0066E5] transition-all duration-300 font-brick [text-shadow:_2px_2px_4px_rgba(0,0,0,0.3)] hover:[text-shadow:_3px_3px_6px_rgba(0,0,0,0.4)]">Too busy to build your LEGO set? <br/>Let us handle it for you!</p>
               <div className="flex flex-col sm:flex-row gap-4 md:gap-6 mb-6 md:mb-8">
                 <Link 
                   href="/how-it-works" 

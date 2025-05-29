@@ -23,7 +23,7 @@ export default function MobileMenu() {
 
       {/* Mobile Navigation Menu */}
       <div 
-        className={`md:hidden fixed top-20 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-lg z-50 transition-all duration-300 ease-in-out ${
+        className={`md:hidden fixed top-16 left-0 right-0 bg-white/95 backdrop-blur-sm shadow-lg z-50 transition-all duration-300 ease-in-out ${
           isOpen ? 'opacity-100 visible translate-y-0' : 'opacity-0 invisible -translate-y-2'
         }`}
       >
