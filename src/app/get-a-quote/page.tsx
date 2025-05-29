@@ -36,7 +36,7 @@ export default function GetAQuote() {
     deliveryMethod: '',
     address: '',
     message: '',
-    gluing: false,
+    gluing: false as false | 'permanent' | 'dissolvable',
     selectedSet: null as LegoSet | null
   });
 
