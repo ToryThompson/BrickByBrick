@@ -177,18 +177,18 @@ export default function Home() {
             quality={100}
             priority
           />
-          <div className="absolute inset-0 bg-white/40 backdrop-blur-sm transition-all duration-700 group-hover:bg-white/30"></div>
+          <div className="absolute inset-0 bg-white/60 backdrop-blur-sm transition-all duration-700 group-hover:bg-white/50"></div>
         </div>
         <div className="container mx-auto px-4 relative z-10">
           <div className="flex flex-col md:flex-row items-center gap-8 md:gap-12">
-            <div className="md:w-1/2 text-center md:text-left transform transition-all duration-500 hover:scale-[1.02]">
-              <h1 className="text-4xl md:text-7xl font-bold mb-4 md:mb-8 text-[#0055BF] font-brick [text-shadow:_4px_4px_8px_rgba(0,0,0,0.5)] transition-all duration-300 hover:text-[#0066E5] hover:[text-shadow:_6px_6px_12px_rgba(0,0,0,0.6)]">Brick by Brick</h1>
+            <div className="w-full md:w-1/2 text-center md:text-left transform transition-all duration-500 hover:scale-[1.02]">
+              <h1 className="text-4xl md:text-7xl font-bold mb-4 md:mb-8 text-[#0055BF] font-brick [text-shadow:_4px_4px_8px_rgba(0,0,0,0.5)] transition-all duration-300 hover:text-[#0066E5] hover:[text-shadow:_6px_6px_12px_rgba(0,0,0,0.6)] bg-white/80 px-4 py-2 rounded-lg inline-block">Brick by Brick</h1>
               <h2 className="text-xl md:text-4xl font-semibold mb-4 md:mb-8 text-[#0055BF] font-brick [text-shadow:_3px_3px_6px_rgba(0,0,0,0.4)] transition-all duration-300 hover:text-[#0066E5] hover:[text-shadow:_4px_4px_8px_rgba(0,0,0,0.5)]">Professional LEGO Set Building – Atlanta, GA</h2>
               <p className="text-lg md:text-3xl font-bold mb-6 md:mb-10 text-[#0055BF] hover:text-[#0066E5] transition-all duration-300 font-brick [text-shadow:_2px_2px_4px_rgba(0,0,0,0.3)] hover:[text-shadow:_3px_3px_6px_rgba(0,0,0,0.4)]">Too busy to build your LEGO set? <br/>Let us handle it for you!</p>
-              <div className="flex flex-col sm:flex-row gap-4 md:gap-6 mb-6 md:mb-8">
+              <div className="flex flex-col sm:flex-row gap-4 md:gap-6 mb-6 md:mb-8 justify-center md:justify-start">
                 <Link 
                   href="/how-it-works" 
-                  className="group relative flex items-center justify-center px-6 py-3 rounded-lg bg-[#D01012] text-white font-semibold text-lg md:text-xl text-center hover:-translate-y-1 active:translate-y-0 transition-all duration-300 hover:shadow-lg hover:shadow-red-500/30"
+                  className="group relative flex items-center justify-center px-6 py-3 rounded-lg bg-[#D01012] text-white font-semibold text-lg md:text-xl text-center hover:-translate-y-1 active:translate-y-0 transition-all duration-300 hover:shadow-lg hover:shadow-red-500/30 w-full sm:w-auto"
                 >
                   <span className="relative z-10 transition-transform duration-300 group-hover:scale-105">How It Works</span>
                   <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-[#D01012] to-[#E52528] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
